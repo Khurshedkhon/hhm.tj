@@ -59,6 +59,17 @@
             z-index: 1000;
             box-shadow: var(--shadow);
         }
+        .header::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background-color: white;
+    width: 100%;
+    position: absolute;
+    bottom: -1px; /* чтобы не перекрывал */
+    left: 0;
+}
+
 
         .nav-container {
             max-width: 1200px;
@@ -71,11 +82,21 @@
         }
 
         .logo {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--white);
-            text-decoration: none;
-        }
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Bookman Old Style Cyr', serif;
+    font-size: 1.4rem;
+    color: var(--white);
+    text-decoration: none;
+}
+
+.logo-img {
+    height: 40px; /* подбери по размеру */
+    width: auto;
+    border-radius: 6px; /* если нужно скругление */
+}
+
 
         .nav-menu {
             display: flex;
@@ -128,12 +149,14 @@
         .hero {
             background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
             color: var(--white);
-            padding: 30px 10px 10px; 
+            padding: 40px 25px 15px; 
               padding-top: 45px;
               padding-bottom: 5px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            height: 185px;
+            
         }
 
         .hero p {
@@ -141,6 +164,7 @@
     font-size: 1.3rem;
     line-height: 1.3;
 }
+
 
         /* Photo Gallery Slider */
         .photo-slider {
@@ -299,6 +323,7 @@
     box-shadow: var(--shadow);
     border: 2px solid var(--bg-cream);
     transition: transform 0.3s ease, box-shadow 0.3s ease, height 0.5s ease;
+    height: 380px;
 }
 
         .bio-text:hover {
@@ -389,7 +414,7 @@
         }
 
         .card-image {
-            height: 120px;
+            height: auto;
             background: var(--bg-cream);
             display: flex;
             align-items: center;
@@ -399,10 +424,16 @@
         }
         
         .card-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+    max-height: 180px;
+    width: 100%;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    background: var(--bg-cream); /* чтобы фон выглядел опрятно */
+    padding: 6px;
+    border-radius: 8px;
+}
+
 
         .card-content {
             padding: 14px;
@@ -766,7 +797,10 @@
     <!-- Header -->
     <header class="header">
         <nav class="nav-container">
-            <a href="index.html" class="logo">Ҳоҷӣ Ҳусайн Мӯсозода	</a>
+            <a href="index.html" class="logo">
+    <img src="img/logo2.png" alt="Логотип" class="logo-img">
+    Ҳоҷӣ Ҳусайн Мӯсозода
+</a>
             <ul class="nav-menu" id="nav-menu">
                 <li><a href="#zindaginoma" class="nav-link">Зиндагинома</a></li>
                 <li><a href="#kitobho" class="nav-link">Китобҳо</a></li>
