@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Китобҳо - Ҳоҷӣ Ҳусайн Мӯсозода</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @font-face {
+            font-family: 'Bookman Old Style Cyr';
+            src: url('font/ofont.ru_Bookman Old Style Cyr.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Caslon Becker';
+            src: url('font/ofont.ru_Caslon Becker.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --primary-green: #28a745;
+            --secondary-green: #1B5E20;
+            --light-green: #b4ffb4;
+            --accent-gold: #28a745;
+            --accent-brown: #28a745;
+            --text-dark: #2E2E2E;
+            --text-gray: #666666;
+            --bg-light: #E7E9ED;
+            --bg-cream: #b4ffb4;
+            --white: #FFFFFF;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        body {
+            font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+        .header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            color: var(--white);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        .header::after {
+            content: '';
+            display: block;
+            height: 1px;
+            background-color: white;
+            width: 100%;
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+        }
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 45px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.2rem;
+            color: var(--white);
+            text-decoration: none;
+            padding: 5px 0;
+        }
+        .logo-img {
+            height: 40px;
+            width: auto;
+            border-radius: 6px;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--light-green);
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--light-green);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after, .nav-link.active::after {
+            width: 100%;
+        }
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            color: var(--white);
+            padding: 80px 20px 40px;
+            text-align: center;
+            padding-top: 100px;
+        }
+        .page-title {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .page-subtitle {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        .search-container {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+        }
+        .search-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px 20px;
+            border-radius: 25px;
+            border: 2px solid var(--bg-cream);
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        .search-input:focus {
+            border-color: var(--primary-green);
+            box-shadow: 0 0 15px rgba(40, 167, 69, 0.2);
+        }
+        .book-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        .book-card {
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 2px solid var(--bg-cream);
+            display: flex;
+            flex-direction: column;
+        }
+        .book-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-gold);
+        }
+        .book-cover {
+            height: 250px;
+            background: var(--bg-cream);
+            border-top-left-radius: 13px;
+            border-top-right-radius: 13px;
+            overflow: hidden;
+        }
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .book-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+        .book-title {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-brown);
+            margin-bottom: 10px;
+        }
+        .book-description {
+            color: var(--text-gray);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            flex-grow: 1;
+            margin-bottom: 20px;
+        }
+        .book-actions {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+        .download-btn {
+            background: var(--primary-green);
+            color: var(--white);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .download-btn:hover {
+            background: var(--secondary-green);
+            transform: scale(1.05);
+        }
+        .share-btn {
+            background: none;
+            border: none;
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        .share-btn:hover {
+            color: var(--primary-green);
+        }
+        .footer {
+            background: linear-gradient(135deg, var(--secondary-green) 0%, var(--primary-green) 100%);
+            color: var(--white);
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 45px;
+                left: 0;
+                right: 0;
+                background: var(--secondary-green);
+                padding: 20px;
+                gap: 15px;
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .hamburger {
+                display: flex;
+            }
+            .page-title {
+                font-size: 2.2rem;
+            }
+            .book-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="img/logo2.png" alt="Логотип" class="logo-img">
+                Ҳоҷӣ Ҳусайн Мӯсозода
+            </a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Асосӣ</a></li>
+                <li><a href="poems.html" class="nav-link">Шеърҳо</a></li>
+                <li><a href="analysis.html" class="nav-link">Таҳлили шеърҳо</a></li>
+                <li><a href="audio.html" class="nav-link">Аудио</a></li>
+                <li><a href="books.html" class="nav-link active">Китобҳо</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <h1 class="page-title">Китобҳо</h1>
+        <p class="page-subtitle">Маҷмӯаи китобҳои Ҳоҷӣ Ҳусайн Мӯсозода</p>
+    </section>
+
+    <main class="main-content">
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-input" placeholder="Ҷустуҷӯи китоб...">
+        </div>
+
+        <div class="book-grid" id="bookGrid">
+            <div class="book-card" data-title="Гулчини ашъор 1" data-genre="шеър">
+                <div class="book-cover">
+                    <img src="img/book_gulchin_ashor.jpg" alt="Гулчини ашъор 1">
+                </div>
+                <div class="book-content">
+                    <h3 class="book-title">Гулчини ашъор 1</h3>
+                    <p class="book-description">Ин маҷмӯаи ашъор гулчине аз эҷодиёти шоир буда, мавзӯъҳои мухталифи ирфонӣ, фалсафӣ, ахлоқӣ ва иҷтимоиро дар бар мегирад.</p>
+                    <div class="book-actions">
+                        <a href="books/Book_1_Gulchin_ashor1.pdf" download class="download-btn"><i class="fas fa-download"></i> PDF</a>
+                        <div class="share-buttons">
+                            <button class="share-btn" onclick="shareBook('Facebook', 'Гулчини ашъор 1')"><i class="fab fa-facebook"></i></button>
+                            <button class="share-btn" onclick="shareBook('Twitter', 'Гулчини ашъор 1')"><i class="fab fa-twitter"></i></button>
+                            <button class="share-btn" onclick="shareBook('VK', 'Гулчини ашъор 1')"><i class="fab fa-vk"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="book-card" data-title="Гулчини ашъор 2" data-genre="шеър">
+                <div class="book-cover">
+                    <img src="img/book_gulchin_ashor.jpg" alt="Гулчини ашъор 2">
+                </div>
+                <div class="book-content">
+                    <h3 class="book-title">Гулчини ашъор 2</h3>
+                    <p class="book-description">Давоми маҷмӯаи ашъори шоир, ки боз ҳам паҳлӯҳои нави эҷодиёти ӯро бозтоб мекунад ва хонандаро ба андеша водор месозад.</p>
+                    <div class="book-actions">
+                        <a href="books/Book_2_Gulchin_ashor2.pdf" download class="download-btn"><i class="fas fa-download"></i> PDF</a>
+                        <div class="share-buttons">
+                            <button class="share-btn" onclick="shareBook('Facebook', 'Гулчини ашъор 2')"><i class="fab fa-facebook"></i></button>
+                            <button class="share-btn" onclick="shareBook('Twitter', 'Гулчини ашъор 2')"><i class="fab fa-twitter"></i></button>
+                            <button class="share-btn" onclick="shareBook('VK', 'Гулчини ашъор 2')"><i class="fab fa-vk"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="book-card" data-title="ҶАВҲАРИ НАЗМУ НАСРИ МӮСОЗОДА" data-genre="шеър">
+                <div class="book-cover">
+                    <img src="img/book_gulchin_ashor.jpg" alt="ҶАВҲАРИ НАЗМУ НАСРИ МӮСОЗОДА">
+                </div>
+                <div class="book-content">
+                    <h3 class="book-title">ҶАВҲАРИ НАЗМУ НАСРИ МӮСОЗОДА</h3>
+                    <p class="book-description">Дар китоби мазкур мақолаҳо, тақризҳо ва сарсуханҳо, ки ба асарҳои мансур ва манзуми Ҳоҷӣ Ҳусайн Мӯсозода аз ҷониби адибону олимон таълиф гаштаанд, гирдоварӣ шудааст. Муаллифони мақола ва тақризҳо ба таври мунсифона ба осори Ҳоҷӣ Ҳусайн Мӯсозода баҳо додаанд. Шоистаи зикр аст, ки номбурда муаллифи чанд китоби мансур мебошанд. Аз соли 2016 Ҳоҷӣ Ҳусайн Мӯсозода ба эҷоди шеър низ пардохтаанд ва то имрӯз девони дувоздаҳумашон омодаи чоп аст. Дар қисми дуввуми китоб асосан шеъри шоир мавриди таҳлил қарор гирифтааст. Китоб ба адабиётшиносон, муҳаққиқони шеъри муосир, донишҷӯёни риштаи филологӣ ва кулли дӯстдорони адабиёту шеър пешкаш мегардад.</p>
+                    <div class="book-actions">
+                        <a href="books/00. ҶАВҲАРИ НАЗМУ НАСР.pdf" download class="download-btn"><i class="fas fa-download"></i> PDF</a>
+                        <div class="share-buttons">
+                            <button class="share-btn" onclick="shareBook('Facebook', 'ҶАВҲАРИ НАЗМУ НАСРИ МӮСОЗОДА')"><i class="fab fa-facebook"></i></button>
+                            <button class="share-btn" onclick="shareBook('Twitter', 'ҶАВҲАРИ НАЗМУ НАСРИ МӮСОЗОДА')"><i class="fab fa-twitter"></i></button>
+                            <button class="share-btn" onclick="shareBook('VK', 'ҶАВҲАРИ НАЗМУ НАСРИ МӮСОЗОДА')"><i class="fab fa-vk"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="book-card" data-title="ҲИКМАТИ ҚИССАВУ ТАЛМЕҲОТ" data-genre="шеър">
+                <div class="book-cover">
+                    <img src="img/book_gulchin_ashor.jpg" alt="ҲИКМАТИ ҚИССАВУ ТАЛМЕҲОТ">
+                </div>
+                <div class="book-content">
+                    <h3 class="book-title">ҲИКМАТИ ҚИССАВУ ТАЛМЕҲОТ</h3>
+                    <p class="book-description">Дар ин китоб чанд манзума ва ғазалҳои Ҳоҷӣ Ҳусайн Мӯсозода гирдоварӣ гаштаанд. Достонҳои манзум аз манбаъҳои гуногун сарчашма гирифта, пеш аз ҳама барои тарбияи ахлоқии мардум нигаронида шудаанд. Инчунин дар ин маҷмӯа ғазалҳои шоир, ки бо корбурди санъати талмеҳ ва ишорот эҷод гаштаанд, гирдоварӣ шудаанд. Китоб ба кулли дӯстдорони каломи бадеъ пешниҳод мегардад.</p>
+                    <div class="book-actions">
+                        <a href="books/0. Мӯсозода Ҳоҷӣ Ҳусайн. ҲИКМАТИ ҚИССАВУ ТАЛМЕҲОТ.pdf" download class="download-btn"><i class="fas fa-download"></i> PDF</a>
+                        <div class="share-buttons">
+                            <button class="share-btn" onclick="shareBook('Facebook', 'ҲИКМАТИ ҚИССАВУ ТАЛМЕҲОТ')"><i class="fab fa-facebook"></i></button>
+                            <button class="share-btn" onclick="shareBook('Twitter', 'ҲИКМАТИ ҚИССАВУ ТАЛМЕҲОТ')"><i class="fab fa-twitter"></i></button>
+                            <button class="share-btn" onclick="shareBook('VK', 'ҲИКМАТИ ҚИССАВУ ТАЛМЕҲОТ')"><i class="fab fa-vk"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="book-card" data-title="МИФТОҲИ АСРОРНОМА. Девони I" data-genre="шеър">
+                <div class="book-cover">
+                    <img src="img/book_gulchin_ashor.jpg" alt="МИФТОҲИ АСРОРНОМА. Девони I">
+                </div>
+                <div class="book-content">
+                    <h3 class="book-title">МИФТОҲИ АСРОРНОМА. Девони I</h3>
+                    <p class="book-description">Дар ин китоб муаллифи он қудрати Инсони муосир ва меҳру ихлоси ӯ, муҳаббат ва саодати халқро ситоиш карда, кӯшидаанд, баъзе масоили диниву ахлоқиро ба шеваи хоси худ дар усули андарзу панд ба ҳамзамонон таъкид намоянд. Ҳадафи муаллиф тавассути назми ноб мардумро ба роҳи рост ҳидоят намудан бо панду андарзи ҳакимона роҳи зиндагии садҳо нафарро равшан сохтан аст. Чопи ҳозир нашри дуюми такмилёфтаи девони якуми шоир буда, ба доираи васеи хонандагон тавсия карда мешавад.</p>
+                    <div class="book-actions">
+                        <a href="books/1. Мӯсозода Ҳоҷӣ Ҳусайн. МИФТОҲИ АСРОРНОМА_compressed.pdf" download class="download-btn"><i class="fas fa-download"></i> PDF</a>
+                        <div class="share-buttons">
+                            <button class="share-btn" onclick="shareBook('Facebook', 'МИФТОҲИ АСРОРНОМА. Девони I')"><i class="fab fa-facebook"></i></button>
+                            <button class="share-btn" onclick="shareBook('Twitter', 'МИФТОҲИ АСРОРНОМА. Девони I')"><i class="fab fa-twitter"></i></button>
+                            <button class="share-btn" onclick="shareBook('VK', 'МИФТОҲИ АСРОРНОМА. Девони I')"><i class="fab fa-vk"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="book-card" data-title="ҶАВҲАРИ ҶОВИДОНА. Девони II (нашри дуюми такмилёфта)" data-genre="шеър">
+                <div class="book-cover">
+                    <img src="img/book_gulchin_ashor.jpg" alt="ҶАВҲАРИ ҶОВИДОНА. Девони II (нашри дуюми такмилёфта)">
+                </div>
+                <div class="book-content">
+                    <h3 class="book-title">ҶАВҲАРИ ҶОВИДОНА. Девони II (нашри дуюми такмилёфта)</h3>
+                    <p class="book-description">Китоб нашри дуюм ва такмилёфтаи девони дуввуми Ҳоҷӣ Ҳусайн Мӯсозода, ки «Ҷавҳари ҷовидона» унвон гирифтааст, давоми мантиқии китоби аввал «Мифтоҳи асрорнома» мебошад. Он асосан фарогири ғазалҳои шоир буда, мавзӯи онҳо нав мебошанд. Ашъори шоир ба мавзуъҳои Ватан ва ватандорӣ, миллат ва миллатпарварӣ, одобу ахлоқи ҳамида, шукргузорӣ аз зиндагии имрӯз бахшида шудааст.Дар нашри якуми китоб ғазалу шеърҳо ба тариқи хронологӣ, бо риояи санаи таълифашон ҷойгир гашта буданд. Дар нашри кунунӣ суннати девоннигории классикӣ риоя гашта, ғазалҳо бо тартиби охири ҳарфи қофия ва ё радиф тибқи алифбои ниёгон ҷой дода шудаанд. Рақамҳои тартибии ғазалу шеърҳо бетағйир мондаанд. Китоб барои дӯстдорони каломи бадеъ, оммаи васеи хонандагон пешкаш мешавад.</p>
+                    <div class="book-actions">
+                        <a href="books/2. Мӯсозода Ҳоҷӣ Ҳусайн. ҶАВҲАРИ ҶОВИДОНА_compressed.pdf" download class="download-btn"><i class="fas fa-download"></i> PDF</a>
+                        <div class="share-buttons">
+                            <button class="share-btn" onclick="shareBook('Facebook', 'ҶАВҲАРИ ҶОВИДОНА. Девони II (нашри дуюми такмилёфта)')"><i class="fab fa-facebook"></i></button>
+                            <button class="share-btn" onclick="shareBook('Twitter', 'ҶАВҲАРИ ҶОВИДОНА. Девони II (нашри дуюми такмилёфта)')"><i class="fab fa-twitter"></i></button>
+                            <button class="share-btn" onclick="shareBook('VK', 'ҶАВҲАРИ ҶОВИДОНА. Девони II (нашри дуюми такмилёфта)')"><i class="fab fa-vk"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="book-card" data-title="МЕЪРОҶИ МАЪРИФАТ. Девони III (нашри дуюми такмилёфта)" data-genre="шеър">
+                <div class="book-cover">
+                    <img src="img/book_gulchin_ashor.jpg" alt="МЕЪРОҶИ МАЪРИФАТ. Девони III (нашри дуюми такмилёфта)">
+                </div>
+                <div class="book-content">
+                    <h3 class="book-title">МЕЪРОҶИ МАЪРИФАТ. Девони III (нашри дуюми такмилёфта)</h3>
+                    <p class="book-description">Девони сеюми Ҳоҷӣ Ҳусайн Мӯсозода – «Меъроҷи маърифат» маҷмӯаест, ки онро метавон хазинаи панду ҳикмат ном бурд. Муаллиф дар ин китоб бештар ба дарёи андарзу панду ғӯтавар мешавад ва рисолати худро дар тарбияи инсонҳо мебинад. Ин шеваи эҷоди шоир аз панди бузургони сухан чун Рӯдакиву Фирдавсӣ, Носири Хусраву Низомӣ, Саъдиву Мавлавӣ, Ҳофизу Камоли Хуҷандӣ, Бедилу Соиб сарчашма мегирад. Дар нашри дуввум девони «Меъроҷи маърифат» тибқи суннати девоннигорони пешина мураттаб гаштааст. Китоб ба кулли дӯстдорони каломи бадеъ пешниҳод мегардад.</p>
+                    <div class="book-actions">
+                        <a href="books/3. Мӯсозода Ҳоҷӣ Ҳусайн. МЕЪРОҶИ МАЪРИФАТ.pdf" download class="download-btn"><i class="fas fa-download"></i> PDF</a>
+                        <div class="share-buttons">
+                            <button class="share-btn" onclick="shareBook('Facebook', 'МЕЪРОҶИ МАЪРИФАТ. Девони III (нашри дуюми такмилёфта)')"><i class="fab fa-facebook"></i></button>
+                            <button class="share-btn" onclick="shareBook('Twitter', 'МЕЪРОҶИ МАЪРИФАТ. Девони III (нашри дуюми такмилёфта)')"><i class="fab fa-twitter"></i></button>
+                            <button class="share-btn" onclick="shareBook('VK', 'МЕЪРОҶИ МАЪРИФАТ. Девони III (нашри дуюми такмилёфта)')"><i class="fab fa-vk"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="book-card" data-title="ТОҶИКИСТОН – ВОРИСИ СОМОНИЁН. (Нашри дуюми такмилёфта)" data-genre="шеър">
+                <div class="book-cover">
+                    <img src="img/book_gulchin_ashor.jpg" alt="ТОҶИКИСТОН – ВОРИСИ СОМОНИЁН. (Нашри дуюми такмилёфта)">
+                </div>
+                <div class="book-content">
+                    <h3 class="book-title">ТОҶИКИСТОН – ВОРИСИ СОМОНИЁН. (Нашри дуюми такмилёфта)</h3>
+                    <p class="book-description">Девони нави Ҳусайн Мӯсозода бо номи «Тоҷикистон вориси Сомониён» баргузидаи ашъор аз ҳафт девони шоир мебошад, ки онҳоро ба мавзуъҳои ватандӯстиву ватандорӣ, шукронаи замон, васфи Тоҷикистон ва монанди инҳо бахшидааст. Китобро рамзи муҳаббати беандоза ба Модар – Ватан гуфтан мумкин аст ва он гулдастаи зебо ва хушбӯеро мемонад, ки дар дили хонанда чароғи ҷовидонаи ишқи Ватанро фурӯзон месозад.</p>
+                    <div class="book-actions">
+                        <a href="books/4. Мӯсозода Ҳоҷӣ Ҳусайн. ТОҶИКИСТОН - ВОРИСИ СОМОНИЁН.pdf" download class="download-btn"><i class="fas fa-download"></i> PDF</a>
+                        <div class="share-buttons">
+                            <button class="share-btn" onclick="shareBook('Facebook', 'ТОҶИКИСТОН – ВОРИСИ СОМОНИЁН. (Нашри дуюми такмилёфта)')"><i class="fab fa-facebook"></i></button>
+                            <button class="share-btn" onclick="shareBook('Twitter', 'ТОҶИКИСТОН – ВОРИСИ СОМОНИЁН. (Нашри дуюми такмилёфта)')"><i class="fab fa-twitter"></i></button>
+                            <button class="share-btn" onclick="shareBook('VK', 'ТОҶИКИСТОН – ВОРИСИ СОМОНИЁН. (Нашри дуюми такмилёфта)')"><i class="fab fa-vk"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="book-card" data-title="ҲИКМАТИСТОН. Девони V (нашри дуюми такмилёфта)" data-genre="шеър">
+                <div class="book-cover">
+                    <img src="img/book_gulchin_ashor.jpg" alt="ҲИКМАТИСТОН. Девони V (нашри дуюми такмилёфта)">
+                </div>
+                <div class="book-content">
+                    <h3 class="book-title">ҲИКМАТИСТОН. Девони V (нашри дуюми такмилёфта)</h3>
+                    <p class="book-description">Девони панҷуми Ҳоҷӣ Ҳусайн Мӯсозода – «Ҳикматистон» тӯшаи ирфону маърифату адабу андарз аст барои раҳравони имрӯзу фардо. Ин чанд саҳифаи ғазал ҳамагӣ барои тарбияи маънавӣ, лаззати фикриву зеҳни хонандагон созгоранд ва ба номаш мувофиқ ҳикматистони маънавӣ мебошад. Дар нашри дуюми девони мазкур тартиби девоннигории суннатӣ ба назар гирифта шудааст. Китоб ба кулли дӯстдорони адабиёт тавсия мегрдад.</p>
+                    <div class="book-actions">
+                        <a href="books/5. Мӯсозода Ҳоҷӣ Ҳусайн. ҲИКМАТИСТОН.pdf" download class="download-btn"><i class="fas fa-download"></i> PDF</a>
+                        <div class="share-buttons">
+                            <button class="share-btn" onclick="shareBook('Facebook', 'ҲИКМАТИСТОН. Девони V (нашри дуюми такмилёфта)')"><i class="fab fa-facebook"></i></button>
+                            <button class="share-btn" onclick="shareBook('Twitter', 'ҲИКМАТИСТОН. Девони V (нашри дуюми такмилёфта)')"><i class="fab fa-twitter"></i></button>
+                            <button class="share-btn" onclick="shareBook('VK', 'ҲИКМАТИСТОН. Девони V (нашри дуюми такмилёфта)')"><i class="fab fa-vk"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="book-card" data-title="ГУЛШАНИСТОН" data-genre="шеър">
+                <div class="book-cover">
+                    <img src="img/book_gulchin_ashor.jpg" alt="ГУЛШАНИСТОН">
+                </div>
+                <div class="book-content">
+                    <h3 class="book-title">ГУЛШАНИСТОН</h3>
+                    <p class="book-description">Дар девони «Гулшанистон»-и шоир Ҳоҷӣ Ҳусайн Мӯсозода зиёда аз 300 ғазали нав гирдоварӣ гаштааст. Ин девон ба тариқи суннатӣ мураттаб шудааст.</p>
+                    <div class="book-actions">
+                        <a href="books/6. Мӯсозода Ҳоҷӣ Ҳусайн. ГУЛШАНИСТОН.pdf" download class="download-btn"><i class="fas fa-download"></i> PDF</a>
+                        <div class="share-buttons">
+                            <button class="share-btn" onclick="shareBook('Facebook', 'ГУЛШАНИСТОН')"><i class="fab fa-facebook"></i></button>
+                            <button class="share-btn" onclick="shareBook('Twitter', 'ГУЛШАНИСТОН')"><i class="fab fa-twitter"></i></button>
+                            <button class="share-btn" onclick="shareBook('VK', 'ГУЛШАНИСТОН')"><i class="fab fa-vk"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="book-card" data-title="САБЪАИ САЙЁР" data-genre="шеър">
+                <div class="book-cover">
+                    <img src="img/book_gulchin_ashor.jpg" alt="САБЪАИ САЙЁР">
+                </div>
+                <div class="book-content">
+                    <h3 class="book-title">САБЪАИ САЙЁР</h3>
+                    <p class="book-description">Дар китоби мазкур ғазалҳои тозаэҷоди Ҳоҷӣ Ҳусайн Мӯсозода гирдоварӣ гардидаанд, ки девони ҳафтуми ғазалҳои шоир аст ва «Сабъаи сайёр» ном гирифтанаш ҳам ба ҳамин хотир аст, ки мисли кавокиби сайёр ашъораш дар фазои маънавӣ парвозҳо дорад. Дар ғазалҳои шоир ишқ тараннум мегардад, ахлоқи ҳамида ситоиш меёбад, насиҳат чун дурри тобон таровиш дорад, меҳанпарастӣ, садоқат ба Ватан арҷгузорӣ мегардад. Ин девон ба тариқи суннатӣ мураттаб шудааст. Китоб ба кулли дӯстдорони шеъру ғазал пешкаш мегардад.</p>
+                    <div class="book-actions">
+                        <a href="books/7. Мӯсозода Ҳоҷӣ Ҳусайн. САБЪАИ САЙЁР.pdf" download class="download-btn"><i class="fas fa-download"></i> PDF</a>
+                        <div class="share-buttons">
+                            <button class="share-btn" onclick="shareBook('Facebook', 'САБЪАИ САЙЁР')"><i class="fab fa-facebook"></i></button>
+                            <button class="share-btn" onclick="shareBook('Twitter', 'САБЪАИ САЙЁР')"><i class="fab fa-twitter"></i></button>
+                            <button class="share-btn" onclick="shareBook('VK', 'САБЪАИ САЙЁР')"><i class="fab fa-vk"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="book-card" data-title="ҲАШТ АХТАР" data-genre="шеър">
+                <div class="book-cover">
+                    <img src="img/book_gulchin_ashor.jpg" alt="ҲАШТ АХТАР">
+                </div>
+                <div class="book-content">
+                    <h3 class="book-title">ҲАШТ АХТАР</h3>
+                    <p class="book-description">Девони ҳаштуми Ҳоҷӣ Ҳусайн Мӯсозода фарогири ғазалҳои нави шоир аст. Дар ин девон ғазалҳо ба тариқи суннатӣ бо риояи ҳарфи охири радиф тибқи алифбои ниёгон пасиҳам қарор гирифтаанд. Дар муқоиса бо девонҳои қаблии Ҳоҷӣ Ҳусайн Мӯсозода дар ин девон рубоиёт ва ҳам ҳикматҳои шоир ҷой дода шудаанд. Ғазалҳои шоир аксарият панду ахлоқӣ мебошанд. Ҳамчунин доир ба мавзуъҳои меҳри Ватан, падару модар, одобу ахлоқ ва ғайра ғазалу рубоиву ҳикматҳо суруда шудаанд. Китоб ба кулли дӯстдорони шеъру адабиёт манзур мегардад.</p>
+                    <div class="book-actions">
+                        <a href="books/8. Мӯсозода Ҳоҷӣ Ҳусайн. ҲАШТ АХТАР.pdf" download class="download-btn"><i class="fas fa-download"></i> PDF</a>
+                        <div class="share-buttons">
+                            <button class="share-btn" onclick="shareBook('Facebook', 'ҲАШТ АХТАР')"><i class="fab fa-facebook"></i></button>
+                            <button class="share-btn" onclick="shareBook('Twitter', 'ҲАШТ АХТАР')"><i class="fab fa-twitter"></i></button>
+                            <button class="share-btn" onclick="shareBook('VK', 'ҲАШТ АХТАР')"><i class="fab fa-vk"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="book-card" data-title="Нӯҳ авроқи забарҷад" data-genre="шеър">
+                <div class="book-cover">
+                    <img src="img/book_gulchin_ashor.jpg" alt="Нӯҳ авроқи забарҷад">
+                </div>
+                <div class="book-content">
+                    <h3 class="book-title">Нӯҳ авроқи забарҷад</h3>
+                    <p class="book-description">Девони нӯҳуми Ҳоҷӣ Ҳусайн Мӯсозода фарогири ғазалҳои нави шоир аст. Дар ин девон ғазалҳо ба тариқи суннатӣ бо риояи ҳарфи охири радиф тибқи алифбои ниёгон пасиҳам қарор гирифтаанд. Ғазалҳои шоир аксарият панду ахлоқӣ мебошанд. Ҳамчунин доир ба мавзуъҳои меҳри Ватан, падару модар, одобу ахлоқ ва ғайра ғазалу рубоиву ҳикматҳо суруда шудаанд. Китоб ба кулли дӯстдорони шеъру адабиёт манзур мегардад.</p>
+                    <div class="book-actions">
+                        <a href="books/9. Мӯсозода Ҳоҷӣ Ҳусайн. НӮХ АВРОҚИ ЗАБАРҶАД.pdf" download class="download-btn"><i class="fas fa-download"></i> PDF</a>
+                        <div class="share-buttons">
+                            <button class="share-btn" onclick="shareBook('Facebook', 'Нӯҳ авроқи забарҷад')"><i class="fab fa-facebook"></i></button>
+                            <button class="share-btn" onclick="shareBook('Twitter', 'Нӯҳ авроқи забарҷад')"><i class="fab fa-twitter"></i></button>
+                            <button class="share-btn" onclick="shareBook('VK', 'Нӯҳ авроқи забарҷад')"><i class="fab fa-vk"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="book-card" data-title="ДАҲ ЧАШМАИ АНБАР" data-genre="шеър">
+                <div class="book-cover">
+                    <img src="img/book_gulchin_ashor.jpg" alt="ДАҲ ЧАШМАИ АНБАР">
+                </div>
+                <div class="book-content">
+                    <h3 class="book-title">ДАҲ ЧАШМАИ АНБАР</h3>
+                    <p class="book-description">Тавсифи муфассал ҳоло дастрас нест.</p>
+                    <div class="book-actions">
+                        <a href="books/10. Мӯсозода Ҳоҷӣ Ҳусайн. ДАҲ ЧАШМАИ АНБАР.pdf" download class="download-btn"><i class="fas fa-download"></i> PDF</a>
+                        <div class="share-buttons">
+                            <button class="share-btn" onclick="shareBook('Facebook', 'ДАҲ ЧАШМАИ АНБАР')"><i class="fab fa-facebook"></i></button>
+                            <button class="share-btn" onclick="shareBook('Twitter', 'ДАҲ ЧАШМАИ АНБАР')"><i class="fab fa-twitter"></i></button>
+                            <button class="share-btn" onclick="shareBook('VK', 'ДАҲ ЧАШМАИ АНБАР')"><i class="fab fa-vk"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="book-card" data-title="ЁЗДАҲ СИТОРАИ ДУРАХШОН" data-genre="шеър">
+                <div class="book-cover">
+                    <img src="img/book_gulchin_ashor.jpg" alt="ЁЗДАҲ СИТОРАИ ДУРАХШОН">
+                </div>
+                <div class="book-content">
+                    <h3 class="book-title">ЁЗДАҲ СИТОРАИ ДУРАХШОН</h3>
+                    <p class="book-description">Дар девони ёздаҳуми шоир Ҳоҷӣ Ҳусайн Мӯсозода ғазалиёти навэҷод ҷой дода шудааст. Мисли девонҳои пешин ин китоб низ бо риояи қоидаи девонсозии классикӣ тадвин гаштааст. Мавзӯи ғазалҳо ишқ, муҳаббат ба Ватан, панду андарз, ҳикмат ва риояи хулқи неки инсонӣ буда, барои кулли хонандагон пешкаш мегардад. Аз он ҳамагон метавонанд, ки ғизои маънавӣ гиранд.</p>
+                    <div class="book-actions">
+                        <a href="books/11.Мӯсозода Ҳоҷӣ Ҳусайн. ЁЗДАҲ СИТОРАИ ДУРАХШОН.pdf" download class="download-btn"><i class="fas fa-download"></i> PDF</a>
+                        <div class="share-buttons">
+                            <button class="share-btn" onclick="shareBook('Facebook', 'ЁЗДАҲ СИТОРАИ ДУРАХШОН')"><i class="fab fa-facebook"></i></button>
+                            <button class="share-btn" onclick="shareBook('Twitter', 'ЁЗДАҲ СИТОРАИ ДУРАХШОН')"><i class="fab fa-twitter"></i></button>
+                            <button class="share-btn" onclick="shareBook('VK', 'ЁЗДАҲ СИТОРАИ ДУРАХШОН')"><i class="fab fa-vk"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="book-card" data-title="ДУВОЗДАҲ БУРҶИ ФАЛАК" data-genre="шеър">
+                <div class="book-cover">
+                    <img src="img/book_gulchin_ashor.jpg" alt="ДУВОЗДАҲ БУРҶИ ФАЛАК">
+                </div>
+                <div class="book-content">
+                    <h3 class="book-title">ДУВОЗДАҲ БУРҶИ ФАЛАК</h3>
+                    <p class="book-description">Дар китоб ғазалиёти нави шоир Ҳоҷӣ Ҳусайн Мӯсозода, чанд рубоӣ ва достону қиссаҳо гирдоварӣ гардидааст. Китоб тибқи суннати девоннигории ниёгон бо риояи ҳарфи охири радиф ва қофия мураттаб гаштааст. Мавзӯи ғазалҳо панду андарз, дурӣ ҷустан аз кирдори бад, муҳаббат ба Ватан, эҳтироми волидайн, ишқ ва ошиқист. Китоб ба кулли дӯстдорони адабиёт ва шеъри муосир тавсия мегардад.</p>
+                    <div class="book-actions">
+                        <a href="books/12. Мӯсозода Ҳоҷӣ Ҳусайн. ДУВОЗДАҲ БУРҶИ ФАЛАК.pdf" download class="download-btn"><i class="fas fa-download"></i> PDF</a>
+                        <div class="share-buttons">
+                            <button class="share-btn" onclick="shareBook('Facebook', 'ДУВОЗДАҲ БУРҶИ ФАЛАК')"><i class="fab fa-facebook"></i></button>
+                            <button class="share-btn" onclick="shareBook('Twitter', 'ДУВОЗДАҲ БУРҶИ ФАЛАК')"><i class="fab fa-twitter"></i></button>
+                            <button class="share-btn" onclick="shareBook('VK', 'ДУВОЗДАҲ БУРҶИ ФАЛАК')"><i class="fab fa-vk"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="book-card" data-title="СЕЗДАҲ НИШОНАИ РОЗ" data-genre="шеър">
+                <div class="book-cover">
+                    <img src="img/book_gulchin_ashor.jpg" alt="СЕЗДАҲ НИШОНАИ РОЗ">
+                </div>
+                <div class="book-content">
+                    <h3 class="book-title">СЕЗДАҲ НИШОНАИ РОЗ</h3>
+                    <p class="book-description">Китоби нави Ҳоҷӣ Ҳусайн Мӯсозода бо номи «Сездаҳ нишонаи роз» беш аз 300 ғазалро дар бар мегирад, ки саршор аз нигоштаҳои ҳикматомезу пандомӯз мебошад. Китоби мазкур девони сездаҳуми шоир мебошад. Китоб ба кулли дӯстдорони каломи бадеъ тавсия мегардад.</p>
+                    <div class="book-actions">
+                        <a href="books/13. Мӯсозода Ҳоҷӣ Ҳусайн. СЕЗДАҲ НИШОНАИ РОЗ_compressed.pdf" download class="download-btn"><i class="fas fa-download"></i> PDF</a>
+                        <div class="share-buttons">
+                            <button class="share-btn" onclick="shareBook('Facebook', 'СЕЗДАҲ НИШОНАИ РОЗ')"><i class="fab fa-facebook"></i></button>
+                            <button class="share-btn" onclick="shareBook('Twitter', 'СЕЗДАҲ НИШОНАИ РОЗ')"><i class="fab fa-twitter"></i></button>
+                            <button class="share-btn" onclick="shareBook('VK', 'СЕЗДАҲ НИШОНАИ РОЗ')"><i class="fab fa-vk"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Сайти Ҳоҷӣ Ҳусайн Мӯсозода. Ҳамаи ҳуқуқҳо ҳифз шудаанд.</p>
+        </div>
+    </footer>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const bookGrid = document.getElementById('bookGrid');
+        const books = Array.from(bookGrid.getElementsByClassName('book-card'));
+
+        searchInput.addEventListener('keyup', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            books.forEach(book => {
+                const title = book.dataset.title.toLowerCase();
+                const genre = book.dataset.genre.toLowerCase();
+                if (title.includes(searchTerm) || genre.includes(searchTerm)) {
+                    book.style.display = 'flex';
+                } else {
+                    book.style.display = 'none';
+                }
+            });
+        });
+
+        function shareBook(platform, title) {
+            const url = window.location.href;
+            let shareUrl = '';
+            const text = `Китоби "${title}"-ро аз сомонаи Ҳоҷӣ Ҳусайн Мӯсозода мутолиа кунед!`;
+
+            switch (platform) {
+                case 'Facebook':
+                    shareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`;
+                    break;
+                case 'Twitter':
+                    shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+                    break;
+                case 'VK':
+                    shareUrl = `https://vk.com/share.php?url=${encodeURIComponent(url)}&title=${encodeURIComponent(text)}`;
+                    break;
+            }
+            window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        hamburger.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
