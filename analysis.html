@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шеърҳо - Ҳоҷӣ Ҳусайн Мӯсозода</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        @font-face {
+    font-family: 'Bookman Old Style Cyr';
+    src: url('font/ofont.ru_Bookman Old Style Cyr.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Caslon Becker';
+    src: url('font/ofont.ru_Caslon Becker.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #28a745;
+            --secondary-green: #1B5E20;
+            --light-green: #b4ffb4;
+            --accent-gold: #28a745;
+            --accent-brown: #28a745;
+            --text-dark: #2E2E2E;
+            --text-gray: #666666;
+            --bg-light: #E7E9ED;
+            --bg-cream: #b4ffb4;
+            --white: #FFFFFF;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        /* Header & Navigation */
+        .header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            color: var(--white);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        .header::after {
+            content: '';
+            display: block;
+            height: 1px;
+            background-color: white;
+            width: 100%;
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 45px;
+        }
+
+         .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Bookman Old Style Cyr', serif;
+    font-size: 1.2rem; /* Adjusted for smaller screens */
+    color: var(--white);
+    text-decoration: none;
+    padding: 5px 0; /* Add some padding */
+}
+.logo-img {
+    height: 40px; /* подбери по размеру */
+    width: auto;
+    border-radius: 6px; /* если нужно скругление */
+}
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--light-green);
+        }
+
+        .nav-link.active {
+            color: var(--light-green);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--light-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            color: var(--white);
+            padding: 80px 20px 40px;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .page-title {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .page-subtitle {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Back Button */
+        .back-btn {
+            background: var(--secondary-green);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-green);
+            transform: translateY(-2px);
+            color: var(--white);
+        }
+
+        /* Analysis Section */
+        .analysis-container {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .analysis-item {
+            border-bottom: 1px solid var(--bg-light);
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+        }
+
+        .analysis-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .analysis-title {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-brown);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        .analysis-title:hover {
+            color: var(--primary-green);
+        }
+
+        .analysis-title .icon {
+            transition: transform 0.3s ease;
+        }
+
+        .analysis-content {
+            display: none;
+            padding-top: 20px;
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .analysis-content p {
+            margin-bottom: 15px;
+        }
+
+        .analysis-content h4 {
+            font-size: 1.3rem;
+            color: var(--secondary-green);
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--secondary-green) 0%, var(--primary-green) 100%);
+            color: var(--white);
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .footer-title {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-text {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.3);
+            margin: 30px 0 20px;
+        }
+
+        .footer-bottom {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 18px;
+            right: 18px;
+            width: 36px;
+            height: 36px;
+            background: var(--accent-gold);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            display: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .back-to-top:hover {
+            background: var(--accent-brown);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 45px;
+                left: 0;
+                right: 0;
+                background: var(--secondary-green);
+                padding: 20px;
+                gap: 15px;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+            
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="img/logo2.png" alt="Логотип" class="logo-img">
+                Ҳоҷӣ Ҳусайн Мӯсозода
+            </a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Асосӣ</a></li>
+                <li><a href="poems.html" class="nav-link">Шеърҳо</a></li>
+                <li><a href="analysis.html" class="nav-link active">Таҳлили шеърҳо</a></li>
+                <li><a href="audio.html" class="nav-link">Аудио</a></li>
+                <li><a href="books.html" class="nav-link">Китобҳо</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1 class="page-title">Таҳлили шеърҳо</h1>
+        <p class="page-subtitle">Таҳлили амиқи шеърҳо ва ғазалҳо</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Бозгашт ба саҳифаи асосӣ
+        </a>
+
+        <div class="analysis-container">
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    КИШВАРИ НУРУ САОДАТ,  ТОҶИКИСТОН, ЗИНДА БОД!
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Матни шеър:</h4>
+                    <p>
+                        Кишвари нуру саодат, Тоҷикистон, зинда бод! <br> 
+                        Пешвои боадолат, зеби даврон, зинда бод! <br> 
+                        Ин ҳама ободиҳо аз баҳри халқу миллат аст, <br> 
+                        Тоҷикистон, доимо бо нури Раҳмон, зинда бод!<br> 
+                        Нури истиқлоли давлат ваҳдати миллат бувад, <br> 
+                        Дар садоқат бар Ватан Вахшу Бадахшон, зинда бод! <br> 
+                        Ваҳдати мо гул кунад аз рамзи Кӯлобу Ҳисор, <br> 
+                        Дар табиат гулшану Рашту Зарафшон, зинда бод! <br> 
+                        Гардад обод ин Ватан - рушди саноат дар назар, <br> 
+                        Дар муҳаббат ҳам рафоқат Суғду Хатлон, зинда бод! <br> 
+                        Асли давлатдории мо давлати Сомониён, <br> 
+                        Ифтихори миллати, мо даври Сомон, зинда бод!
+                    </p>
+                    <h4>Таҳлил:</h4>
+                    <p>Таҳлили ин шеър ба зудӣ илова карда мешавад.</p>
+                </div>
+            </div>
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    АДЛИ ПЕШВОИ ЗАМОН ШУКРОНАИ ДАВРОНИ МО
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Матни шеър:</h4>
+                    <p>
+                        Адли Пешвои замон шукронаи даврони мо, <br>
+                        Шукри шоҳи додгар Эмомалӣ Раҳмони мо. <br>
+                        Шукри истиқлоли давлат, Парчами миллат баланд, <br>
+                        Ифтихори миллату Исмоили Сомони мо. <br>
+                        Шукри оромии миллат, адли Сарвар дар назар, <br>
+                        Дар масири зиндагӣ шукронаи Раҳмони мо. <br>
+                        Худ навозишҳо кунад аз баҳри муҳтоҷу ятим, <br>
+                        Шукри раҳми Пешво, шукронаи даврони мо. <br>
+                        Марзу буми Тоҷикистон, Рамзи давлат ҳам Нишон, <br>
+                        Хоки поки Тоҷикистон сурмаи чашмони мо. <br>
+                        Шукри халқи Тоҷикистон, шукри хоки ин Ватан, <br>
+                        Шукри адли Пешво Эмомалӣ Раҳмони мо.
+                    </p>
+                    <h4>Таҳлил:</h4>
+                    <p>Таҳлили ин шеър ба зудӣ илова карда мешавад.</p>
+                </div>
+            </div>
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    ТИНАТИ ГУЛҲОИ РАНГИН ДАР ГУЛОБ АФТОДААСТ
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Матни шеър:</h4>
+                    <p>
+                        Тинати гулҳои рангин дар гулоб афтодааст, <br>
+                        Раҳмати дилҳои сангин бениқоб афтодааст. <br>
+                        Мушку анбар гар ту дидӣ дар гулобе ё ниқоб, <br>
+                        Қимати гулҳои мушкин беҳисоб афтодааст. <br>
+                        Боданӯшӣ, бангу афюн сад ҷунун орад ба ту, <br>
+                        Иллати ин номи нангин дар шароб афтодааст. <br>
+                        Лаззати об ар бидонӣ, шӯру талхӣ рамзи баҳр, <br>
+                        Қисмати дарёи ширин аз саҳоб афтодааст. <br>
+                        Бо шаҳомат чуғзу лочин дӯрӣ ҷӯяд худ ба худ, <br>
+                        Ғафлати авлоди шоҳин чун сароб афтодааст. <br>
+                        Номаи девон чу омад нақши дунёро бубин, <br>
+                        Давлати дунёи рангин дар китоб афтодааст. <br>
+                        Вақти оромӣ ба нармӣ ту дуо кун, эй Ҳусайн, <br>
+                        Фурсати наҷвои омин мустаҷоб афтодааст.
+                    </p>
+                    <h4>Таҳлил:</h4>
+                    <p>Таҳлили ин шеър ба зудӣ илова карда мешавад.</p>
+                </div>
+            </div>
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    ЭЪЛОМИЯИ ХУҶАНД
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Матни шеър:</h4>
+                    <p>
+                        Қиссаи таърихи омад баҳри миллат дарХуҷанд,<br>
+                        Iди Наврӯз бо бузургон зикри он шуд дилписанд.<br>
+                        Ҷашни Наврӯз қутбнамоу Тоҷикистон муқтадо,<br>
+                        Пешвои миллати мо бо садоқат раҳнамо.<br>
+                        Раҳбари қирғизу узбек Содиру ҳам Мирзиё,<br>
+                        Миизбон олимақом Эмомалӣ Раҳмони мо.<br>
+                        Сулҳу дӯсти байни се халқ муҷдаҳо бар мо расид,<br>
+                        Ҷовидон Эъломия бар мардуми дунё расид.<br>
+                        Дар Хуҷанд Эъломия имзо бишуд дар иттиҳод,<br>
+                        Халқ бигуфто ваҳдати мо бо муҳаббат зинда бод!<br>
+                        Раҳбари се мамлакат болои сар парчам буд,<br>
+                        Шуд муайян бо адолат бе хато хатти ҳудуд.<br>
+                        Баҳри миллат ин санадҳо армуғони бо бақо,<br>
+                        Дар Хуҷанд имзо бикарданд дӯстони бо вафо.<br>
+                        Тоҷику ӯзбеку қирғиз чун бародар дар яқин,<br>
+                        Роҳи дӯстиро бидонад ҳар,ки бошад нек бин.<br>
+                        Қалъаи шаҳри Хуҷанд тобанда шуд чун офтоб,<br>
+                        Нури имзо васфи он поянда монад дар китод.<br>
+                        Ҷашни Наврӯз бо сафо машҳӯр гашта дар ҷаҳон,<br>
+                        Дар Хуҷанди бостон Эъломия шуд ҷовидон.<br>
+                        Аҳду паймону садоқат дар миёни дӯстон,<br>
+                        То абад поянда бошад ҳамчу роҳи Каҳкашон.<br>
+                        Ту таманно кун Ҳусайно баҳри мардум иттиҳод,<br>
+                        Рамзи ободӣ расонад халқи моро бар мурод.
+                    </p>
+                    <h4>Таҳлил:</h4>
+                    <p>Таҳлили ин шеър ба зудӣ илова карда мешавад.</p>
+                </div>
+            </div>
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    ТОҶИКИСТОН МЕҲАНИ МАН, ТАХТИ СУЛТОНИ МАН АСТ
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Матни шеър:</h4>
+                    <p>
+                        Тоҷикистон меҳани ман, тахти султони ман аст, <br>
+                        Ёдгоре аз асолат, мулки Сомони ман аст. <br>
+                        Миллати тоҷик ба олам шуҳраташ поянда шуд, <br>
+                        Илму ирфону муҳаббат роҳи кайҳони ман аст. <br>
+                        Роҳи кайҳон илми миллат, воҷаҳои суғдиён, <br>
+                        Маънии рамзи ҳаёташ роҳи осони ман аст. <br>
+                        Дастрас бошад ба неъмат, қатраҳо ояд ба даст, <br>
+                        Ҳикматаш андар назарҳо рӯзи борони ман аст. <br>
+                        Шодбошиҳо бигӯям халқу миллат дар назар, <br>
+                        Дар раҳи меҳру садоқат гул ба домони ман аст. <br>
+                        Дар ҳикоятҳои мардум назми ту мавзун, Ҳусайн, <br>
+                        Васфи меҳанро бигӯ, ки назми бурҳони ман аст.
+                    </p>
+                    <h4>Таҳлил:</h4>
+                    <p>Таҳлили ин шеър ба зудӣ илова карда мешавад.</p>
+                </div>
+            </div>
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    АЗ ДИЛАМ ИЛҲОМ ҲАМЧУН ОФТОБ ОМАД БУРУН
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Матни шеър:</h4>
+                    <p>
+                        Аз дилам илҳом ҳамчун офтоб омад бурун, <br>
+                        Равшанӣ аз зери дарё бениқоб омад бурун. <br>
+                        Шуд мунаввар рӯи олам дар назар бо ҳар ғазал, <br>
+                        Назди Шайхи Маслиҳатдин моҳтоб омад бурун. <br>
+                        Фарқи назмамро бубинӣ бо мақом оҳанги худ, <br>
+                        Баҳри ҳар хунёгаре чангу рубоб омад бурун. <br>
+                        Кашфи асрори ғазалро баҳри ғофил гӯ, Ҳусайн, <br>
+                        Аз гулистон бе гуле, бо чашми хоб омад бурун. <br>
+                        Баҳри доноён бигӯ, ки ин дилам сад пора шуд, <br>
+                        Аз вуҷудам сӯзиши бӯи кабоб омад бурун. <br>
+                        Аз барои нафъи миллат хок бошам дар замин, <br>
+                        Шамси тобон нурбахшо аз саҳоб омад бурун.
+                    </p>
+                    <h4>Таҳлил:</h4>
+                    <p>Таҳлили ин шеър ба зудӣ илова карда мешавад.</p>
+                </div>
+            </div>
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    ШОИРИ СОҲИББАЁН ЗАР АЗ ЗАРАФШОН МЕКАШАД
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Матни шеър:</h4>
+                    <p>
+                        Шоири соҳиббаён зар аз Зарафшон мекашад, <br>
+                        Ранги маъниро зи гул бо нури чашмон мекашад. <br>
+                        Соҳиби иззат бигардад бо баёни роҳи ҳақ, <br>
+                        Ҳарфи маъниро зи дил бо қуввати ҷон мекашад. <br>
+                        Гар ту дидӣ шоиреро даъваташ бар маъсият, <br>
+                        Ранҷу кулфатро мудом дар роҳи шайтон мекашад. <br>
+                        Дар сухан ҳар шоире н-орад ба мардум мушкилӣ, <br>
+                        Ҳарфи худро аз дилаш бо роҳи осон мекашад. <br>
+                        Корвони аҳли ҳикмат дар сафар бошад мудом, <br>
+                        Ихтилофе гар расад, реги биёбон мекашад. <br>
+                        Ҳар кӣ хонад бо муҳаббат нуктаи ҳарфи Ҳусайн, <br>
+                        Хатти худро дар бинои мулки сомон мекашад.
+                    </p>
+                    <h4>Таҳлил:</h4>
+                    <p>Таҳлили ин шеър ба зудӣ илова карда мешавад.</p>
+                </div>
+            </div>
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    АЗ ҶАҲОН БО САД РИВОЯТ ОДАМУ ҲАВВО ГУЗАШТ
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Матни шеър:</h4>
+                    <p>
+                        Аз ҷаҳон бо сад ривоят Одаму Ҳавво гузашт, <br>
+                        Дар ҳаводис бемуаммо Нуҳу ҳам Мӯсо гузашт. <br>
+                        Қиссаи Айюби Собир ибрати аҳли хирад, <br>
+                        Бо ҷаҳолат ту магӯ, ки Юсуфи зебо гузашт. <br>
+                        Сарвату молат зиёд аст, баҳравар кун миллатат, <br>
+                        Зубдаи амволи худ бин, Акбари доро гузашт. <br>
+                        Зиндагӣ дар рӯи олам бо бузургон беҳтар аст, <br>
+                        Қадри оламро бидонад он, ки аз дунё гузашт. <br>
+                        Бо тасаввур сатҳи баҳре дар ғазал гӯяд Ҳусайн, <br>
+                        Дар назар айёми умрам мисли як дарё гузашт. <br>
+                        Гарчи парвозе бикардӣ мисли шоҳин дар ҳаво, <br>
+                        Қадри парвона бидон, ки Аҳмади доно гузашт.
+                    </p>
+                    <h4>Таҳлил:</h4>
+                    <p>Таҳлили ин шеър ба зудӣ илова карда мешавад.</p>
+                </div>
+            </div>
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    ШУКРИ ҲАҚ, ИН УМРИ МАН ДАР КИШВАРИ ЗЕБО ГУЗАШТ
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Матни шеър:</h4>
+                    <p>
+                        Шукри Ҳақ, ин умри ман дар кишвари зебо гузашт, <br>
+                        Дар Хуҷанди бостон домони Сирдарё гузашт. <br>
+                        Бо суруру шодмониҳо гузашт ин умри ман, <br>
+                        Дар ривоятҳои худ чун Вомиқу Узро гузашт. <br>
+                        Байни мардум хидмати дин бо тариқи назму наср, <br>
+                        Дар ақида солиму дар роҳи он Якто гузашт. <br>
+                        Дар маҷолис ҳамнишини аҳли илму ҳам адаб, <br>
+                        Беҳтарин айёми ман дар назди сад доно гузашт. <br>
+                        Ман намегӯям, ки умрам орӣ аст аз ноқисот, <br>
+                        Шукри даврон мекунам дорову нодоро гузашт. <br>
+                        Бар лаби баҳре бирав, бо худ бигӯ, Ҳоҷӣ Ҳусайн, <br>
+                        Умри ман андар масал монанди як дарё гузашт.
+                    </p>
+                    <h4>Таҳлил:</h4>
+                    <p>Таҳлили ин шеър ба зудӣ илова карда мешавад.</p>
+                </div>
+            </div>
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    ДИЛУ ДИНИ МУСУЛМОНӢ ЗИ БОЗОРЕ НАМЕЁБАМ
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Матни шеър:</h4>
+                    <p>
+                        Дилу дини мусулмонӣ зи бозоре намеёбам, <br>
+                        Давоми назми ирфонӣ зи гуфторе намеёбам. <br>
+                        Дар ин бозори пурғавғо гурезонам ман аз савдо, <br>
+                        Ба амволи ҳакимона харидоре намеёбам. <br>
+                        Мақоми ҷаҳлу нодонӣ ба подорӣ намеарзад, <br>
+                        Ҳар он чӣ дидаам дар хоб, ба бедорӣ намеёбам. <br>
+                        Ҳама мадҳушу нодонӣ зи исёни Банӣ Одам, <br>
+                        Кунун роҳи пушаймонӣ зи ҳушёре намеёбам. <br>
+                        Гиёҳе дар замин рӯяд, нагӯям он гули Марям, <br>
+                        Гули насрини Мавлоро зи гулзоре намеёбам. <br>
+                        Ҳусайно, ту бигӯ Ҳақро, камарбандӣ адоват нест, <br>
+                        Ҳидоятҳои Исоро зи зунноре намеёбам.
+                    </p>
+                    <h4>Таҳлил:</h4>
+                    <p>Таҳлили ин шеър ба зудӣ илова карда мешавад.</p>
+                </div>
+            </div>
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    МЕҲРУБОНИ ҶОВИДОН ДАР ИН ҶАҲОН БОШАД ПАДАР
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Матни шеър:</h4>
+                    <p>
+                        Меҳрубони ҷовидон дар ин ҷаҳон бошад падар,<br>
+                        Баҳри фарзандони худ ҳам соябон бошад падар.<br>
+                        Рӯзу шаб бо сӯзи дил ғамхори фарзандони худ,<br>
+                        Аз сафар ҳар гаҳ чу ойӣ, дар амон бошад падар.<br>
+                        Бадзабониҳо макун дар назди ӯ гоҳи сухан,<br>
+                        Чун гудози шуълаҳо оташфишон бошад падар.<br>
+                        Аз ту н-ояд гар хамӯшӣ лаҳзаи қаҳру ғазаб,<br>
+                        Оташе шуд ҷилвагар, оташнишон бошад падар.<br>
+                        Гар падар амре кунад, фармудааш воҷиб бувад,<br>
+                        Дар дилат поянда дор, то ҷовидон бошад падар.<br>
+                        Баҳри фарзандон бигӯ бо як ишорат, эй Ҳусайн,<br>
+                        Бо дуои мустаҷоб дар ҳар макон бошад падар.
+                    </p>
+                    <h4>Таҳлил:</h4>
+                    <p>Таҳлили ин шеър ба зудӣ илова карда мешавад.</p>
+                </div>
+            </div>
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    АНДАР ИН ДУНЁ ТУ БУДӢ МЕҲРУБОНАМ, МОДАРАМ
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Матни шеър:</h4>
+                    <p>
+                        Андар ин дунё ту будӣ меҳрубонам, модарам,<br>
+                        Офтоби зиндагӣ, партавфишонам, модарам!<br>
+                        Навҷавониям гузашт андар паноҳи меҳри ту,<br>
+                        Дар тариқи даъвати Ҳақ комронам, модарам!<br>
+                        Ҳеч кас чун ту набуд ғамхори фарзандони ман,<br>
+                        Меҳри ту то ҳол нури хонадонам, модарам!<br>
+                        Интизори роҳи ман будӣ ту ҳар шому саҳар,<br>
+                        Раҳнамову раҳбару ҳам роҳбонам, модарам!<br>
+                        Меҳрубонию дуоят ҷовидон ҳамроҳи ман, <br>
+                        Марқадат обод, эй ҷаннатмаконам, модарам!<br>
+                        Эй Худо, мепурсам аз ту: Шод гардон рӯҳи ӯ,<br>
+                        То дами охир, Ҳусайно, гӯ: «Ҷаҳонам, модарам!»
+                    </p>
+                    <h4>Таҳлил:</h4>
+                    <p>Таҳлили ин шеър ба зудӣ илова карда мешавад.</p>
+                </div>
+            </div>
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    ДОДАРУ ХОҲАР ҲАМА ДАР АСЛ АЗ ЯК ГАВҲАРАНД
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Матни шеър:</h4>
+                    <p>
+                        Додару хоҳар ҳама дар асл аз як гавҳаранд,<br>
+                        Ифтихори волидайни гулбару гулпарваранд.<br>
+                        Ҷавҳари аҷдод дар ҳастии авлод озмуд,<br>
+                        Байни абнои падар симои асли мазҳаранд.<br>
+                        Волидон хоҳанд доим байни фарзандони хеш,<br>
+                        Меҳру шафқат чун зару бошад, ки онон заргаранд.<br>
+                        Хонаи танги падар бошад, набошад мушкиле,<br>
+                        Ҳар замон чун тифлаке ғамхори раҳми модаранд.<br>
+                        Хоҳару додар ҳама мастури айби якдигар,<br>
+                        Норизогӣбайни онон ғуссаи баҳру баранд.<br>
+                        Бо бародар қадрдонӣ кун, Ҳусайн имрӯзу пас,<br>
+                        Молу дунё бевафо, фармудаи Пайғамбаранд!
+                    </p>
+                    <h4>Таҳлил:</h4>
+                    <p>Таҳлили ин шеър ба зудӣ илова карда мешавад.</p>
+                </div>
+            </div>
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    ҲИКМАТИ АСРОРИ МАН ДАР ҲАР КИТОБ ОМАД БА ЧОП
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Матни шеър:</h4>
+                    <p>
+                        Ҳикмати асрори ман дар ҳар китоб омад ба чоп,<br>
+                        Фурсати гуфтори ман беинтихоб омад ба чоп.<br>
+                        Гар расад аз мардумон ҳар як суоле баҳри ман,<br>
+                        Қимати иқрори ман баҳри ҷавоб омад ба чоп.<br>
+                        Дар радифи назму насрам қиссаи дарёву баҳр,<br>
+                        Иллати озори ман «моҳӣ зи об» омад ба чоп.<br>
+                        Назди ҳар соҳибдиле тадвини насрам дар назар,<br>
+                        Сӯҳбату афкори ман худ беҳисоб омад ба чоп. <br>
+                        Бар қалам он ҳарчӣ омад шукри неъмат мекунам,<br>
+                        Нузҳати дилдори ман савти рубоб омад ба чоп.<br>
+                        Ташнаеро гар ту дидӣ худ бигӯ, Ҳоҷӣ Ҳусайн,<br>
+                        Қисмати осори ман назми пуроб омад ба чоп.
+                    </p>
+                    <h4>Таҳлил:</h4>
+                    <p>Таҳлили ин шеър ба зудӣ илова карда мешавад.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3 class="footer-title">Дар бораи сайт</h3>
+            <p class="footer-text">
+                Ин сайт ба устод Ҳоҷӣ Ҳусайн Мӯсозода бахшида шудааст. 
+                <br>Мақсади мо таърифи осор ва мероси адабии ин шоири бузург ба насли ҷавон мебошад.
+            </p>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Сайти Ҳоҷӣ Ҳусайн Мӯсозода. Ҳамаи ҳуқуқҳо ҳифз шудаанд.</p>
+                <p>Таҳия шуда аз ҷониби тими барномасозон</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Accordion functionality
+        const analysisItems = document.querySelectorAll('.analysis-item');
+
+        analysisItems.forEach(item => {
+            const title = item.querySelector('.analysis-title');
+            const content = item.querySelector('.analysis-content');
+            const icon = item.querySelector('.icon i');
+
+            title.addEventListener('click', () => {
+                const isVisible = content.style.display === 'block';
+                
+                // Close all items
+                analysisItems.forEach(i => {
+                    i.querySelector('.analysis-content').style.display = 'none';
+                    i.querySelector('.icon i').classList.remove('fa-chevron-up');
+                    i.querySelector('.icon i').classList.add('fa-chevron-down');
+                });
+
+                // Open the clicked item if it was closed
+                if (!isVisible) {
+                    content.style.display = 'block';
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+        });
+
+        // Back to top functionality
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                if(backToTopButton) backToTopButton.style.display = 'block';
+            } else {
+                if(backToTopButton) backToTopButton.style.display = 'none';
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        if(hamburger) {
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>

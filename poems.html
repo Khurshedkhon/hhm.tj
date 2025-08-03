@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шеърҳо - Ҳоҷӣ Ҳусайн Мӯсозода</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        @font-face {
+    font-family: 'Bookman Old Style Cyr';
+    src: url('font/ofont.ru_Bookman Old Style Cyr.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Caslon Becker';
+    src: url('font/ofont.ru_Caslon Becker.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #28a745;
+            --secondary-green: #1B5E20;
+            --light-green: #b4ffb4;
+            --accent-gold: #28a745;
+            --accent-brown: #28a745;
+            --text-dark: #2E2E2E;
+            --text-gray: #666666;
+            --bg-light: #E7E9ED;
+            --bg-cream: #b4ffb4;
+            --white: #FFFFFF;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        /* Header & Navigation */
+        .header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            color: var(--white);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        .header::after {
+            content: '';
+            display: block;
+            height: 1px;
+            background-color: white;
+            width: 100%;
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 45px;
+        }
+
+         .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Bookman Old Style Cyr', serif;
+    font-size: 1.2rem; /* Adjusted for smaller screens */
+    color: var(--white);
+    text-decoration: none;
+    padding: 5px 0; /* Add some padding */
+}
+.logo-img {
+    height: 40px; /* подбери по размеру */
+    width: auto;
+    border-radius: 6px; /* если нужно скругление */
+}
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--light-green);
+        }
+
+        .nav-link.active {
+            color: var(--light-green);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--light-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            color: var(--white);
+            padding: 80px 20px 40px;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .page-title {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .page-subtitle {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Search and Filter */
+        .search-filter {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .search-box {
+            display: flex;
+            width: 100%;
+            border: 2px solid var(--bg-light);
+            border-radius: 25px;
+            overflow: hidden;
+        }
+
+        .search-input {
+            flex-grow: 1;
+            border: none;
+            padding: 12px 20px;
+            font-size: 1rem;
+            outline: none;
+            color: var(--text-dark);
+        }
+
+        .search-btn {
+            background: var(--primary-green);
+            color: var(--white);
+            border: none;
+            padding: 0 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-btn:hover {
+            background: var(--secondary-green);
+        }
+
+        .filter-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .filter-tag {
+            background: var(--bg-light);
+            color: var(--text-gray);
+            border: 1px solid transparent;
+            padding: 8px 18px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .filter-tag:hover {
+            background: #d4d6d9;
+            color: var(--text-dark);
+        }
+
+        .filter-tag.active {
+            background: var(--primary-green);
+            color: var(--white);
+            border-color: var(--secondary-green);
+            font-weight: 600;
+        }
+
+        /* Poems Grid */
+        .poems-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 30px;
+        }
+
+        .poem-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--bg-cream);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .poem-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-gold);
+        }
+
+        .poem-title {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-brown);
+            margin-bottom: 7px;
+        }
+
+        .poem-text {
+            font-size: 1.1rem;
+            font-family: 'Bookman Old Style Cyr', serif;
+            line-height: 1.8;
+            color: var(--text-dark);
+            font-style: italic;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .poem-actions {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+        }
+
+        .action-btn {
+            background: var(--accent-gold);
+            color: var(--white);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+        }
+
+        .action-btn:hover {
+            background: var(--accent-brown);
+            transform: scale(1.05);
+        }
+
+        /* Back Button */
+        .back-btn {
+            background: var(--secondary-green);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-green);
+            transform: translateY(-2px);
+            color: var(--white);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--secondary-green) 0%, var(--primary-green) 100%);
+            color: var(--white);
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .footer-title {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-text {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.3);
+            margin: 30px 0 20px;
+        }
+
+        .footer-bottom {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 18px;
+            right: 18px;
+            width: 36px;
+            height: 36px;
+            background: var(--accent-gold);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            display: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .back-to-top:hover {
+            background: var(--accent-brown);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 45px;
+                left: 0;
+                right: 0;
+                background: var(--secondary-green);
+                padding: 20px;
+                gap: 15px;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+            
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+
+            .poems-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+    <img src="img/logo2.png" alt="Логотип" class="logo-img">
+    Ҳоҷӣ Ҳусайн Мӯсозода
+</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Асосӣ</a></li>
+                <li><a href="poems.html" class="nav-link active">Шеърҳо</a></li>
+                <li><a href="analysis.html" class="nav-link">Таҳлили шеърҳо</a></li>
+                <li><a href="audio.html" class="nav-link">Аудио</a></li>
+                <li><a href="books.html" class="nav-link">Китобҳо</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1 class="page-title">Шеъру ғазалҳо</h1>
+        <p class="page-subtitle">Маҷмӯаи комили шеъру ғазалҳои Ҳоҷӣ Ҳусайн Мӯсозода</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Бозгашт ба саҳифаи асосӣ
+        </a>
+
+         <div class="search-filter">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Ҷустуҷӯи шеърҳо..." id="searchInput">
+                <button class="search-btn" onclick="searchPoems()">
+                    <i class="fas fa-search"></i>
+                    
+                </button>
+            </div>
+            <div class="filter-tags">
+                <button class="filter-tag active" onclick="filterPoems('all')">Ҳама</button>
+                <button class="filter-tag" onclick="filterPoems('vatan')">Ватан</button>
+                <button class="filter-tag" onclick="filterPoems('falsafi')">Фалсафӣ</button>
+                <button class="filter-tag" onclick="filterPoems('hayot')">Ҳаёт</button>
+                <button class="filter-tag" onclick="filterPoems('dini')">Динӣ</button>
+                <button class="filter-tag" onclick="filterPoems('oila')">Оила</button>
+            </div>
+            </div>
+        </div>
+        <div class="poems-grid" id="poemsGrid">
+            <div class="poem-card" data-category="vatan">
+                <h3 class="poem-title">КИШВАРИ НУРУ САОДАТ,  ТОҶИКИСТОН, ЗИНДА БОД!</h3>
+                <div class="poem-text">
+                    Кишвари нуру саодат, Тоҷикистон, зинда бод! <br> 
+                    Пешвои боадолат, зеби даврон, зинда бод! <br> 
+                    Ин ҳама ободиҳо аз баҳри халқу миллат аст, <br> 
+                    Тоҷикистон, доимо бо нури Раҳмон, зинда бод!<br> 
+                    Нури истиқлоли давлат ваҳдати миллат бувад, <br> 
+                    Дар садоқат бар Ватан Вахшу Бадахшон, зинда бод! <br> 
+                    Ваҳдати мо гул кунад аз рамзи Кӯлобу Ҳисор, <br> 
+                    Дар табиат гулшану Рашту Зарафшон, зинда бод! <br> 
+                    Гардад обод ин Ватан - рушди саноат дар назар, <br> 
+                    Дар муҳаббат ҳам рафоқат Суғду Хатлон, зинда бод! <br> 
+                    Асли давлатдории мо давлати Сомониён, <br> 
+                    Ифтихори миллати, мо даври Сомон, зинда бод!
+                </div>
+                <div class="poem-actions">
+                    <button class="action-btn" onclick="copyPoem(this)">
+                        <i class="fas fa-copy"></i> Нусха
+                    </button>
+                </div>
+            </div>
+            <div class="poem-card" data-category="vatan">
+                <h3 class="poem-title">АДЛИ ПЕШВОИ ЗАМОН ШУКРОНАИ ДАВРОНИ МО</h3>
+                <div class="poem-text">
+                    Адли Пешвои замон шукронаи даврони мо, <br>
+                    Шукри шоҳи додгар Эмомалӣ Раҳмони мо. <br>
+                    Шукри истиқлоли давлат, Парчами миллат баланд, <br>
+                    Ифтихори миллату Исмоили Сомони мо. <br>
+                    Шукри оромии миллат, адли Сарвар дар назар, <br>
+                    Дар масири зиндагӣ шукронаи Раҳмони мо. <br>
+                    Худ навозишҳо кунад аз баҳри муҳтоҷу ятим, <br>
+                    Шукри раҳми Пешво, шукронаи даврони мо. <br>
+                    Марзу буми Тоҷикистон, Рамзи давлат ҳам Нишон, <br>
+                    Хоки поки Тоҷикистон сурмаи чашмони мо. <br>
+                    Шукри халқи Тоҷикистон, шукри хоки ин Ватан, <br>
+                    Шукри адли Пешво Эмомалӣ Раҳмони мо.
+                </div>
+                <div class="poem-actions">
+                    <button class="action-btn" onclick="copyPoem(this)">
+                        <i class="fas fa-copy"></i> Нусха
+                    </button>
+                </div>
+            </div>
+            <div class="poem-card" data-category="falsafi">
+                <h3 class="poem-title">ТИНАТИ ГУЛҲОИ РАНГИН ДАР ГУЛОБ АФТОДААСТ</h3>
+                <div class="poem-text">
+                    Тинати гулҳои рангин дар гулоб афтодааст, <br>
+                    Раҳмати дилҳои сангин бениқоб афтодааст. <br>
+                    Мушку анбар гар ту дидӣ дар гулобе ё ниқоб, <br>
+                    Қимати гулҳои мушкин беҳисоб афтодааст. <br>
+                    Боданӯшӣ, бангу афюн сад ҷунун орад ба ту, <br>
+                    Иллати ин номи нангин дар шароб афтодааст. <br>
+                    Лаззати об ар бидонӣ, шӯру талхӣ рамзи баҳр, <br>
+                    Қисмати дарёи ширин аз саҳоб афтодааст. <br>
+                    Бо шаҳомат чуғзу лочин дӯрӣ ҷӯяд худ ба худ, <br>
+                    Ғафлати авлоди шоҳин чун сароб афтодааст. <br>
+                    Номаи девон чу омад нақши дунёро бубин, <br>
+                    Давлати дунёи рангин дар китоб афтодааст. <br>
+                    Вақти оромӣ ба нармӣ ту дуо кун, эй Ҳусайн, <br>
+                    Фурсати наҷвои омин мустаҷоб афтодааст.
+                </div>
+                <div class="poem-actions">
+                    <button class="action-btn" onclick="copyPoem(this)">
+                        <i class="fas fa-copy"></i> Нусха
+                    </button>
+                </div>
+            </div>
+            <div class="poem-card" data-category="vatan">
+                <h3 class="poem-title">ЭЪЛОМИЯИ ХУҶАНД</h3>
+                <div class="poem-text">
+                    Қиссаи таърихи омад баҳри миллат дарХуҷанд,<br>
+                    Iди Наврӯз бо бузургон зикри он шуд дилписанд.<br>
+                    Ҷашни Наврӯз қутбнамоу Тоҷикистон муқтадо,<br>
+                    Пешвои миллати мо бо садоқат раҳнамо.<br>
+                    Раҳбари қирғизу узбек Содиру ҳам Мирзиё,<br>
+                    Миизбон олимақом Эмомалӣ Раҳмони мо.<br>
+                    Сулҳу дӯсти байни се халқ муҷдаҳо бар мо расид,<br>
+                    Ҷовидон Эъломия бар мардуми дунё расид.<br>
+                    Дар Хуҷанд Эъломия имзо бишуд дар иттиҳод,<br>
+                    Халқ бигуфто ваҳдати мо бо муҳаббат зинда бод!<br>
+                    Раҳбари се мамлакат болои сар парчам буд,<br>
+                    Шуд муайян бо адолат бе хато хатти ҳудуд.<br>
+                    Баҳри миллат ин санадҳо армуғони бо бақо,<br>
+                    Дар Хуҷанд имзо бикарданд дӯстони бо вафо.<br>
+                    Тоҷику ӯзбеку қирғиз чун бародар дар яқин,<br>
+                    Роҳи дӯстиро бидонад ҳар,ки бошад нек бин.<br>
+                    Қалъаи шаҳри Хуҷанд тобанда шуд чун офтоб,<br>
+                    Нури имзо васфи он поянда монад дар китод.<br>
+                    Ҷашни Наврӯз бо сафо машҳӯр гашта дар ҷаҳон,<br>
+                    Дар Хуҷанди бостон Эъломия шуд ҷовидон.<br>
+                    Аҳду паймону садоқат дар миёни дӯстон,<br>
+                    То абад поянда бошад ҳамчу роҳи Каҳкашон.<br>
+                    Ту таманно кун Ҳусайно баҳри мардум иттиҳод,<br>
+                    Рамзи ободӣ расонад халқи моро бар мурод.
+                </div>
+                <div class="poem-actions">
+                    <button class="action-btn" onclick="copyPoem(this)">
+                        <i class="fas fa-copy"></i> Нусха
+                    </button>
+                </div>
+            </div>
+            <div class="poem-card" data-category="vatan">
+                <h3 class="poem-title">ТОҶИКИСТОН МЕҲАНИ МАН, ТАХТИ СУЛТОНИ МАН АСТ</h3>
+                <div class="poem-text">
+                    Тоҷикистон меҳани ман, тахти султони ман аст, <br>
+                    Ёдгоре аз асолат, мулки Сомони ман аст. <br>
+                    Миллати тоҷик ба олам шуҳраташ поянда шуд, <br>
+                    Илму ирфону муҳаббат роҳи кайҳони ман аст. <br>
+                    Роҳи кайҳон илми миллат, воҷаҳои суғдиён, <br>
+                    Маънии рамзи ҳаёташ роҳи осони ман аст. <br>
+                    Дастрас бошад ба неъмат, қатраҳо ояд ба даст, <br>
+                    Ҳикматаш андар назарҳо рӯзи борони ман аст. <br>
+                    Шодбошиҳо бигӯям халқу миллат дар назар, <br>
+                    Дар раҳи меҳру садоқат гул ба домони ман аст. <br>
+                    Дар ҳикоятҳои мардум назми ту мавзун, Ҳусайн, <br>
+                    Васфи меҳанро бигӯ, ки назми бурҳони ман аст.
+                </div>
+                <div class="poem-actions">
+                    <button class="action-btn" onclick="copyPoem(this)">
+                        <i class="fas fa-copy"></i> Нусха
+                    </button>
+                </div>
+            </div>
+            <div class="poem-card" data-category="falsafi">
+                <h3 class="poem-title">АЗ ДИЛАМ ИЛҲОМ ҲАМЧУН ОФТОБ ОМАД БУРУН</h3>
+                <div class="poem-text">
+                    Аз дилам илҳом ҳамчун офтоб омад бурун, <br>
+                    Равшанӣ аз зери дарё бениқоб омад бурун. <br>
+                    Шуд мунаввар рӯи олам дар назар бо ҳар ғазал, <br>
+                    Назди Шайхи Маслиҳатдин моҳтоб омад бурун. <br>
+                    Фарқи назмамро бубинӣ бо мақом оҳанги худ, <br>
+                    Баҳри ҳар хунёгаре чангу рубоб омад бурун. <br>
+                    Кашфи асрори ғазалро баҳри ғофил гӯ, Ҳусайн, <br>
+                    Аз гулистон бе гуле, бо чашми хоб омад бурун. <br>
+                    Баҳри доноён бигӯ, ки ин дилам сад пора шуд, <br>
+                    Аз вуҷудам сӯзиши бӯи кабоб омад бурун. <br>
+                    Аз барои нафъи миллат хок бошам дар замин, <br>
+                    Шамси тобон нурбахшо аз саҳоб омад бурун.
+                </div>
+                <div class="poem-actions">
+                    <button class="action-btn" onclick="copyPoem(this)">
+                        <i class="fas fa-copy"></i> Нусха
+                    </button>
+                </div>
+            </div>
+            <div class="poem-card" data-category="falsafi">
+                <h3 class="poem-title">ШОИРИ СОҲИББАЁН ЗАР АЗ ЗАРАФШОН МЕКАШАД</h3>
+                <div class="poem-text">
+                    Шоири соҳиббаён зар аз Зарафшон мекашад, <br>
+                    Ранги маъниро зи гул бо нури чашмон мекашад. <br>
+                    Соҳиби иззат бигардад бо баёни роҳи ҳақ, <br>
+                    Ҳарфи маъниро зи дил бо қуввати ҷон мекашад. <br>
+                    Гар ту дидӣ шоиреро даъваташ бар маъсият, <br>
+                    Ранҷу кулфатро мудом дар роҳи шайтон мекашад. <br>
+                    Дар сухан ҳар шоире н-орад ба мардум мушкилӣ, <br>
+                    Ҳарфи худро аз дилаш бо роҳи осон мекашад. <br>
+                    Корвони аҳли ҳикмат дар сафар бошад мудом, <br>
+                    Ихтилофе гар расад, реги биёбон мекашад. <br>
+                    Ҳар кӣ хонад бо муҳаббат нуктаи ҳарфи Ҳусайн, <br>
+                    Хатти худро дар бинои мулки сомон мекашад.
+                </div>
+                <div class="poem-actions">
+                    <button class="action-btn" onclick="copyPoem(this)">
+                        <i class="fas fa-copy"></i> Нусха
+                    </button>
+                </div>
+            </div>
+            <div class="poem-card" data-category="falsafi">
+                <h3 class="poem-title">АЗ ҶАҲОН БО САД РИВОЯТ ОДАМУ ҲАВВО ГУЗАШТ</h3>
+                <div class="poem-text">
+                    Аз ҷаҳон бо сад ривоят Одаму Ҳавво гузашт, <br>
+                    Дар ҳаводис бемуаммо Нуҳу ҳам Мӯсо гузашт. <br>
+                    Қиссаи Айюби Собир ибрати аҳли хирад, <br>
+                    Бо ҷаҳолат ту магӯ, ки Юсуфи зебо гузашт. <br>
+                    Сарвату молат зиёд аст, баҳравар кун миллатат, <br>
+                    Зубдаи амволи худ бин, Акбари доро гузашт. <br>
+                    Зиндагӣ дар рӯи олам бо бузургон беҳтар аст, <br>
+                    Қадри оламро бидонад он, ки аз дунё гузашт. <br>
+                    Бо тасаввур сатҳи баҳре дар ғазал гӯяд Ҳусайн, <br>
+                    Дар назар айёми умрам мисли як дарё гузашт. <br>
+                    Гарчи парвозе бикардӣ мисли шоҳин дар ҳаво, <br>
+                    Қадри парвона бидон, ки Аҳмади доно гузашт.
+                </div>
+                <div class="poem-actions">
+                    <button class="action-btn" onclick="copyPoem(this)">
+                        <i class="fas fa-copy"></i> Нусха
+                    </button>
+                </div>
+            </div>
+            <div class="poem-card" data-category="hayot">
+                <h3 class="poem-title">ШУКРИ ҲАҚ, ИН УМРИ МАН ДАР КИШВАРИ ЗЕБО ГУЗАШТ</h3>
+                <div class="poem-text">
+                    Шукри Ҳақ, ин умри ман дар кишвари зебо гузашт, <br>
+                    Дар Хуҷанди бостон домони Сирдарё гузашт. <br>
+                    Бо суруру шодмониҳо гузашт ин умри ман, <br>
+                    Дар ривоятҳои худ чун Вомиқу Узро гузашт. <br>
+                    Байни мардум хидмати дин бо тариқи назму наср, <br>
+                    Дар ақида солиму дар роҳи он Якто гузашт. <br>
+                    Дар маҷолис ҳамнишини аҳли илму ҳам адаб, <br>
+                    Беҳтарин айёми ман дар назди сад доно гузашт. <br>
+                    Ман намегӯям, ки умрам орӣ аст аз ноқисот, <br>
+                    Шукри даврон мекунам дорову нодоро гузашт. <br>
+                    Бар лаби баҳре бирав, бо худ бигӯ, Ҳоҷӣ Ҳусайн, <br>
+                    Умри ман андар масал монанди як дарё гузашт.
+                </div>
+                <div class="poem-actions">
+                    <button class="action-btn" onclick="copyPoem(this)">
+                        <i class="fas fa-copy"></i> Нусха
+                    </button>
+                </div>
+            </div>
+            <div class="poem-card" data-category="dini">
+                <h3 class="poem-title">ДИЛУ ДИНИ МУСУЛМОНӢ ЗИ БОЗОРЕ НАМЕЁБАМ</h3>
+                <div class="poem-text">
+                    Дилу дини мусулмонӣ зи бозоре намеёбам, <br>
+                    Давоми назми ирфонӣ зи гуфторе намеёбам. <br>
+                    Дар ин бозори пурғавғо гурезонам ман аз савдо, <br>
+                    Ба амволи ҳакимона харидоре намеёбам. <br>
+                    Мақоми ҷаҳлу нодонӣ ба подорӣ намеарзад, <br>
+                    Ҳар он чӣ дидаам дар хоб, ба бедорӣ намеёбам. <br>
+                    Ҳама мадҳушу нодонӣ зи исёни Банӣ Одам, <br>
+                    Кунун роҳи пушаймонӣ зи ҳушёре намеёбам. <br>
+                    Гиёҳе дар замин рӯяд, нагӯям он гули Марям, <br>
+                    Гули насрини Мавлоро зи гулзоре намеёбам. <br>
+                    Ҳусайно, ту бигӯ Ҳақро, камарбандӣ адоват нест, <br>
+                    Ҳидоятҳои Исоро зи зунноре намеёбам.
+                </div>
+                <div class="poem-actions">
+                    <button class="action-btn" onclick="copyPoem(this)">
+                        <i class="fas fa-copy"></i> Нусха
+                    </button>
+                </div>
+            </div>
+            <div class="poem-card" data-category="oila">
+                <h3 class="poem-title">МЕҲРУБОНИ ҶОВИДОН ДАР ИН ҶАҲОН БОШАД ПАДАР</h3>
+                <div class="poem-text">
+                    Меҳрубони ҷовидон дар ин ҷаҳон бошад падар,<br>
+                    Баҳри фарзандони худ ҳам соябон бошад падар.<br>
+                    Рӯзу шаб бо сӯзи дил ғамхори фарзандони худ,<br>
+                    Аз сафар ҳар гаҳ чу ойӣ, дар амон бошад падар.<br>
+                    Бадзабониҳо макун дар назди ӯ гоҳи сухан,<br>
+                    Чун гудози шуълаҳо оташфишон бошад падар.<br>
+                    Аз ту н-ояд гар хамӯшӣ лаҳзаи қаҳру ғазаб,<br>
+                    Оташе шуд ҷилвагар, оташнишон бошад падар.<br>
+                    Гар падар амре кунад, фармудааш воҷиб бувад,<br>
+                    Дар дилат поянда дор, то ҷовидон бошад падар.<br>
+                    Баҳри фарзандон бигӯ бо як ишорат, эй Ҳусайн,<br>
+                    Бо дуои мустаҷоб дар ҳар макон бошад падар.
+                </div>
+                <div class="poem-actions">
+                    <button class="action-btn" onclick="copyPoem(this)">
+                        <i class="fas fa-copy"></i> Нусха
+                    </button>
+                </div>
+            </div>
+            <div class="poem-card" data-category="oila">
+                <h3 class="poem-title">АНДАР ИН ДУНЁ ТУ БУДӢ МЕҲРУБОНАМ, МОДАРАМ</h3>
+                <div class="poem-text">
+                    Андар ин дунё ту будӣ меҳрубонам, модарам,<br>
+                    Офтоби зиндагӣ, партавфишонам, модарам!<br>
+                    Навҷавониям гузашт андар паноҳи меҳри ту,<br>
+                    Дар тариқи даъвати Ҳақ комронам, модарам!<br>
+                    Ҳеч кас чун ту набуд ғамхори фарзандони ман,<br>
+                    Меҳри ту то ҳол нури хонадонам, модарам!<br>
+                    Интизори роҳи ман будӣ ту ҳар шому саҳар,<br>
+                    Раҳнамову раҳбару ҳам роҳбонам, модарам!<br>
+                    Меҳрубонию дуоят ҷовидон ҳамроҳи ман, <br>
+                    Марқадат обод, эй ҷаннатмаконам, модарам!<br>
+                    Эй Худо, мепурсам аз ту: Шод гардон рӯҳи ӯ,<br>
+                    То дами охир, Ҳусайно, гӯ: «Ҷаҳонам, модарам!»
+                </div>
+                <div class="poem-actions">
+                    <button class="action-btn" onclick="copyPoem(this)">
+                        <i class="fas fa-copy"></i> Нусха
+                    </button>
+                </div>
+            </div>
+            <div class="poem-card" data-category="oila">
+                <h3 class="poem-title">ДОДАРУ ХОҲАР ҲАМА ДАР АСЛ АЗ ЯК ГАВҲАРАНД</h3>
+                <div class="poem-text">
+                    Додару хоҳар ҳама дар асл аз як гавҳаранд,<br>
+                    Ифтихори волидайни гулбару гулпарваранд.<br>
+                    Ҷавҳари аҷдод дар ҳастии авлод озмуд,<br>
+                    Байни абнои падар симои асли мазҳаранд.<br>
+                    Волидон хоҳанд доим байни фарзандони хеш,<br>
+                    Меҳру шафқат чун зару бошад, ки онон заргаранд.<br>
+                    Хонаи танги падар бошад, набошад мушкиле,<br>
+                    Ҳар замон чун тифлаке ғамхори раҳми модаранд.<br>
+                    Хоҳару додар ҳама мастури айби якдигар,<br>
+                    Норизогӣбайни онон ғуссаи баҳру баранд.<br>
+                    Бо бародар қадрдонӣ кун, Ҳусайн имрӯзу пас,<br>
+                    Молу дунё бевафо, фармудаи Пайғамбаранд!
+                </div>
+                <div class="poem-actions">
+                    <button class="action-btn" onclick="copyPoem(this)">
+                        <i class="fas fa-copy"></i> Нусха
+                    </button>
+                </div>
+            </div>
+            <div class="poem-card" data-category="falsafi">
+                <h3 class="poem-title">ҲИКМАТИ АСРОРИ МАН ДАР ҲАР КИТОБ ОМАД БА ЧОП</h3>
+                <div class="poem-text">
+                    Ҳикмати асрори ман дар ҳар китоб омад ба чоп,<br>
+                    Фурсати гуфтори ман беинтихоб омад ба чоп.<br>
+                    Гар расад аз мардумон ҳар як суоле баҳри ман,<br>
+                    Қимати иқрори ман баҳри ҷавоб омад ба чоп.<br>
+                    Дар радифи назму насрам қиссаи дарёву баҳр,<br>
+                    Иллати озори ман «моҳӣ зи об» омад ба чоп.<br>
+                    Назди ҳар соҳибдиле тадвини насрам дар назар,<br>
+                    Сӯҳбату афкори ман худ беҳисоб омад ба чоп. <br>
+                    Бар қалам он ҳарчӣ омад шукри неъмат мекунам,<br>
+                    Нузҳати дилдори ман савти рубоб омад ба чоп.<br>
+                    Ташнаеро гар ту дидӣ худ бигӯ, Ҳоҷӣ Ҳусайн,<br>
+                    Қисмати осори ман назми пуроб омад ба чоп.
+                </div>
+                <div class="poem-actions">
+                    <button class="action-btn" onclick="copyPoem(this)">
+                        <i class="fas fa-copy"></i> Нусха
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3 class="footer-title">Дар бораи сайт</h3>
+            <p class="footer-text">
+                Ин сайт ба устод Ҳоҷӣ Ҳусайн Мӯсозода бахшида шудааст. 
+                <br>Мақсади мо таърифи осор ва мероси адабии ин шоири бузург ба насли ҷавон мебошад.
+            </p>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Сайти Ҳоҷӣ Ҳусайн Мӯсозода. Ҳамаи ҳуқуқҳо ҳифз шудаанд.</p>
+                <p>Таҳия шуда аз ҷониби тими барномасозон</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        function copyPoem(button) {
+            const poemCard = button.closest('.poem-card');
+            const title = poemCard.querySelector('.poem-title').textContent;
+            const text = poemCard.querySelector('.poem-text').innerText;
+            const fullText = `${title}
+
+${text}
+
+- Ҳоҷӣ Ҳусайн Мӯсозода`;
+            
+            navigator.clipboard.writeText(fullText).then(() => {
+                button.innerHTML = '<i class="fas fa-check"></i> Нусха гирифта шуд';
+                setTimeout(() => {
+                    button.innerHTML = '<i class="fas fa-copy"></i> Нусха';
+                }, 2000);
+            });
+        }
+
+        // Back to top functionality
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                if(backToTopButton) backToTopButton.style.display = 'block';
+            } else {
+                if(backToTopButton) backToTopButton.style.display = 'none';
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        if(hamburger) {
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+        }
+
+        // --- Search and Filter Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('searchInput');
+            const poemsGrid = document.getElementById('poemsGrid');
+            const poemCards = Array.from(poemsGrid.getElementsByClassName('poem-card'));
+            const filterButtons = document.querySelectorAll('.filter-tag');
+            let currentFilter = 'all';
+
+            function updateDisplay() {
+                const searchTerm = searchInput.value.toLowerCase().trim();
+
+                poemCards.forEach(card => {
+                    const title = card.querySelector('.poem-title').textContent.toLowerCase();
+                    const text = card.querySelector('.poem-text').textContent.toLowerCase();
+                    const category = card.dataset.category;
+
+                    const matchesFilter = (currentFilter === 'all') || (category === currentFilter);
+                    const matchesSearch = (searchTerm === '') || title.includes(searchTerm) || text.includes(searchTerm);
+
+                    if (matchesFilter && matchesSearch) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+
+            window.searchPoems = function() {
+                // This function is called by the search button's onclick
+                updateDisplay();
+            }
+
+            window.filterPoems = function(category) {
+                currentFilter = category;
+                filterButtons.forEach(button => {
+                    // Extract category from onclick attribute for comparison
+                    const btnCategory = button.getAttribute('onclick').match(/'([^']+)'/)[1];
+                    if (btnCategory === category) {
+                        button.classList.add('active');
+                    }
+                    else {
+                        button.classList.remove('active');
+                    }
+                });
+                updateDisplay();
+            }
+
+            searchInput.addEventListener('input', updateDisplay);
+            
+            // Ensure initial state is correct
+            updateDisplay();
+        });
+    </script>
+</body>
+</html>

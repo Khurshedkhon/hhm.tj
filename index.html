@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ҳоҷӣ Ҳусайн Мӯсозода</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+        <style>
+        @font-face {
+    font-family: 'Bookman Old Style Cyr';
+    src: url('font/ofont.ru_Bookman\ Old\ Style\ Cyr.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Caslon Becker';
+    src: url('font/ofont.ru_Caslon Becker.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #28a745;
+            --secondary-green: #1B5E20;
+            --light-green: #b4ffb4;
+            --accent-gold: #28a745;
+            --accent-brown: #28a745;
+            --text-dark: #2E2E2E;
+            --text-gray: #666666;
+            --bg-light: #E7E9ED;
+            --bg-cream: #b4ffb4;
+            --white: #FFFFFF;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        /* Header & Navgation */
+          .header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            color: var(--white);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        .header::after {
+    content: '';
+    display: block;
+    height: 1px;
+    background-color: white;
+    width: 100%;
+    position: absolute;
+    bottom: -1px; /* чтобы не перекрывал */
+    left: 0;
+}
+
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 45px;
+        }
+
+        .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Bookman Old Style Cyr', serif;
+    font-size: 1.2rem; /* Adjusted for smaller screens */
+    color: var(--white);
+    text-decoration: none;
+    padding: 5px 0; /* Add some padding */
+}
+
+.logo-img {
+    height: 40px; /* подбери по размеру */
+    width: auto;
+    border-radius: 6px; /* если нужно скругление */
+}
+
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--light-green);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--light-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            color: var(--white);
+            padding: 40px 25px 15px; 
+              padding-top: 45px;
+              padding-bottom: 5px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            height: 185px;
+            
+        }
+
+        .hero p {
+    font-family: 'Bookman Old Style Cyr', serif;
+    font-size: 1.3rem;
+    line-height: 1.3;
+    margin-top: 20px; /* ↑ добавь отступ сверху */
+}
+
+
+        /* Photo Gallery Slider */
+        .photo-slider {
+            position: relative;
+            max-width: 800px;
+            margin: 40px auto;
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-hover);
+            border: 3px solid var(--bg-cream);
+            height: 535px;
+        }
+
+        .slider-container {
+            position: relative;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .slider-track {
+            display: flex;
+            transition: transform 0.5s ease;
+            height: 100%;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
+        }
+
+        .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* показывать всё изображение */
+    background-color: var(--bg-cream); 
+}
+
+
+        .slide-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+            padding: 20px;
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.1rem;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .slider-nav:hover {
+            background: var(--primary-green);
+            color: white;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-nav.prev {
+            left: 15px;
+        }
+
+        .slider-nav.next {
+            right: 15px;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 20px;
+            background: var(--white);
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--bg-cream);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .dot.active {
+            background: var(--primary-green);
+            transform: scale(1.2);
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5px 12px;
+            padding-top: 10px;
+            padding-bottom: 10px;
+        }
+
+        .section {
+            margin-bottom: 80px;
+        }
+
+        .section-title {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            margin-bottom: 22px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 35px;
+            height: 2px;
+            background: var(--accent-brown);
+            border-radius: 2px;
+        }
+
+        /* Biography Section */
+        .bio-content {
+            font-family: 'Bookman Old Style Cyr', serif;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        .bio-text {
+    font-family: 'Bookman Old Style Cyr', serif;
+    text-align: left;
+    background: var(--white);
+    padding: 18px;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    border: 2px solid var(--bg-cream);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+        .bio-text:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-gold);
+        }
+
+        .bio-text p {
+            font-size: 1.1rem;
+            font-family: 'Bookman Old Style Cyr', serif;
+            line-height: 1.5;
+            color: var(--text-dark);
+            margin-bottom: 18px;
+            text-align: left;
+        }
+
+ .bio-image {
+    background: var(--white);
+    border-radius: 15px;
+    box-shadow: var(--shadow);
+    border: 2px solid var(--bg-cream);
+    overflow: hidden;
+    width: 270px;
+    max-width: 300px;
+    height: 370px;
+}
+
+.bio-image img {
+    width: 270px;
+    height: 380px;
+    object-fit: cover;
+    display: block;
+}
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 40px 0;
+        }
+
+        .nav-btn {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            color: var(--white);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+            background: linear-gradient(135deg, var(--secondary-green) 0%, var(--primary-green) 100%);
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+}
+
+        .card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid var(--bg-cream);
+            display: flex;
+            flex-direction: column;
+            height: 100%; /* Make card take full height of the link wrapper */
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-gold);
+        }
+
+        .card-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .card-image {
+            height: auto;
+            background: var(--bg-cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: var(--accent-gold);
+        }
+        
+        .card-image img {
+    max-height: 180px;
+    width: 100%;
+    object-fit: contain;
+    display: block;
+    margin: 0 auto;
+    background: var(--bg-cream); /* чтобы фон выглядел опрятно */
+    padding: 6px;
+    border-radius: 8px;
+}
+
+
+        .card-content {
+            padding: 14px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-title {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent-brown);
+    margin-bottom: 8px;
+        }
+
+        .card-text {
+            font-family: 'Bookman Old Style Cyr', serif;
+            color: var(--text-gray);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            flex-grow: 1;
+            overflow: hidden;
+        }
+
+        /* Poems Section */
+        .poems-container {
+            display: grid;
+            gap: 30px;
+        }
+
+        .poem-card {
+            background: var(--white);
+            border-radius: 10px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid var(--bg-cream);
+        }
+
+        .poem-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 4rem;
+            color: var(--accent-gold);
+            font-family: 'Bookman Old Style Cyr', serif;
+            opacity: 0.3;
+        }
+
+        .poem-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-gold);
+        }
+
+        .poem-title {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--accent-brown);
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 2;
+        }
+
+        .poem-text {
+            font-size: 0.98rem;
+            font-family: 'Bookman Old Style Cyr', serif;
+            line-height: 1.8;
+            color: var(--text-dark);
+            font-style: italic;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .share-btn {
+            background: var(--accent-gold);
+            color: var(--white);
+            border: none;
+            padding: 6px 14px;
+            border-radius: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .share-btn:hover {
+            background: var(--accent-brown);
+            transform: scale(1.05);
+        }
+
+        /* Audio Grid */
+        .audio-grid {
+            display: grid;
+            gap: 25px;
+        }
+
+        .audio-card {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            border: 2px solid var(--bg-cream);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .audio-card:hover {
+            transform: translateX(10px);
+            box-shadow: var(--shadow-hover);
+            border-color: var(--accent-gold);
+        }
+
+        .audio-title {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--accent-brown);
+            margin-bottom: 8px;
+        }
+
+        .audio-controls {
+            width: 100%;
+        }
+        
+        .action-buttons {
+            margin-top: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn {
+            background: var(--accent-gold);
+            color: var(--white);
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+            text-decoration: none;
+            width: 140px;
+            justify-content: center;
+        }
+
+        .action-btn:hover {
+            background: var(--accent-brown);
+            transform: scale(1.05);
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--secondary-green) 0%, var(--primary-green) 100%);
+            color: var(--white);
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .footer-title {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-text {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.3);
+            margin: 30px 0 20px;
+        }
+
+        .footer-bottom {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 18px;
+            right: 18px;
+            width: 36px;
+            height: 36px;
+            background: var(--accent-gold);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            display: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .back-to-top:hover {
+            background: var(--accent-brown);
+            transform: translateY(-3px);
+        }
+
+        /* Text Content Toggle */
+        .text-content {
+            position: relative;
+            max-height: 280px;
+            overflow: hidden;
+            transition: max-height 0.5s ease-in-out;
+        }
+
+        .text-content.expanded {
+            max-height: 1500px; /* A large enough value */
+        }
+
+        .text-content:not(.expanded)::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 50px;
+            background: linear-gradient(transparent, var(--white));
+            pointer-events: none;
+        }
+
+        .read-more-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 15px auto 0;
+            padding: 8px 25px;
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            color: var(--white);
+            border: none;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(40, 167, 69, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .read-more-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+            background: linear-gradient(135deg, var(--secondary-green) 0%, var(--primary-green) 100%);
+        }
+
+        .read-more-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(40, 167, 69, 0.2);
+        }
+
+        .read-more-btn i {
+            transition: transform 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .read-more-btn.active i {
+            transform: rotate(180deg);
+        }
+
+        .read-more-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.2),
+                transparent
+            );
+            transition: 0.5s;
+        }
+
+        .read-more-btn:hover::before {
+            left: 100%;
+        }
+
+        .audio-text-content {
+            display: none;
+            padding: 15px;
+            margin-top: 15px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            border: 1px solid #eee;
+        }
+
+        .audio-text-content.expanded {
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                height: auto;
+                padding-top: 60px;
+                padding-bottom: 20px;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+                margin-top: 10px;
+            }
+
+            .text-content {
+                max-height: 200px;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 45px;
+                left: 0;
+                right: 0;
+                background: var(--secondary-green);
+                padding: 20px;
+                gap: 15px;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+            
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .bio-content {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .bio-text, .bio-image {
+                height: auto;
+            }
+
+            .bio-image {
+                width: 90%;
+                max-width: 350px;
+                margin: 0 auto;
+            }
+
+            .bio-image img {
+                width: 100%;
+                height: auto;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .slider-nav {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .photo-slider {
+                margin: 20px auto;
+                height: auto;
+            }
+
+            .slider-container {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+    <img src="img/logo2.png" alt="Логотип" class="logo-img">
+    Ҳоҷӣ Ҳусайн Мӯсозода
+</a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="#zindaginoma" class="nav-link">Зиндагинома</a></li>
+                <li><a href="#kitobho" class="nav-link">Китобҳо</a></li>
+                <li><a href="#sherho" class="nav-link">Шеъру ғазалҳо</a></li>
+                <li><a href="analysis.html" class="nav-link">Таҳлили шеърҳо</a></li>
+                <li><a href="#audio" class="nav-link">Сабти овозӣ</a></li>
+                <li><a href="#gallery" class="nav-link">Фотогалерея</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    
+    <section class="hero">
+        <div class="hero-content">
+            <i><p>Ҳар чӣ омад бар дилам, ман бар забон овардаам,<br>
+			      Аз дили худ дар каломи худ нишон овардаам.<br>
+			      Дар раҳи рушду ҳидоят баҳри халқу миллатам,<br>
+			      Қиссаҳо дар назму насрам армуғон овардаам.</p></i>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Biography Section -->
+        <section id="zindaginoma" class="section fade-in">
+            <h2 class="section-title">Зиндагинома</h2>
+            <div class="bio-content">
+                <div class="bio-text">
+					<div class="text-content" id="bioText">
+						<p>Ҳоҷӣ Ҳусайн Мӯсозода 10-уми июни соли 1955 дар деҳаи Ростровути ноҳияи Ғончӣ ба дунё омадааст. 
+						Ӯ баъди хатми мактаби миёна соли 1973 ба мадрасаи «Мири Араб»-и шаҳри Бухоро дохил шуда, 
+						онро соли 1978 бо муваффақият хатм намудааст.
+						<br>Ҳоҷӣ Ҳусайн Мӯсозода тайи солҳои 1978-1990 чун сархатиби масҷиди ҷомеи «Ғулакандоз»-и ноҳияи ба номи 
+						Ҷаббор Расулов адои вазифа кардааст. Солҳои 1990-1992 дар факултаи «Улуми Қуръон»-и Донишгоҳи байналмилалии 
+						Ҷамоҳирии Сотсиалистии Либиё таҳсил карда, бо имтиёзномаи махсуси донишгоҳи мазкур дар соҳаи илм сарфароз гаштааст.
+						<br>Ҳоҷӣ Ҳусайн Мӯсозода аз ибтидои соли 1993 сархатиби масоҷиди вилояти Суғд интихоб шуда,
+						аз соли 1994 сархатиби масҷиди ҷомеи «Шайх Маслиҳатдин»-и шаҳри Хуҷанд, дар як вақт чун ноиби муфтии 
+						мусалмонони Тоҷикистон адои вазифа кардааст. Ӯ аз моҳи майи соли 1997 раиси Шурои уламои дини вилояти Суғд, 
+						сархатиби масҷиди ҷомеи Шайх Маслиҳатдин ва дар як вақт муовини раиси Шурои уламои дини Ҷумҳурии 
+						Тоҷикистон интихоб шудааст.
+                        <br>Ҳоҷӣ Ҳусайн Мӯсозода баробари хеле хуб андӯхтани забонҳои арабӣ, русӣ, форсӣ ва ӯзбекӣ дар такмилу 
+                        сайқал додани улуми дунявии худ низ ба комёбиҳое ноил гардидааст. 
+                        <br>Ҳоҷӣ Ҳусайн Мӯсозода баробари пешбурди фаъолияти худ дар ташкилотҳои динӣ бо мақсади баланд бардоштани сатҳи маърифатнокӣ ва маънавиёти мардум аз васоити ахбори омма ва аз роҳи табъу нашри силсилакитобҳо 
+                        саҳми босазо гузош-тааст. 
+                        <br>Дар давоми солҳои 1993-2023 беш аз 350 мақолаи хурду бузурги ӯ дар матбуот чоп шудааст ва зиёда аз 1000 барномаҳо ва мусоҳабаҳояш дар 
+                        мавзуъҳои динию маърифатӣ ва панду ахлоқӣ дар телевизионҳо ба мардум намоиш дода шудааст. Дар бадали ин солҳо китобҳои Ҳоҷӣ Ҳусайн Мӯсозода 
+                        «Гавҳари имон мафурӯш» (1997), «Бунёди оила дар ислом» (1999), «Сиву се сӯҳбати судманд» (2001), «Ҳазрати бузургвор» (2001), «Маъхаз-ул-маъонӣ 
+                        аз оёти Қуръонӣ» (2004), «Табйин-ул-ҳақоиқ» (2005), «Роҳнамои ҳаҷ» (2006), «Анвор-ул-мактубот» (2008), «Об асли мавҷудият» (2013), «Об дар «Маснавии маънавӣ» (2015), 
+                        «Мазҳаб ва соҳибмазҳаб» (2016), «Ҳадиси он расул бишнав» (2016), «Раҳнамои фардои обод» (2016), «Бунёди оила дар ислом» (нашри дуввум. 2016) «Масҷидҳои Хуҷанд» (2017), 
+                        «Мифтоҳи асрорнома» (2017) «Ҷавҳари ҷовидона» (2018), «Меъроҷи маърифат» (2018), «Тоҷикистон – вориси Сомониён» (2018, нашри дуюм соли 2020), «Ҳикматистон» (2018) «Меҳри падару модар» 
+                        (2019), «Гулшанистон» (2020) «Саразм – мероси бузургони миллат» (2020), «Сабъаи сайёр» (2021), «Ҳашт ахтар» (2021), «Нуҳ авроқи забарҷад» (2022), «Гулчини ашъор» (2022) «Даҳ чашмаи анбар» (2022) 
+                        бо теъдоди зиёд аз чоп баромадаанд, ки мавриди писанди умум гардидаанд. 
+                        <br>Ҳоҷӣ Ҳусайн Мӯсозода соли 2004 дар заминаи китоби худ «Маъхаз-ул-маъонӣ аз оёти Қуръонӣ» баҳри дарёфти дараҷаи илмӣ дар мавзӯи «Усули истифодаи оёт ва қиссаҳои қуръонӣ дар достони «Маснавии маънавӣ»-и Ҷалолуддини Румӣ» кори илмиро 
+                        ба субут расонда, рисолаи номзадии илми суханшиносиро ҳимоя намуд. Ҳоҷӣ Ҳусайн Мӯсозода тӯли фаъолияти зиёда аз сисолаи худ ба бисёр 
+                        мамолики Шарқу Ғарб чун Арабистони Саудӣ, Эрон, Кувайт, Урдун, Сурия, Туркия, Миср, Ливия, Алҷазоир, Фаластин, Амороти муттаҳидаи Араб, 
+                        Кипр, Италия, Нигер, Мали, Мавритания, Малазия, Уганда, Сенегал ва ғайра сафарҳои хидматиро анҷом дода, Тоҷикистонро чун давлати демократию ҳуқуқбунёд ва мусалмоннишини рӯ ба 
+                        тараққӣ ба оламиён шинос кардааст. 
+                        <br>Ҳоҷӣ Ҳусайн Мӯсозода дар айни авҷи камолоти илмию эҷодӣ қарор дорад. Ҳоҷӣ Ҳусайн Мӯсозода солҳои охир ба эҷоди ашъори орифона пардохтааст ва ғазалҳои ирфониву ҳакимонаи эшонро 
+                        як қатор ҳофизон ба оҳанг дароварда сурудаанд. Бо чандин мукофот ва сипосномаҳо аз ҷумла бо медали «Хизмати шоиста»-и Ҷумҳурии Тоҷикистон ва ҷоизаи вилоятии ба номи Бобоҷон Ғафуров дар соҳаи илм сазовор гаштааст. Номзади илмҳои филология, Шаҳрванди фахрии шаҳри Хуҷанд мебошад. 
+                        Ашъори Ҳоҷӣ Ҳусайн Мӯсозода дар ёздаҳ китоб «Мифтоҳи асрорнома», «Ҷавҳари ҷовидона», «Меъроҷи маърифат», «Тоҷикистон – вориси Сомониён», «Ҳикматистон», «Гулшанистон», «Саразм – мероси бузургони миллат», «Сабъаи сайёр», «Ҳашт ахтар», «Нуҳ авроқи забарҷад», «Гулчини ашъор» «Даҳ чашмаи анбар» 
+                        ба нашр расидаанд. Девони ёздаҳуми эшон «Ёздаҳ ситораи дурахшон»-ро алҳол дар даст доред. Девони дувоздаҳуми Ҳоҷӣ Ҳусайн Мӯсозода таҳти унвони «Дувоздаҳ бурҷи фалак» ба чоп омода мегардад. </p>
+					</div>
+					<button class="read-more-btn" onclick="toggleText(this)">
+						<span class="btn-text">Муфассал</span>
+						<i class="fas fa-chevron-down"></i>
+					</button>
+                </div>
+                <div class="bio-image">
+                    <img src="img/photo_1.jpg" alt="Ҳоҷӣ Ҳусайн Мӯсозода">
+                </div>
+            </div>
+        </section>
+
+        <!-- Books Section -->
+        <section id="kitobho" class="section fade-in">
+            <h2 class="section-title">Китобҳо</h2>
+            <div class="cards-grid">
+
+                <!-- Карточка 1 -->
+                <a href="books.html?book=gulchin1" class="card-link">
+                    <div class="card" data-book-id="gulchin1" data-title="Гулчини ашъор 1">
+                        <div class="card-image">
+                            <img src="img/book_gulchin_ashor-min.jpg" alt="Гулчини ашъор 1">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">Гулчини ашъор 1</h3>
+                            <p class="card-text">Ин маҷмӯаи ашъор гулчине аз эҷодиёти шоир буда, мавзӯъҳои мухталифи ирфонӣ, фалсафӣ, ахлоқӣ ва иҷтимоиро дар бар мегирад.</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Карточка 2 -->
+                <a href="books.html?book=hikmatiston" class="card-link">
+                    <div class="card" data-book-id="hikmatiston" data-title="ҲИКМАТИСТОН. Девони V">
+                        <div class="card-image">
+                            <img src="img/hikmatiston.png" alt="ҲИКМАТИСТОН. Девони V">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">ҲИКМАТИСТОН. Девони V</h3>
+                            <p class="card-text">Девони панҷуми Ҳоҷӣ Ҳусайн Мӯсозода – «Ҳикматистон» тӯшаи ирфону маърифату адабу андарз аст.</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Карточка 3 -->
+                <a href="books.html?book=javhari" class="card-link">
+                    <div class="card" data-book-id="javhari" data-title="ҶАВҲАРИ НАЗМУ НАСРИ МӮСОЗОДА">
+                        <div class="card-image">
+                            <img src="img/javhari nazmu nasr.png" alt="ҶАВҲАРИ НАЗМУ НАСРИ МӮСОЗОДА">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">ҶАВҲАРИ НАЗМУ НАСРИ МӮСОЗОДА</h3>
+                            <p class="card-text">Дар китоби мазкур мақолаҳо, тақризҳо ва сарсуханҳо, ки ба асарҳои мансур ва манзуми Ҳоҷӣ Ҳусайн Мӯсозода аз ҷониби адибону олимон таълиф гаштаанд, гирдоварӣ шудааст.</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Карточка 4 -->
+                <a href="books.html?book=hikmati" class="card-link">
+                    <div class="card" data-book-id="hikmati" data-title="ҲИКМАТИ ҚИССАВУ ТАЛМЕҲОТ">
+                        <div class="card-image">
+                            <img src="img/default.jpg" alt="ҲИКМАТИ ҚИССАВУ ТАЛМЕҲОТ">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">ҲИКМАТИ ҚИССАВУ ТАЛМЕҲОТ</h3>
+                            <p class="card-text">Дар ин китоб чанд манзума ва ғазалҳои Ҳоҷӣ Ҳусайн Мӯсозода гирдоварӣ гаштаанд. Достонҳои манзум аз манбаъҳои гуногун сарчашма гирифта, пеш аз ҳама барои тарбияи ахлоқии мардум нигаронида шудаанд.</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Карточка 5 -->
+                <a href="books.html?book=miftohi" class="card-link">
+                    <div class="card" data-book-id="miftohi" data-title="МИФТОҲИ АСРОРНОМА. Девони I">
+                        <div class="card-image">
+                            <img src="img/miftohi asrornoma.png" alt="МИФТОҲИ АСРОРНОМА. Девони I">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">МИФТОҲИ АСРОРНОМА. Девони I</h3>
+                            <p class="card-text">Дар ин китоб муаллифи он қудрати Инсони муосир ва меҳру ихлоси ӯ, муҳаббат ва саодати халқро ситоиш карда, кӯшидаанд, баъзе масоили диниву ахлоқиро ба шеваи хоси худ дар усули андарзу панд ба ҳамзамонон таъкид намоянд.</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Карточка 6 -->
+                <a href="books.html?book=javharidovidona" class="card-link">
+                    <div class="card" data-book-id="javharidovidona" data-title="ҶАВҲАРИ ҶОВИДОНА. Девони II">
+                        <div class="card-image">
+                            <img src="img/default.jpg" alt="ҶАВҲАРИ ҶОВИДОНА. Девони II (нашри дуюми такмилёфта)">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">ҶАВҲАРИ ҶОВИДОНА. Девони II</h3>
+                            <p class="card-text">Китоб нашри дуюм ва такмилёфтаи девони дуввуми Ҳоҷӣ Ҳусайн Мӯсозода, ки «Ҷавҳари ҷовидона» унвон гирифтааст, давоми мантиқии китоби аввал «Мифтоҳи асрорнома» мебошад.</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Карточка 7 (новая) -->
+                <a href="books.html?book=meroji" class="card-link">
+                    <div class="card" data-book-id="meroji" data-title="МЕЪРОҶИ МАЪРИФАТ. Девони III">
+                        <div class="card-image">
+                            <img src="img/meroji marifat.png" alt="МЕЪРОҶИ МАЪРИФАТ. Девони III (нашри дуюми такмилёфта)">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">МЕЪРОҶИ МАЪРИФАТ. Девони III</h3>
+                            <p class="card-text">Девони сеюми Ҳоҷӣ Ҳусайн Мӯсозода – «Меъроҷи маърифат» маҷмӯаест, ки онро метавон хазинаи панду ҳикмат ном бурд.</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Карточка 8 (новая) -->
+                <a href="books.html?book=tojikiston" class="card-link">
+                    <div class="card" data-book-id="tojikiston" data-title="ТОҶИКИСТОН – ВОРИСИ СОМОНИЁН">
+                        <div class="card-image">
+                            <img src="img/tojikon vorisoni somoniyon.png" alt="ТОҶИКИСТОН – ВОРИСИ СОМОНИЁН. (Нашри дуюми такмилёфта)">
+                        </div>
+                        <div class="card-content">
+                            <h3 class="card-title">ТОҶИКИСТОН – ВОРИСИ СОМОНИЁН</h3>
+                            <p class="card-text">Девони нави Ҳусайн Мӯсозода бо номи «Тоҷикистон вориси Сомониён» баргузидаи ашъор аз ҳафт девони шоир мебошад.</p>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+            <div class="nav-buttons">
+                <a href="books.html" class="nav-btn">
+                    <i class="fas fa-book-open"></i>
+                    Ҳамаи китобхо
+                </a>
+            </div>
+        </section>
+
+
+        <!-- Poems Section -->
+        <section id="sherho" class="section fade-in">
+            <h2 class="section-title">Шеъру ғазалҳо</h2>
+            <div class="poems-container">
+                <div class="poem-card">
+                    <h3 class="poem-title">КИШВАРИ НУРУ САОДАТ,  ТОҶИКИСТОН, ЗИНДА БОД! </h3>
+                    <div class="poem-text">
+                        Кишвари нуру саодат, Тоҷикистон, зинда бод!<br> 
+                        Пешвои боадолат, зеби даврон, зинда бод! <br>
+                        Ин ҳама ободиҳо аз баҳри халқу миллат аст, <br>
+                        Тоҷикистон, доимо бо нури Раҳмон, зинда бод!<br> 
+                        Нури истиқлоли давлат ваҳдати миллат бувад, <br>
+                        Дар садоқат бар Ватан Вахшу Бадахшон, зинда бод! <br>
+                        Ваҳдати мо гул кунад аз рамзи Кӯлобу Ҳисор, <br>
+                        Дар табиат гулшану Рашту Зарафшон, зинда бод! <br>
+                        Гардад обод ин Ватан - рушди саноат дар назар, <br>
+                        Дар муҳаббат ҳам рафоқат Суғду Хатлон, зинда бод! <br>
+                        Асли давлатдории мо давлати Сомониён, <br>
+                        Ифтихори миллати, мо даври Сомон, зинда бод! 
+
+                    </div>
+                    <button class="share-btn" onclick="sharePoem(this)">
+                        <i class="fas fa-share"></i> Мубодила кардан
+                    </button>
+                </div>
+                <div class="poem-card">
+                    <h3 class="poem-title">АДЛИ ПЕШВОИ ЗАМОН ШУКРОНАИ ДАВРОНИ МО </h3>
+                    <div class="poem-text">
+                        Адли Пешвои замон шукронаи даврони мо, <br>
+                        Шукри шоҳи додгар Эмомалӣ Раҳмони мо. <br>
+                        Шукри истиқлоли давлат, Парчами миллат баланд, <br>
+                        Ифтихори миллату Исмоили Сомони мо. <br>
+                        Шукри оромии миллат, адли Сарвар дар назар,<br> 
+                        Дар масири зиндагӣ шукронаи Раҳмони мо. <br>
+                        Худ навозишҳо кунад аз баҳри муҳтоҷу ятим, <br>
+                        Шукри раҳми Пешво, шукронаи даврони мо. <br>
+                        Марзу буми Тоҷикистон, Рамзи давлат ҳам Нишон,<br> 
+                        Хоки поки Тоҷикистон сурмаи чашмони мо. <br>
+                        Шукри халқи Тоҷикистон, шукри хоки ин Ватан,<br> 
+                        Шукри адли Пешво Эмомалӣ Раҳмони мо. 
+
+                    </div>
+                    <button class="share-btn" onclick="sharePoem(this)">
+                        <i class="fas fa-share"></i> Мубодила кардан
+                    </button>
+                </div>
+                <div class="poem-card">
+                    <h3 class="poem-title">ТИНАТИ ГУЛҲОИ РАНГИН ДАР ГУЛОБ АФТОДААСТ </h3>
+                    <div class="poem-text">
+                        Тинати гулҳои рангин дар гулоб афтодааст,<br>
+                        Раҳмати дилҳои сангин бениқоб афтодааст. <br>
+                        Мушку анбар гар ту дидӣ дар гулобе ё ниқоб, <br>
+                        Қимати гулҳои мушкин беҳисоб афтодааст. <br>
+                        Боданӯшӣ, бангу афюн сад ҷунун орад ба ту, <br>
+                        Иллати ин номи нангин дар шароб афтодааст. <br>
+                        Лаззати об ар бидонӣ, шӯру талхӣ рамзи баҳр, <br>
+                        Қисмати дарёи ширин аз саҳоб афтодааст. <br>
+                        Бо шаҳомат чуғзу лочин дӯрӣ ҷӯяд худ ба худ, <br>
+                        Ғафлати авлоди шоҳин чун сароб афтодааст. <br>
+                        Номаи девон чу омад нақши дунёро бубин, <br>
+                        Давлати дунёи рангин дар китоб афтодааст. <br>
+                        Вақти оромӣ ба нармӣ ту дуо кун, эй Ҳусайн, <br>
+                        Фурсати наҷвои омин мустаҷоб афтодааст. 
+
+                    </div>
+                    <button class="share-btn" onclick="sharePoem(this)">
+                        <i class="fas fa-share"></i> Мубодила кардан
+                    </button>
+                </div>
+                <div class="poem-card">
+                    <h3 class="poem-title">ЭЪЛОМИЯИ ХУҶАНД </h3>
+                    <div class="poem-text">
+                        Қиссаи таърихи омад баҳри миллат дарХуҷанд,<br>
+                        Иди Наврӯз бо бузургон зикри он шуд дилписанд.<br>
+                        Ҷашни Наврӯз қутбнамоу Тоҷикистон муқтадо,<br>
+                        Пешвои миллати мо бо садоқат раҳнамо.<br>
+                        Раҳбари қирғизу узбек Содиру ҳам Мирзиё,<br>
+                        Миизбон олимақом Эмомалӣ Раҳмони мо.<br>
+                        Сулҳу дӯсти байни се халқ муҷдаҳо бар мо расид,<br>
+                        Ҷовидон Эъломия бар мардуми дунё расид.<br>
+                        Дар Хуҷанд Эъломия имзо бишуд дар иттиҳод,<br>
+                        Халқ бигуфто ваҳдати мо бо муҳаббат зинда бод!<br>
+                        Раҳбари се мамлакат болои сар парчам буд,<br>
+                        Шуд муайян бо адолат бе хато хатти ҳудуд.<br>
+                        Баҳри миллат ин санадҳо армуғони бо бақо,<br>
+                        Дар Хуҷанд имзо бикарданд дӯстони бо вафо.<br>
+                        Тоҷику ӯзбеку қирғиз чун бародар дар яқин,<br>
+                        Роҳи дӯстиро бидонад ҳар,ки бошад нек бин.<br>
+                        Қалъаи шаҳри Хуҷанд тобанда шуд чун офтоб,<br>
+                        Нури имзо васфи он поянда монад дар китод.<br>
+                        Ҷашни Наврӯз бо сафо машҳӯр гашта дар ҷаҳон,<br>
+                        Дар Хуҷанди бостон Эъломия шуд ҷовидон.<br>
+                        Аҳду паймону садоқат дар миёни дӯстон,<br>
+                        То абад поянда бошад ҳамчу роҳи Каҳкашон.<br>
+                        Ту таманно кун Ҳусайно баҳри мардум иттиҳод,<br>
+                        Рамзи ободӣ расонад халқи моро бар мурод.
+
+
+                    </div>
+                    <button class="share-btn" onclick="sharePoem(this)">
+                        <i class="fas fa-share"></i> Мубодила кардан
+                    </button>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <a href="poems.html" class="nav-btn">
+                    <i class="fas fa-book"></i>
+                    Ҳамаи шеърҳо
+                </a>
+            </div>
+        </section>
+        
+
+        <!-- Audio Section -->
+        <section id="audio" class="section fade-in">
+            <h2 class="section-title">Сабти овози ғазалҳо</h2>
+            <div class="audio-grid">
+                
+                <div class="audio-card">
+                    <h3 class="audio-title">Пешво</h3>
+                    <audio controls class="audio-controls" src="audio/23 Пешво Hasanako.mp3"></audio>
+                    <div class="action-buttons">
+                        <a href="audio/23 Пешво Hasanako.mp3" download class="action-btn">
+                            <i class="fas fa-download"></i> Боргирӣ
+                        </a>
+                        <button class="action-btn" onclick="toggleAudioText(this)">
+                            <i class="fas fa-file-alt"></i> Матни пурра
+                        </button>
+                    </div>
+                    <div class="audio-text-content">
+                        <p>Матни пурраи шеър дар ин ҷо ҷойгир аст.</p>
+                    </div>
+                </div>
+                 <div class="audio-card">
+                    <h3 class="audio-title">Тоҷикистон</h3>
+                    <audio controls class="audio-controls" src="audio/TOJIKISTON_++_TTA_Выход_Stereo_Out_Выход_Stereo_Out.mp3"></audio>
+                    <div class="action-buttons">
+                        <a href="audio/TOJIKISTON_++_TTA_Выход_Stereo_Out_Выход_Stereo_Out.mp3" download class="action-btn">
+                            <i class="fas fa-download"></i> Боргирӣ
+                        </a>
+                        <button class="action-btn" onclick="toggleAudioText(this)">
+                            <i class="fas fa-file-alt"></i> Матни пурра
+                        </button>
+                    </div>
+                    <div class="audio-text-content">
+                        <p>Матни пурраи шеър дар ин ҷо ҷойгир аст.</p>
+                    </div>
+                </div>
+                <div class="audio-card">
+                    <h3 class="audio-title">Ғолибҷон - Гуфтам ватан</h3>
+                    <audio controls class="audio-controls" src="audio/Ғолибҷон Гуфтам ватан .mp3"></audio>
+                    <div class="action-buttons">
+                        <a href="audio/Ғолибҷон Гуфтам ватан .mp3" download class="action-btn">
+                            <i class="fas fa-download"></i> Боргирӣ
+                        </a>
+                        <button class="action-btn" onclick="toggleAudioText(this)">
+                            <i class="fas fa-file-alt"></i> Матни пурра
+                        </button>
+                    </div>
+                    <div class="audio-text-content">
+                        <p>Матни пурраи шеър дар ин ҷо ҷойгир аст.</p>
+                    </div>
+                </div>
+                 <div class="audio-card">
+                    <h3 class="audio-title">Ҳоҷӣ Ҳусайн Мӯсозода Зиндагинома ва Фаъолият</h3>
+                    <audio controls class="audio-controls" src="audio/Ҳоҷӣ_Ҳусайн_Мӯсозода_Зиндагинома_ва_Фаъолият.wav"></audio>
+                    <div class="action-buttons">
+                        <a href="audio/Ҳоҷӣ_Ҳусайн_Мӯсозода_Зиндагинома_ва_Фаъолият.wav" download class="action-btn">
+                            <i class="fas fa-download"></i> Боргирӣ
+                        </a>
+                        <button class="action-btn" onclick="toggleAudioText(this)">
+                            <i class="fas fa-file-alt"></i> Матни пурра
+                        </button>
+                    </div>
+                    <div class="audio-text-content">
+                        <p>Матни пурраи шеър дар ин ҷо ҷойгир аст.</p>
+                    </div>
+                </div>
+                <div class="audio-card">
+                    <h3 class="audio-title">Ходжи Хусайн Мусозода Деятель,Ученый,ПоэтТаджикистана</h3>
+                    <audio controls class="audio-controls" src="audio/Ходжи_Хусайн_Мусозода_Деятель,_Ученый,_Поэт_Таджикистана.wav"></audio>
+                    <div class="action-buttons">
+                        <a href="audio/Ходжи_Хусайн_Мусозода_Деятель,_Ученый,_Поэт_Таджикистана.wav" download class="action-btn">
+                            <i class="fas fa-download"></i> Боргирӣ
+                        </a>
+                        <button class="action-btn" onclick="toggleAudioText(this)">
+                            <i class="fas fa-file-alt"></i> Матни пурра
+                        </button>
+                    </div>
+                    <div class="audio-text-content">
+                        <p>Матни пурраи шеър дар ин ҷо ҷойгир аст.</p>
+                    </div>
+                </div>
+                
+                 <div class="audio-card">
+                    <h3 class="audio-title">Пушкин и Коран Влияние и Смысл</h3>
+                    <audio controls class="audio-controls" src="audio/Пушкин и Коран_ Влияние и Смысл.wav"></audio>
+                    <div class="action-buttons">
+                        <a href="audio/Пушкин и Коран_ Влияние и Смысл.wav" download class="action-btn">
+                            <i class="fas fa-download"></i> Боргирӣ
+                        </a>
+                        <button class="action-btn" onclick="toggleAudioText(this)">
+                            <i class="fas fa-file-alt"></i> Матни пурра
+                        </button>
+                    </div>
+                    <div class="audio-text-content">
+                        <p>Матни пурраи шеър дар ин ҷо ҷойгир аст.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-buttons">
+                <a href="audio.html" class="nav-btn">
+                    <i class="fas fa-headphones"></i>
+                    Ҳамаи аудио
+                </a>
+            </div>
+        </section>
+
+ <!-- Photo Gallery Slider -->
+    <h2 class="section-title">Фотогалерея</h2>
+    <div id="gallery" class="photo-slider">
+        <div class="slider-container">
+            <div class="slider-track" id="sliderTrack">
+                <div class="slide">
+                    <img src="img/img-galer6.JPG" alt="Акс аз вохӯрӣ">
+                    <div class="slide-caption">Ҳоҷӣ Ҳусайн Мӯсозода</div>
+                </div>
+                <div class="slide">
+                    <img src="img/img-galer7.JPG" alt="Акс аз китобхона">
+                    <div class="slide-caption">Ҳоҷӣ Ҳусайн Мӯсозода</div>
+                </div>
+                <div class="slide">
+                    <img src="img/img-galer8.JPG" alt="Акс аз сафар">
+                    <div class="slide-caption">Ҳоҷӣ Ҳусайн Мӯсозода</div>
+                </div>
+                <div class="slide">
+                    <img src="img/img-galer9.JPG" alt="Акс аз масҷид">
+                    <div class="slide-caption">Ҳоҷӣ Ҳусайн Мӯсозода</div>
+                </div>
+                <div class="slide">
+                    <img src="img/img-galer10.JPG" alt="Акси портретӣ">
+                    <div class="slide-caption">Ҳоҷӣ Ҳусайн Мӯсозода</div>
+                </div>
+                <div class="slide">
+                    <img src="img/img-galer11.JPG" alt="Акси портретӣ">
+                    <div class="slide-caption">Ҳоҷӣ Ҳусайн Мӯсозода</div>
+                </div>
+                <div class="slide">
+                    <img src="img/img-galer12.JPG" alt="Акси портретӣ">
+                    <div class="slide-caption">Ҳоҷӣ Ҳусайн Мӯсозода</div>
+                </div>
+                <div class="slide">
+                    <img src="img/img-galer13.JPG" alt="Акси портретӣ">
+                    <div class="slide-caption">Ҳоҷӣ Ҳусайн Мӯсозода</div>
+                </div>
+                <div class="slide">
+                    <img src="img/img-galer14.JPG" alt="Акси портретӣ">
+                    <div class="slide-caption">Ҳоҷӣ Ҳусайн Мӯсозода</div>
+                </div>
+            </div>
+            <button class="slider-nav prev" onclick="changeSlide(-1)">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-nav next" onclick="changeSlide(1)">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        <div class="slider-dots" id="sliderDots">
+            <span class="dot active" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
+            <span class="dot" onclick="currentSlide(4)"></span>
+            <span class="dot" onclick="currentSlide(5)"></span>
+        </div>
+    </div>
+
+    </main>
+
+    <!-- Footer -->
+      <footer class="footer">
+        <div class="footer-content">
+            <h3 class="footer-title">Дар бораи сайт</h3>
+            <p class="footer-text">
+                Ин сайт ба устод Ҳоҷӣ Ҳусайн Мӯсозода бахшида шудааст. 
+                <br>Мақсади мо таърифи осор ва мероси адабии ин шоири бузург ба насли ҷавон мебошад.
+            </p>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>2025 Сайти Ҳоҷӣ Ҳусайн Мӯсозода</p>
+                <p>Таҳия шуда аз ҷониби тими барномасозон</p>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="back-to-top" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+   
+
+ <script>
+        // Slider functionality
+        let currentSlideIndex = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = slides.length;
+
+        function showSlide(index) {
+            const track = document.getElementById('sliderTrack');
+            if (track) {
+                track.style.transform = `translateX(-${index * 100}%)`;
+            }
+            
+            dots.forEach(dot => dot.classList.remove('active'));
+            if (dots[index]) {
+                dots[index].classList.add('active');
+            }
+        }
+
+        function changeSlide(direction) {
+            currentSlideIndex += direction;
+            if (currentSlideIndex >= totalSlides) {
+                currentSlideIndex = 0;
+            } else if (currentSlideIndex < 0) {
+                currentSlideIndex = totalSlides - 1;
+            }
+            showSlide(currentSlideIndex);
+        }
+
+        function currentSlide(index) {
+            currentSlideIndex = index - 1;
+            showSlide(currentSlideIndex);
+        }
+
+        // Auto-play slider
+        setInterval(() => {
+            changeSlide(1);
+        }, 5000);
+
+        // Text toggle functionality
+        function toggleText(button) {
+            const bioText = document.getElementById('bioText'); // More specific selector
+            const btnText = button.querySelector('.btn-text');
+            const icon = button.querySelector('i');
+
+            bioText.classList.toggle('expanded');
+            button.classList.toggle('active');
+
+            if (bioText.classList.contains('expanded')) {
+                btnText.textContent = 'Камтар нишон додан';
+                icon.classList.remove('fa-chevron-down');
+                icon.classList.add('fa-chevron-down');
+            } else {
+                btnText.textContent = 'Муфассал';
+                icon.classList.remove('fa-chevron-up');
+                icon.classList.add('fa-chevron-down');
+            }
+        }
+
+        // Back to top functionality
+        const backToTopButton = document.getElementById('back-to-top');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.display = 'block';
+            } else {
+                backToTopButton.style.display = 'none';
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        hamburger.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+        
+        function toggleAudioText(button) {
+            const card = button.closest('.audio-card');
+            const textContent = card.querySelector('.audio-text-content');
+            textContent.classList.toggle('expanded');
+        }
+        
+        // Share Poem
+        function sharePoem(button) {
+            const card = button.closest('.poem-card');
+            const title = card.querySelector('.poem-title').innerText;
+            const text = card.querySelector('.poem-text').innerText;
+            const content = `${title}\n\n${text}\n\n---\nАз сомонаи Ҳоҷӣ Ҳусайн Мӯсозода`;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: title,
+                    text: content,
+                    url: window.location.href
+                }).catch(console.error);
+            } else {
+                // Fallback for browsers that don't support navigator.share
+                navigator.clipboard.writeText(content).then(() => {
+                    alert('Маводи шеърӣ нусхабардорӣ шуд!');
+                });
+            }
+        }
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Китобҳо - Ҳоҷӣ Ҳусайн Мӯсозода</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.min.js"></script>
+    <style>
+        @font-face {
+            font-family: 'Bookman Old Style Cyr';
+            src: url('font/ofont.ru_Bookman Old Style Cyr.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Caslon Becker';
+            src: url('font/ofont.ru_Caslon Becker.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        :root {
+            --primary-green: #28a745;
+            --secondary-green: #1B5E20;
+            --light-green: #b4ffb4;
+            --accent-gold: #28a745;
+            --accent-brown: #28a745;
+            --text-dark: #2E2E2E;
+            --text-gray: #666666;
+            --bg-light: #E7E9ED;
+            --bg-cream: #b4ffb4;
+            --white: #FFFFFF;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        body {
+            font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            color: var(--white);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        .nav-container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 45px;
+        }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.2rem;
+            color: var(--white);
+            text-decoration: none;
+        }
+        .logo-img {
+            height: 40px;
+            border-radius: 6px;
+        }
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            color: var(--light-green);
+        }
+        .hamburger { display: none; }
+
+        .panel-toggle {
+            display: none; /* Hidden by default, shown on mobile */
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.4rem;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .header-toggles {
+            display: none; /* Wrapper for mobile toggles */
+            align-items: center;
+            gap: 15px;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 199; /* Below panels */
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .overlay.active {
+            display: block;
+            opacity: 1;
+        }
+
+        .page-container {
+            display: flex;
+            flex-grow: 1;
+            padding-top: 45px; /* Header height */
+            overflow: hidden;
+        }
+
+        /* Left Panel */
+        .left-panel {
+            width: 250px;
+            background-color: var(--white);
+            border-right: 1px solid #ddd;
+            padding: 20px;
+            overflow-y: auto;
+            transition: width 0.3s ease;
+        }
+        .left-panel h3 {
+            font-family: 'Bookman Old Style Cyr', serif;
+            color: var(--secondary-green);
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--primary-green);
+            padding-bottom: 10px;
+        }
+        .doc-info p {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+        .doc-info strong {
+            color: var(--text-dark);
+        }
+       .action-buttons {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.action-btn {
+    width: 100%; /* все кнопки одинаково растягиваются по ширине контейнера */
+    min-height: 45px; /* чтобы все были одной высоты */
+    background: var(--primary-green);
+    color: var(--white);
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-sizing: border-box;
+}
+
+.action-btn:hover {
+    background: var(--secondary-green);
+}
+
+.action-btn i {
+    font-size: 1.1rem;
+}
+
+
+        /* Main Viewer Area */
+        .main-viewer-area {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            background-color: var(--bg-light);
+        }
+        .viewer-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 15px;
+            background: var(--white);
+            border-bottom: 1px solid #ddd;
+            box-shadow: var(--shadow);
+            z-index: 100;
+        }
+        .toolbar-group {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .toolbar-btn {
+            background: none;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .toolbar-btn:hover {
+            background-color: #f0f0f0;
+        }
+        .page-info {
+            gap: 8px;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+        .search-controls {
+            display: flex;
+            align-items: center;
+        }
+        .search-controls input {
+            border: 1px solid #ccc;
+            padding: 5px 8px;
+            border-radius: 5px;
+            outline: none;
+        }
+        .search-controls .toolbar-btn {
+            border-radius: 5px;
+            border-left: 1px solid #ccc;
+            margin-left: 1px; /* Overlap the border */
+        }
+
+        .pdf-viewer {
+            flex-grow: 1;
+            overflow: auto;
+            padding: 20px;
+        }
+        #viewer-placeholder {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            font-size: 1.5rem;
+            color: var(--text-gray);
+            text-align: center;
+        }
+
+        /* Right Panel */
+        .right-panel {
+            width: 380px;
+            background-color: var(--white);
+            border-left: 1px solid #ddd;
+            padding: 20px;
+            overflow-y: auto;
+            transition: width 0.3s ease;
+        }
+        .search-container {
+            margin-bottom: 20px;
+        }
+        .search-input {
+            width: 100%;
+            padding: 10px 15px;
+            border-radius: 20px;
+            border: 1px solid #ddd;
+            font-size: 0.9rem;
+            outline: none;
+        }
+        .book-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+        }
+        .book-card {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            gap: 15px;
+            background: transparent;
+            border-radius: 8px;
+            box-shadow: none;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            text-align: left;
+            border: 1px solid transparent;
+            padding: 8px;
+        }
+        .book-card.active, .book-card:hover {
+            background-color: #f8f9fa;
+            border-color: var(--primary-green);
+        }
+        .book-cover {
+            width: 75px;
+            height: 105px;
+            flex-shrink: 0;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid #eee;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 0;
+        }
+        .book-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .book-content {
+            padding: 0;
+            flex-grow: 1;
+        }
+        .book-title {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            line-height: 1.3;
+            margin-bottom: 5px;
+        }
+        .book-description {
+           display: -webkit-box;
+           -webkit-line-clamp: 2; /* Allow for 2 lines before hiding */
+           -webkit-box-orient: vertical;
+           overflow: hidden;
+           font-size: 0.8rem;
+           color: var(--text-gray);
+           line-height: 1.4;
+           margin-bottom: 8px; /* Add some space below description */
+        }
+
+        .book-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--text-gray);
+        }
+
+        .star-rating {
+            display: inline-flex;
+            direction: rtl; /* Right to left to fill stars correctly */
+        }
+
+        .star-rating input[type="radio"] {
+            display: none; /* Hide the radio button */
+        }
+
+        .star-rating label {
+            font-size: 1.1rem;
+            color: #ddd;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .star-rating input[type="radio"]:checked ~ label,
+        .star-rating label:hover,
+        .star-rating label:hover ~ label { /* Color stars on hover */
+            color: var(--accent-gold);
+        }
+
+        .downloads {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        @media (max-width: 1024px) {
+            .left-panel {
+                position: fixed;
+                left: -280px;
+                width: 280px;
+                top: 45px;
+                height: calc(100% - 45px);
+                z-index: 200;
+                transition: left 0.3s ease;
+                box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+            }
+            .left-panel.open { left: 0; }
+
+            .right-panel {
+                position: fixed;
+                right: -320px;
+                width: 320px;
+                top: 45px;
+                height: calc(100% - 45px);
+                z-index: 200;
+                transition: right 0.3s ease;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            }
+            .right-panel.open { right: 0; }
+
+            .header-toggles { display: flex; }
+            .nav-menu { 
+                display: none; 
+                flex-direction: column;
+                position: absolute;
+                top: 45px;
+                left: 0;
+                right: 0;
+                background: var(--secondary-green);
+                padding: 20px;
+                gap: 15px;
+            }
+            .nav-menu.active { display: flex; }
+            .hamburger { display: flex; }
+        }
+
+        @media (max-width: 768px) {
+            .viewer-toolbar {
+                flex-wrap: wrap;
+                gap: 10px;
+                justify-content: center;
+            }
+            .right-panel { width: 280px; right: -280px; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="img/logo2.png" alt="Логотип" class="logo-img">
+                Ҳоҷӣ Ҳусайн Мӯсозода
+            </a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Асосӣ</a></li>
+                <li><a href="poems.html" class="nav-link">Шеърҳо</a></li>
+                <li><a href="analysis.html" class="nav-link">Таҳлили шеърҳо</a></li>
+                <li><a href="audio.html" class="nav-link">Аудио</a></li>
+                <li><a href="books.html" class="nav-link active">Китобҳо</a></li>
+            </ul>
+            <div class="header-toggles">
+                <button class="panel-toggle" id="left-panel-toggle"><i class="fas fa-info-circle"></i></button>
+                <button class="panel-toggle" id="right-panel-toggle"><i class="fas fa-book-open"></i></button>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <div class="page-container">
+        <!-- Left Panel -->
+        <aside class="left-panel" id="left-panel">
+            <h3>Маълумоти китоб</h3>
+            <div class="doc-info" id="doc-info">
+                <p><strong>Сарлавҳа:</strong> <span id="info-title">-</span></p>
+                <p><strong>Жанр:</strong> <span id="info-genre">-</span></p>
+                <p><strong>Тавсиф:</strong> <span id="info-desc">-</span></p>
+                <p><strong>Рейтинг:</strong> <span id="info-rating">-</span></p>
+                <p><strong>Миқдори зеркашишуда:</strong> <span id="info-downloads">-</span></p>
+            </div>
+            <div class="action-buttons">
+                <a href="#" id="info-download-btn" class="action-btn" download><i class="fas fa-download"></i> Зеркаши кардан</a>
+                <button class="action-btn" id="info-share-btn"><i class="fas fa-share-alt"></i> Мубодила кардан</button>
+            </div>
+        </aside>
+
+        <!-- Main Viewer Area -->
+        <main class="main-viewer-area">
+            <div class="viewer-toolbar">
+                <div class="toolbar-group page-controls">
+                    <button class="toolbar-btn" id="prev-page"><i class="fas fa-arrow-left"></i></button>
+                    <span>Саҳифа: </span>
+                    <input type="number" value="1" id="page-num" min="1">
+                    <span> / </span>
+                    <span id="page-count">0</span>
+                    <button class="toolbar-btn" id="next-page"><i class="fas fa-arrow-right"></i></button>
+                </div>
+                <div class="toolbar-group search-controls">
+                    <input type="search" id="search-in-doc" placeholder="Ҷустуҷӯ дар дохили...">
+                    <button class="toolbar-btn" id="search-btn"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+            <div class="pdf-viewer" id="pdf-viewer">
+                <div id="viewer-placeholder">
+                    <p>Барои дидан китоберо интихоб кунед.</p>
+                </div>
+                <!-- Canvases will be added here by JS -->
+            </div>
+        </main>
+
+        <!-- Right Panel -->
+        <aside class="right-panel" id="right-panel">
+            <div class="search-container">
+                <input type="text" id="searchInput" class="search-input" placeholder="Ҷустуҷӯи китоб...">
+            </div>
+            <div class="sort-container" style="margin-bottom: 15px;">
+                <select id="sort-select" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 5px; font-size: 0.9rem;">
+                    <option value="default">Пешфарз</option>
+                    <option value="title-asc">Ном (А-Я)</option>
+                    <option value="title-desc">Ном (Я-А)</option>
+                    <option value="rating-desc">Рейтинг (баландтарин)</option>
+                    <option value="downloads-desc">Зеркашиҳо (бештарин)</option>
+                </select>
+            </div>
+            <div class="book-grid" id="bookGrid">
+                 
+                <div class="book-card" data-book-id="javhari" data-title="ҶАВҲАРИ НАЗМУ НАСРИ МӮСОЗОДА" data-genre="шеър" data-pdf="books/00. ҶАВҲАРИ НАЗМУ НАСР.pdf" data-desc="Дар китоби мазкур мақолаҳо, тақризҳо ва сарсуханҳо, ки ба асарҳои мансур ва манзуми Ҳоҷӣ Ҳусайн Мӯсозода аз ҷониби адибону олимон таълиф гаштаанд, гирдоварӣ шудааст.">
+                    <div class="book-cover"><img src="img/javhari nazmu nasr.png" alt="ҶАВҲАРИ НАЗМУ НАСРИ МӮСОЗОДА"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">ҶАВҲАРИ НАЗМУ НАСРИ МӮСОЗОДА</h3>
+                        <p class="book-description">Дар китоби мазкур мақолаҳо, тақризҳо ва сарсуханҳо, ки ба асарҳои мансур ва манзуми Ҳоҷӣ Ҳусайн Мӯсозода аз ҷониби адибону олимон таълиф гаштаанд, гирдоварӣ шудааст.</p>
+                        <div class="book-meta">
+                            <div class="star-rating" id="rating-javhari">
+                                <!-- Stars will be generated by JS -->
+                            </div>
+                            <div class="downloads"><i class="fas fa-download"></i> <span id="downloads-javhari">0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-card" data-book-id="hikmati" data-title="ҲИКМАТИ ҚИССАВУ ТАЛМЕҲОТ" data-genre="шеър" data-pdf="books/0. Мӯсозода Ҳоҷӣ Ҳусайн. ҲИКМАТИ ҚИССАВУ ТАЛМЕҲОТ.pdf" data-desc="Дар ин китоб чанд манзума ва ғазалҳои Ҳоҷӣ Ҳусайн Мӯсозода гирдоварӣ гаштаанд.">
+                    <div class="book-cover"><img src="img/default.jpg" alt="ҲИКМАТИ ҚИССАВУ ТАЛМЕҲОТ"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">ҲИКМАТИ ҚИССАВУ ТАЛМЕҲОТ</h3>
+                        <p class="book-description">Дар ин китоб чанд манзума ва ғазалҳои Ҳоҷӣ Ҳусайн Мӯсозода гирдоварӣ гаштаанд.</p>
+                        <div class="book-meta">
+                            <div class="star-rating" id="rating-hikmati">
+                                <!-- Stars will be generated by JS -->
+                            </div>
+                            <div class="downloads"><i class="fas fa-download"></i> <span id="downloads-hikmati">0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-card" data-book-id="miftohi" data-title="МИФТОҲИ АСРОРНОМА. Девони I" data-genre="шеър" data-pdf="books/1. Мӯсозода Ҳоҷӣ Ҳусайн. МИФТОҲИ АСРОРНОМА_compressed.pdf" data-desc="Дар ин китоб муаллифи он қудрати Инсони муосир ва меҳру ихлоси ӯ, муҳаббат ва саодати халқро ситоиш кардааст.">
+                    <div class="book-cover"><img src="img/miftohi asrornoma.png" alt="МИФТОҲИ АСРОРНОМА. Девони I"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">МИФТОҲИ АСРОРНОМА. Девони I</h3>
+                        <p class="book-description">Дар ин китоб муаллифи он қудрати Инсони муосир ва меҳру ихлоси ӯ, муҳаббат ва саодати халқро ситоиш кардааст.</p>
+                        <div class="book-meta">
+                            <div class="star-rating" id="rating-miftohi">
+                                <!-- Stars will be generated by JS -->
+                            </div>
+                            <div class="downloads"><i class="fas fa-download"></i> <span id="downloads-miftohi">0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-card" data-book-id="javharidovidona" data-title="ҶАВҲАРИ ҶОВИДОНА. Девони II" data-genre="шеър" data-pdf="books/2. Мӯсозода Ҳоҷӣ Ҳусайн. ҶАВҲАРИ ҶОВИДОНА_compressed.pdf" data-desc="Китоб нашри дуюм ва такмилёфтаи девони дуввуми Ҳоҷӣ Ҳусайн Мӯсозода, ки «Ҷавҳари ҷовидона» унвон гирифтааст.">
+                    <div class="book-cover"><img src="img/default.jpg" alt="ҶАВҲАРИ ҶОВИДОНА. Девони II"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">ҶАВҲАРИ ҶОВИДОНА. Девони II</h3>
+                        <p class="book-description">Китоб нашри дуюм ва такмилёфтаи девони дуввуми Ҳоҷӣ Ҳусайн Мӯсозода, ки «Ҷавҳари ҷовидона» унвон гирифтааст.</p>
+                        <div class="book-meta">
+                            <div class="star-rating" id="rating-javharidovidona">
+                                <!-- Stars will be generated by JS -->
+                            </div>
+                            <div class="downloads"><i class="fas fa-download"></i> <span id="downloads-javharidovidona">0</span></div>
+                        </div>
+                    </div>
+                </div>
+                 <div class="book-card" data-book-id="meroji" data-title="МЕЪРОҶИ МАЪРИФАТ. Девони III" data-genre="шеър" data-pdf="books/3. Мӯсозода Ҳоҷӣ Ҳусайн. МЕЪРОҶИ МАЪРИФАТ.pdf" data-desc="Девони сеюми Ҳоҷӣ Ҳусайн Мӯсозода – «Меъроҷи маърифат» маҷмӯаест, ки онро метавон хазинаи панду ҳикмат ном бурд.">
+                    <div class="book-cover"><img src="img/meroji marifat.png" alt="МЕЪРОҶИ МАЪРИФАТ. Девони III"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">МЕЪРОҶИ МАЪРИФАТ. Девони III</h3>
+                        <p class="book-description">Девони сеюми Ҳоҷӣ Ҳусайн Мӯсозода – «Меъроҷи маърифат» маҷмӯаест, ки онро метавон хазинаи панду ҳикмат ном бурд.</p>
+                        <div class="book-meta">
+                            <div class="star-rating" id="rating-meroji">
+                                <!-- Stars will be generated by JS -->
+                            </div>
+                            <div class="downloads"><i class="fas fa-download"></i> <span id="downloads-meroji">0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-card" data-book-id="tojikiston" data-title="ТОҶИКИСТОН – ВОРИСИ СОМОНИЁН" data-genre="шеър" data-pdf="books/4. Мӯсозода Ҳоҷӣ Ҳусайн. ТОҶИКИСТОН - ВОРИСИ СОМОНИЁН.pdf" data-desc="Девони нави Ҳусайн Мӯсозода бо номи «Тоҷикистон вориси Сомониён» баргузидаи ашъор аз ҳафт девони шоир мебошад.">
+                    <div class="book-cover"><img src="img/tojikon vorisoni somoniyon.png" alt="ТОҶИКИСТОН – ВОРИСИ СОМОНИЁН"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">ТОҶИКИСТОН – ВОРИСИ СОМОНИЁН</h3>
+                        <p class="book-description">Девони нави Ҳусайн Мӯсозода бо номи «Тоҷикистон вориси Сомониён» баргузидаи ашъор аз ҳафт девони шоир мебошад.</p>
+                        <div class="book-meta">
+                            <div class="star-rating" id="rating-tojikiston">
+                                <!-- Stars will be generated by JS -->
+                            </div>
+                            <div class="downloads"><i class="fas fa-download"></i> <span id="downloads-tojikiston">0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-card" data-book-id="hikmatiston" data-title="ҲИКМАТИСТОН. Девони V" data-genre="шеър" data-pdf="books/5. Мӯсозода Ҳоҷӣ Ҳусайн. ҲИКМАТИСТОН.pdf" data-desc="Девони панҷуми Ҳоҷӣ Ҳусайн Мӯсозода – «Ҳикматистон» тӯшаи ирфону маърифату адабу андарз аст.">
+                    <div class="book-cover"><img src="img/hikmatiston.png" alt="ҲИКМАТИСТОН. Девони V"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">ҲИКМАТИСТОН. Девони V</h3>
+                        <p class="book-description">Девони панҷуми Ҳоҷӣ Ҳусайн Мӯсозода – «Ҳикматистон» тӯшаи ирфону маърифату адабу андарз аст.</p>
+                        <div class="book-meta">
+                            <div class="star-rating" id="rating-hikmatiston">
+                                <!-- Stars will be generated by JS -->
+                            </div>
+                            <div class="downloads"><i class="fas fa-download"></i> <span id="downloads-hikmatiston">0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-card" data-book-id="gulshaniston" data-title="ГУЛШАНИСТОН" data-genre="шеър" data-pdf="books/6. Мӯсозода Ҳоҷӣ Ҳусайн. ГУЛШАНИСТОН.pdf" data-desc="Дар девони «Гулшанистон»-и шоир Ҳоҷӣ Ҳусайн Мӯсозода зиёда аз 300 ғазали нав гирдоварӣ гаштааст.">
+                    <div class="book-cover"><img src="img/gulshaniston.png" alt="ГУЛШАНИСТОН"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">ГУЛШАНИСТОН</h3>
+                        <p class="book-description">Дар девони «Гулшанистон»-и шоир Ҳоҷӣ Ҳусайн Мӯсозода зиёда аз 300 ғазали нав гирдоварӣ гаштааст.</p>
+                        <div class="book-meta">
+                            <div class="star-rating" id="rating-gulshaniston">
+                                <!-- Stars will be generated by JS -->
+                            </div>
+                            <div class="downloads"><i class="fas fa-download"></i> <span id="downloads-gulshaniston">0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-card" data-book-id="sabai" data-title="САБЪАИ САЙЁР" data-genre="шеър" data-pdf="books/7. Мӯсозода Ҳоҷӣ Ҳусайн. САБЪАИ САЙЁР.pdf" data-desc="Дар китоби мазкур ғазалҳои тозаэҷоди Ҳоҷӣ Ҳусайн Мӯсозода гирдоварӣ гардидаанд, ки девони ҳафтуми ғазалҳои шоир аст.">
+                    <div class="book-cover"><img src="img/sabai sayyor.png" alt="САБЪАИ САЙЁР"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">САБЪАИ САЙЁР</h3>
+                        <p class="book-description">Дар китоби мазкур ғазалҳои тозаэҷоди Ҳоҷӣ Ҳусайн Мӯсозода гирдоварӣ гардидаанд, ки девони ҳафтуми ғазалҳои шоир аст.</p>
+                        <div class="book-meta">
+                            <div class="star-rating" id="rating-sabai">
+                                <!-- Stars will be generated by JS -->
+                            </div>
+                            <div class="downloads"><i class="fas fa-download"></i> <span id="downloads-sabai">0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-card" data-book-id="hasht" data-title="ҲАШТ АХТАР" data-genre="шеър" data-pdf="books/8. Мӯсозода Ҳоҷӣ Ҳусайн. ҲАШТ АХТАР.pdf" data-desc="Девони ҳаштуми Ҳоҷӣ Ҳусайн Мӯсозода фарогири ғазалҳои нави шоир аст.">
+                    <div class="book-cover"><img src="img/hasht ahtar.png" alt="ҲАШТ АХТАР"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">ҲАШТ АХТАР</h3>
+                        <p class="book-description">Девони ҳаштуми Ҳоҷӣ Ҳусайн Мӯсозода фарогири ғазалҳои нави шоир аст.</p>
+                        <div class="book-meta">
+                            <div class="star-rating" id="rating-hasht">
+                                <!-- Stars will be generated by JS -->
+                            </div>
+                            <div class="downloads"><i class="fas fa-download"></i> <span id="downloads-hasht">0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-card" data-book-id="nuh" data-title="Нӯҳ авроқи забарҷад" data-genre="шеър" data-pdf="books/9. Мӯсозода Ҳоҷӣ Ҳусайн. НӮХ АВРОҚИ ЗАБАРҶАД.pdf" data-desc="Девони нӯҳуми Ҳоҷӣ Ҳусайн Мӯсозода фарогири ғазалҳои нави шоир аст.">
+                    <div class="book-cover"><img src="img/nuh avroqi zabarjad.png" alt="Нӯҳ авроқи забарҷад"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">Нӯҳ авроқи забарҷад</h3>
+                        <p class="book-description">Девони нӯҳуми Ҳоҷӣ Ҳусайн Мӯсозода фарогири ғазалҳои нави шоир аст.</p>
+                        <div class="book-meta">
+                            <div class="star-rating" id="rating-nuh">
+                                <!-- Stars will be generated by JS -->
+                            </div>
+                            <div class="downloads"><i class="fas fa-download"></i> <span id="downloads-nuh">0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-card" data-book-id="dah" data-title="ДАҲ ЧАШМАИ АНБАР" data-genre="шеър" data-pdf="books/10. Мӯсозода Ҳоҷӣ Ҳусайн. ДАҲ ЧАШМАИ АНБАР.pdf" data-desc="Тавсифи муфассал ҳоло дастрас нест.">
+                    <div class="book-cover"><img src="img/dah chashmai anbar.png" alt="ДАҲ ЧАШМАИ АНБАР"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">ДАҲ ЧАШМАИ АНБАР</h3>
+                        <p class="book-description">Тавсифи муфассал ҳоло дастрас нест.</p>
+                        <div class="book-meta">
+                            <div class="star-rating" id="rating-dah">
+                                <!-- Stars will be generated by JS -->
+                            </div>
+                            <div class="downloads"><i class="fas fa-download"></i> <span id="downloads-dah">0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-card" data-book-id="yozdah" data-title="ЁЗДАҲ СИТОРАИ ДУРАХШОН" data-genre="шеър" data-pdf="books/11.Мӯсозода Ҳоҷӣ Ҳусайн. ЁЗДАҲ СИТОРАИ ДУРАХШОН.pdf" data-desc="Дар девони ёздаҳуми шоир Ҳоҷӣ Ҳусайн Мӯсозода ғазалиёти навэҷод ҷой дода шудааст.">
+                    <div class="book-cover"><img src="img/default.jpg" alt="ЁЗДАҲ СИТОРАИ ДУРАХШОН"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">ЁЗДАҲ СИТОРАИ ДУРАХШОН</h3>
+                        <p class="book-description">Дар девони ёздаҳуми шоир Ҳоҷӣ Ҳусайн Мӯсозода ғазалиёти навэҷод ҷой дода шудааст.</p>
+                        <div class="book-meta">
+                            <div class="star-rating" id="rating-yozdah">
+                                <!-- Stars will be generated by JS -->
+                            </div>
+                            <div class="downloads"><i class="fas fa-download"></i> <span id="downloads-yozdah">0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-card" data-book-id="duvozdah" data-title="ДУВОЗДАҲ БУРҶИ ФАЛАК" data-genre="шеър" data-pdf="books/12. Мӯсозода Ҳоҷӣ Ҳусайн. ДУВОЗДАҲ БУРҶИ ФАЛАК.pdf" data-desc="Дар китоб ғазалиёти нави шоир Ҳоҷӣ Ҳусайн Мӯсозода, чанд рубоӣ ва достону қиссаҳо гирдоварӣ гардидааст.">
+                    <div class="book-cover"><img src="img/duvozdah burji falak.png" alt="ДУВОЗДАҲ БУРҶИ ФАЛАК"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">ДУВОЗДАҲ БУРҶИ ФАЛАК</h3>
+                        <p class="book-description">Дар китоб ғазалиёти нави шоир Ҳоҷӣ Ҳусайн Мӯсозода, чанд рубоӣ ва достону қиссаҳо гирдоварӣ гардидааст.</p>
+                        <div class="book-meta">
+                            <div class="star-rating" id="rating-duvozdah">
+                                <!-- Stars will be generated by JS -->
+                            </div>
+                            <div class="downloads"><i class="fas fa-download"></i> <span id="downloads-duvozdah">0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-card" data-book-id="gulchin1" data-title="Гулчини ашъор 1" data-genre="шеър" data-pdf="books/Book_1_Gulchin_ashor1.pdf" data-desc="Ин маҷмӯаи ашъор гулчине аз эҷодиёти шоир буда, мавзӯъҳои мухталифи ирфонӣ, фалсафӣ, ахлоқӣ ва иҷтимоиро дар бар мегирад.">
+                    <div class="book-cover"><img src="img/book_gulchin_ashor-min.jpg" alt="Гулчини ашъор 1"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">Гулчини ашъор 1</h3>
+                        <p class="book-description">Ин маҷмӯаи ашъор гулчине аз эҷодиёти шоир буда, мавзӯъҳои мухталифи ирфонӣ, фалсафӣ, ахлоқӣ ва иҷтимоиро дар бар мегирад.</p>
+                        <div class="book-meta">
+                            <div class="star-rating" id="rating-gulchin1">
+                                <!-- Stars will be generated by JS -->
+                            </div>
+                            <div class="downloads"><i class="fas fa-download"></i> <span id="downloads-gulchin1">0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-card" data-book-id="gulchin2" data-title="Гулчини ашъор 2" data-genre="шеър" data-pdf="books/Book_2_Gulchin_ashor2.pdf" data-desc="Давоми маҷмӯаи ашъори шоир, ки боз ҳам паҳлӯҳои нави эҷодиёти ӯро бозтоб мекунад ва хонандаро ба андеша водор месозад.">
+                    <div class="book-cover"><img src="img/book_gulchin_ashor-min.jpg" alt="Гулчини ашъор 2"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">Гулчини ашъор 2</h3>
+                        <p class="book-description">Давоми маҷмӯаи ашъори шоир, ки боз ҳам паҳлӯҳои нави эҷодиёти ӯро бозтоб мекунад ва хонандаро ба андеша водор месозад.</p>
+                        <div class="book-meta">
+                            <div class="star-rating" id="rating-gulchin2">
+                                <!-- Stars will be generated by JS -->
+                            </div>
+                            <div class="downloads"><i class="fas fa-download"></i> <span id="downloads-gulchin2">0</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="book-card" data-book-id="sezdah" data-title="СЕЗДАҲ НИШОНАИ РОЗ" data-genre="шеър" data-pdf="books/13. Мӯсозода Ҳоҷӣ Ҳусайн. СЕЗДАҲ НИШОНАИ РОЗ_compressed.pdf" data-desc="Китоби нави Ҳоҷӣ Ҳусайн Мӯсозода бо номи «Сездаҳ нишонаи роз» беш аз 300 ғазалро дар бар мегирад.">
+                    <div class="book-cover"><img src="img/sezdah nishoni roz.png" alt="СЕЗДАҲ НИШОНАИ РОЗ"></div>
+                    <div class="book-content">
+                        <h3 class="book-title">СЕЗДАҲ НИШОНАИ РОЗ</h3>
+                        <p class="book-description">Китоби нави Ҳоҷӣ Ҳусайн Мӯсозода бо номи «Сездаҳ нишонаи роз» беш аз 300 ғазалро дар бар мегирад.</p>
+                        <div class="book-meta">
+                            <div class="star-rating" id="rating-sezdah">
+                                <!-- Stars will be generated by JS -->
+                            </div>
+                            <div class="downloads"><i class="fas fa-download"></i> <span id="downloads-sezdah">0</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+    <div class="overlay" id="overlay"></div>
+
+    <script>
+        const searchInput = document.getElementById('searchInput');
+        const bookGrid = document.getElementById('bookGrid');
+        const books = Array.from(bookGrid.getElementsByClassName('book-card'));
+
+        // Search functionality for the right panel
+        searchInput.addEventListener('keyup', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            books.forEach(book => {
+                const title = book.dataset.title.toLowerCase();
+                if (title.includes(searchTerm)) {
+                    book.style.display = 'flex';
+                } else {
+                    book.style.display = 'none';
+                }
+            });
+        });
+
+        // PDF.js setup
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.338/pdf.worker.min.js';
+
+        const pdfViewer = document.getElementById('pdf-viewer');
+        const pageCountSpan = document.getElementById('page-count');
+        const pageNumInput = document.getElementById('page-num');
+        const prevPageBtn = document.getElementById('prev-page');
+        const nextPageBtn = document.getElementById('next-page');
+        const searchDocInput = document.getElementById('search-in-doc');
+        const searchDocBtn = document.getElementById('search-btn');
+        const placeholder = document.getElementById('viewer-placeholder');
+
+        let pdfDoc = null;
+        let pageNum = 1;
+        let pageText = []; // To store text of each page for searching
+
+        function renderPage(pdfDoc, num, canvas) {
+            return pdfDoc.getPage(num).then(page => {
+                const viewport = page.getViewport({ scale: 1.5 });
+                const context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                canvas.style.display = 'block';
+                canvas.style.margin = '0 auto 10px auto';
+                canvas.style.boxShadow = '0 0 10px rgba(0,0,0,0.1)';
+
+                const renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+                
+                // Store text content for searching
+                page.getTextContent().then(textContent => {
+                    pageText[num] = textContent.items.map(item => item.str).join(' ');
+                });
+
+                return page.render(renderContext).promise;
+            });
+        }
+
+        function loadPdf(pdfUrl) {
+            placeholder.style.display = 'flex';
+            placeholder.innerHTML = '<p>Китоб бор шуда истодааст...</p>';
+            pdfViewer.innerHTML = ''; // Clear previous pages
+            pdfViewer.appendChild(placeholder);
+            pdfViewer.scrollTop = 0;
+            pageText = []; // Reset page text
+
+            const loadingTask = pdfjsLib.getDocument(pdfUrl);
+            loadingTask.promise.then(pdfDoc_ => {
+                pdfDoc = pdfDoc_;
+                pageCountSpan.textContent = pdfDoc.numPages;
+                pageNumInput.max = pdfDoc.numPages;
+                pageNumInput.value = 1;
+                pdfViewer.innerHTML = ''; // Clear placeholder
+
+                let renderQueue = Promise.resolve();
+                for (let i = 1; i <= pdfDoc.numPages; i++) {
+                     renderQueue = renderQueue.then(() => {
+                        const canvas = document.createElement('canvas');
+                        canvas.id = `page-${i}`;
+                        pdfViewer.appendChild(canvas);
+                        return renderPage(pdfDoc, i, canvas);
+                     });
+                }
+                
+                renderQueue.catch(err => {
+                     console.error("Error rendering page: ", err);
+                });
+
+            }).catch(err => {
+                console.error("Error loading PDF: ", err);
+                placeholder.style.display = 'flex';
+                placeholder.innerHTML = `<p>Хатогӣ дар боркунии PDF.</p>`;
+            });
+        }
+        
+        function goToPage(num) {
+            if (!pdfDoc || num < 1 || num > pdfDoc.numPages) return;
+            const pageElement = document.getElementById(`page-${num}`);
+            if (pageElement) {
+                pdfViewer.scrollTop = pageElement.offsetTop - pdfViewer.offsetTop;
+                pageNumInput.value = num;
+                pageNum = num;
+            }
+        }
+
+        function onPrevPage() {
+            if (pageNum <= 1) return;
+            goToPage(pageNum - 1);
+        }
+
+        function onNextPage() {
+            if (pageNum >= pdfDoc.numPages) return;
+            goToPage(pageNum + 1);
+        }
+
+        function searchInDoc() {
+            const query = searchDocInput.value.toLowerCase();
+            if (!query || !pdfDoc) return;
+
+            for (let i = 1; i <= pdfDoc.numPages; i++) {
+                if (pageText[i] && pageText[i].toLowerCase().includes(query)) {
+                    goToPage(i);
+                    // Basic highlight (optional, can be improved)
+                    setTimeout(() => {
+                        const pageElement = document.getElementById(`page-${i}`);
+                        pageElement.style.outline = '3px solid var(--primary-green)';
+                        setTimeout(() => { pageElement.style.outline = 'none'; }, 2000);
+                    }, 300); // wait for scroll
+                    return; // Stop at first match
+                }
+            }
+            alert('Матн ёфт нашуд.');
+        }
+
+        prevPageBtn.addEventListener('click', onPrevPage);
+        nextPageBtn.addEventListener('click', onNextPage);
+        pageNumInput.addEventListener('change', () => goToPage(parseInt(pageNumInput.value)));
+        searchDocBtn.addEventListener('click', searchInDoc);
+        searchDocInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') searchInDoc();
+        });
+
+        function updateInfoPanel(card) {
+            const bookId = card.dataset.bookId;
+            document.getElementById('info-title').textContent = card.dataset.title;
+            document.getElementById('info-genre').textContent = card.dataset.genre;
+            document.getElementById('info-desc').textContent = card.dataset.desc;
+            
+            const downloadBtn = document.getElementById('info-download-btn');
+            downloadBtn.href = card.dataset.pdf;
+            downloadBtn.setAttribute('download', card.dataset.title + '.pdf');
+
+            // Update downloads count in info panel
+            const downloads = localStorage.getItem(`downloads-${bookId}`) || 0;
+            document.getElementById('info-downloads').textContent = downloads;
+
+            // Update rating in info panel
+            const rating = getRating(bookId);
+            document.getElementById('info-rating').textContent = `${rating.average.toFixed(1)} (${rating.count} овоз)`
+        }
+
+        function handleRating(bookId, rating) {
+            let ratings = JSON.parse(localStorage.getItem(`ratings-${bookId}`)) || [];
+            ratings.push(rating);
+            localStorage.setItem(`ratings-${bookId}`, JSON.stringify(ratings));
+            updateBookCard(bookId);
+            updateInfoPanel(document.querySelector(`[data-book-id='${bookId}']`));
+        }
+
+        function getRating(bookId) {
+            const ratings = JSON.parse(localStorage.getItem(`ratings-${bookId}`)) || [];
+            const count = ratings.length;
+            const average = count > 0 ? ratings.reduce((a, b) => a + b, 0) / count : 0;
+            return { count, average };
+        }
+
+        function generateStars(bookId, container) {
+            const rating = getRating(bookId);
+            container.innerHTML = ''; // Clear existing stars
+            for (let i = 5; i >= 1; i--) {
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.id = `${bookId}-star${i}`;
+                radio.name = `rating-${bookId}`;
+                radio.value = i;
+                if (i === Math.round(rating.average)) {
+                    radio.checked = true;
+                }
+                radio.onchange = () => handleRating(bookId, i);
+
+                const label = document.createElement('label');
+                label.htmlFor = `${bookId}-star${i}`;
+                label.innerHTML = '&#9733;'; // Star character
+
+                container.appendChild(radio);
+                container.appendChild(label);
+            }
+        }
+
+        function updateBookCard(bookId) {
+            const card = document.querySelector(`[data-book-id='${bookId}']`);
+            if (!card) return;
+
+            const downloads = localStorage.getItem(`downloads-${bookId}`) || 0;
+            card.querySelector(`#downloads-${bookId}`).textContent = downloads;
+
+            const ratingContainer = card.querySelector(`#rating-${bookId}`);
+            generateStars(bookId, ratingContainer);
+        }
+
+        books.forEach(card => {
+            const bookId = card.dataset.bookId;
+            updateBookCard(bookId);
+
+            card.addEventListener('click', () => {
+                books.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+
+                const pdfUrl = card.dataset.pdf;
+                if (pdfUrl) {
+                    loadPdf(pdfUrl);
+                    updateInfoPanel(card);
+                }
+            });
+        });
+
+        document.getElementById('info-download-btn').addEventListener('click', (e) => {
+            const activeCard = document.querySelector('.book-card.active');
+            if (activeCard) {
+                const bookId = activeCard.dataset.bookId;
+                let downloads = parseInt(localStorage.getItem(`downloads-${bookId}`) || 0);
+                downloads++;
+                localStorage.setItem(`downloads-${bookId}`, downloads);
+                updateBookCard(bookId);
+                updateInfoPanel(activeCard);
+            }
+        });
+
+        // Sorting functionality
+        const sortSelect = document.getElementById('sort-select');
+        sortSelect.addEventListener('change', () => {
+            sortBooks(sortSelect.value);
+        });
+
+        function sortBooks(criteria) {
+            let sortedBooks = [...books]; // Create a copy to sort
+
+            sortedBooks.sort((a, b) => {
+                const idA = a.dataset.bookId;
+                const idB = b.dataset.bookId;
+
+                switch (criteria) {
+                    case 'title-asc':
+                        return a.dataset.title.localeCompare(b.dataset.title);
+                    case 'title-desc':
+                        return b.dataset.title.localeCompare(a.dataset.title);
+                    case 'rating-desc':
+                        const ratingA = getRating(idA).average;
+                        const ratingB = getRating(idB).average;
+                        return ratingB - ratingA;
+                    case 'downloads-desc':
+                        const downloadsA = parseInt(localStorage.getItem(`downloads-${idA}`) || 0);
+                        const downloadsB = parseInt(localStorage.getItem(`downloads-${idB}`) || 0);
+                        return downloadsB - downloadsA;
+                    default:
+                        return 0; // No change for default
+                }
+            });
+
+            // Re-append sorted books to the grid
+            bookGrid.innerHTML = '';
+            sortedBooks.forEach(book => bookGrid.appendChild(book));
+        }
+
+        // Mobile panel toggles
+        const leftPanel = document.getElementById('left-panel');
+        const rightPanel = document.getElementById('right-panel');
+        const leftPanelToggle = document.getElementById('left-panel-toggle');
+        const rightPanelToggle = document.getElementById('right-panel-toggle');
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        const overlay = document.getElementById('overlay');
+
+        function closeAllPanels() {
+            leftPanel.classList.remove('open');
+            rightPanel.classList.remove('open');
+            navMenu.classList.remove('active');
+            overlay.classList.remove('active');
+        }
+
+        leftPanelToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeAllPanels();
+            leftPanel.classList.add('open');
+            overlay.classList.add('active');
+        });
+
+        rightPanelToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeAllPanels();
+            rightPanel.classList.add('open');
+            overlay.classList.add('active');
+        });
+
+        hamburger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            closeAllPanels();
+            navMenu.classList.add('active');
+            overlay.classList.add('active');
+        });
+
+        overlay.addEventListener('click', closeAllPanels);
+        document.addEventListener('keydown', (e) => {
+            if (e.key === "Escape") closeAllPanels();
+        });
+
+        // Open book from URL
+        window.addEventListener('load', () => {
+            const params = new URLSearchParams(window.location.search);
+            const bookId = params.get('book');
+            if (bookId) {
+                const cardToOpen = document.querySelector(`.book-card[data-book-id="${bookId}"]`);
+                if (cardToOpen) {
+                    cardToOpen.click();
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
