@@ -458,7 +458,7 @@
     <header class="header">
         <nav class="nav-container">
             <a href="index.html" class="logo">
-                <img src="img/logo2.png" alt="Логотип" class="logo-img">
+                <img src="img/logo2-min.png" alt="Логотип" class="logo-img">
                 Ҳоҷӣ Ҳусайн Мӯсозода
             </a>
             <ul class="nav-menu" id="nav-menu">
@@ -492,7 +492,8 @@
                 <p><strong>Миқдори зеркашишуда:</strong> <span id="info-downloads">-</span></p>
             </div>
             <div class="action-buttons">
-                <a href="#" id="info-download-btn" class="action-btn" download><i class="fas fa-download"></i> Зеркаши кардан</a>
+                <a href="#" id="info-download-btn" class="action-btn" download><i class="fas fa-download"></i> Зеркаши кардан (PDF)</a>
+                <a href="#" id="info-download-apk-btn" class="action-btn" style="display: none;" download><i class="fas fa-robot"></i> Зеркашии барнома (APK)</a>
                 <button class="action-btn" id="info-share-btn"><i class="fas fa-share-alt"></i> Мубодила кардан</button>
             </div>
         </aside>
@@ -719,7 +720,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="book-card" data-book-id="gulchin1" data-title="Гулчини ашъор 1" data-genre="шеър" data-pdf="books/Book_1_Gulchin_ashor1.pdf" data-desc="Ин маҷмӯаи ашъор гулчине аз эҷодиёти шоир буда, мавзӯъҳои мухталифи ирфонӣ, фалсафӣ, ахлоқӣ ва иҷтимоиро дар бар мегирад.">
+                <div class="book-card" data-book-id="gulchin1" data-title="Гулчини ашъор 1" data-genre="шеър" data-pdf="books/Book_1_Gulchin_ashor1.pdf" data-apk="apk/GulchinAshor.apk" data-desc="Ин маҷмӯаи ашъор гулчине аз эҷодиёти шоир буда, мавзӯъҳои мухталифи ирфонӣ, фалсафӣ, ахлоқӣ ва иҷтимоиро дар бар мегирад.">
                     <div class="book-cover"><img src="img/book_gulchin_ashor-min.jpg" alt="Гулчини ашъор 1"></div>
                     <div class="book-content">
                         <h3 class="book-title">Гулчини ашъор 1</h3>
@@ -991,6 +992,15 @@
             const downloadBtn = document.getElementById('info-download-btn');
             downloadBtn.href = card.dataset.pdf;
             downloadBtn.setAttribute('download', card.dataset.title + '.pdf');
+
+            const downloadApkBtn = document.getElementById('info-download-apk-btn');
+            if (card.dataset.apk) {
+                downloadApkBtn.href = card.dataset.apk;
+                downloadApkBtn.setAttribute('download', 'GulchinAshor.apk');
+                downloadApkBtn.style.display = 'flex';
+            } else {
+                downloadApkBtn.style.display = 'none';
+            }
 
             // Update downloads count in info panel
             const downloads = localStorage.getItem(`downloads-${bookId}`) || 0;
