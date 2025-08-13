@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="tg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Шеърҳо - Ҳоҷӣ Ҳусайн Мӯсозода</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        @font-face {
+    font-family: 'Bookman Old Style Cyr';
+    src: url('font/ofont.ru_Bookman Old Style Cyr.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Caslon Becker';
+    src: url('font/ofont.ru_Caslon Becker.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-green: #28a745;
+            --secondary-green: #1B5E20;
+            --light-green: #b4ffb4;
+            --accent-gold: #28a745;
+            --accent-brown: #28a745;
+            --text-dark: #2E2E2E;
+            --text-gray: #666666;
+            --bg-light: #E7E9ED;
+            --bg-cream: #b4ffb4;
+            --white: #FFFFFF;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: 'Open Sans', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+        }
+
+        /* Header & Navigation */
+        .header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            color: var(--white);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+        }
+        .header::after {
+            content: '';
+            display: block;
+            height: 1px;
+            background-color: white;
+            width: 100%;
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 45px;
+        }
+
+         .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Bookman Old Style Cyr', serif;
+    font-size: 1.2rem; /* Adjusted for smaller screens */
+    color: var(--white);
+    text-decoration: none;
+    padding: 5px 0; /* Add some padding */
+}
+.logo-img {
+    height: 40px; /* подбери по размеру */
+    width: auto;
+    border-radius: 6px; /* если нужно скругление */
+}
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        .nav-link {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--light-green);
+        }
+
+        .nav-link.active {
+            color: var(--light-green);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--light-green);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--white);
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--secondary-green) 100%);
+            color: var(--white);
+            padding: 80px 20px 40px;
+            text-align: center;
+            padding-top: 100px;
+        }
+
+        .page-title {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .page-subtitle {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.3rem;
+            opacity: 0.9;
+        }
+
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Back Button */
+        .back-btn {
+            background: var(--secondary-green);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-green);
+            transform: translateY(-2px);
+            color: var(--white);
+        }
+
+        /* Analysis Section */
+        .analysis-container {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .analysis-item {
+            border-bottom: 1px solid var(--bg-light);
+            margin-bottom: 20px;
+            padding-bottom: 20px;
+        }
+
+        .analysis-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+
+        .analysis-title {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent-brown);
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+
+        .analysis-title:hover {
+            color: var(--primary-green);
+        }
+
+        .analysis-title .icon {
+            transition: transform 0.3s ease;
+        }
+
+        .analysis-content {
+            display: none;
+            padding-top: 20px;
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-dark);
+        }
+
+        .analysis-content p {
+            margin-bottom: 15px;
+        }
+
+        .analysis-content h4 {
+            font-size: 1.3rem;
+            color: var(--secondary-green);
+            margin-top: 20px;
+            margin-bottom: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            background: linear-gradient(135deg, var(--secondary-green) 0%, var(--primary-green) 100%);
+            color: var(--white);
+            padding: 40px 0 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .footer-title {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+
+        .footer-text {
+            font-family: 'Bookman Old Style Cyr', serif;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.3);
+            margin: 30px 0 20px;
+        }
+
+        .footer-bottom {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        /* Back to top */
+        .back-to-top {
+            position: fixed;
+            bottom: 18px;
+            right: 18px;
+            width: 36px;
+            height: 36px;
+            background: var(--accent-gold);
+            color: var(--white);
+            border: none;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+            display: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .back-to-top:hover {
+            background: var(--accent-brown);
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 45px;
+                left: 0;
+                right: 0;
+                background: var(--secondary-green);
+                padding: 20px;
+                gap: 15px;
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+            
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            .page-title {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="img/logo2-min.png" alt="Логотип" class="logo-img">
+                Ҳоҷӣ Ҳусайн Мӯсозода
+            </a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="index.html" class="nav-link">Асосӣ</a></li>
+                <li><a href="poems.html" class="nav-link">Шеърҳо</a></li>
+                <li><a href="analysis.html" class="nav-link">Таҳлили шеърҳо</a></li>
+                <li><a href="audio.html" class="nav-link">Аудио</a></li>
+                <li><a href="books.html" class="nav-link">Китобҳо</a></li>
+                <li><a href="hikmatho.html" class="nav-link">Ҳикматҳо</a></li>
+                <li><a href="sukhanho.html" class="nav-link active">Андешаҳо</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <h1 class="page-title">Андешаҳои аҳли қалам</h1>
+        <p class="page-subtitle">Хулоса ва суханҳои аҳли қалам оид ба эҷодиёти шоир</p>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <a href="index.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Бозгашт ба саҳифаи асосӣ
+        </a>
+
+        <div class="analysis-container">
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    Фарҳод Раҳимӣ
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Президенти Академияи илмҳои Ҷумҳурии Тоҷикистон:</h4>
+                    <p>
+						ИҚТИБОС АЗ МАҚОЛАҲОИ ШОИРОНИ ХАЛҚӢ ВА АДИБОН БАР НАЗМИ МӮСОЗОДА<br>
+						Мӯсозода Ҳусайн аз афроди фарҳехтаи илму адаб ва сиёсати Тоҷикистон маҳсуб мешавад, ки дар густариш ва пойдории аркони давлатдорӣ ва Истиқлолияти Тоҷикистон тавассути қалам, сухан ва андешаҳои фозилонаи хеш нақши муассир гузоштааст. Ҳарчанд ин донишманд дар ҷомеаи муосири тоҷик ҳамчун чеҳраи мазҳабӣ маъруфият пайдо кардааст, вале хидмати ӯ дар ҷодаи илм, адабиёт ва фарҳанг на кам аз заҳматҳои ӯ дар ростои дин мебошад.<br>
+						Мӯсозода Ҳусайн ҳамчун шахсияти соҳиби мавқеи муайян дар мавриди пиёда кардани сиёсати давлату ҳукумат, амалӣ намудани дастуру супоришоти Асосгузори сулҳу ваҳдати миллӣ – Пешвои миллат, муҳтарам Эмомалӣ Раҳмон хидматҳои арзандаро ба анҷом расонидааст. Дониши баланд, афкору ақидаҳои тозаву пешқадам, мавқеи дуруст ва дилсӯзиву ғамхорӣ нисбати мардум ӯро дар байни ҷомеаи мамлакат чун чеҳраи азизу маъруф шиносонид.<br>
+						Умуман, китоби «Тоҷикистон – вориси Сомониён» як маҷмӯаи гулчини ашъори ватандӯстона ва ҳакимо- наи Мӯсозода Ҳусайн мебошад, ки барои насли наврас ва ҷавони давлати соҳибистиқлоли мо дастур ва раҳнамо дар ҷодаи хидмат ба Ватан ва халқ мебошад. Ин ҳадяи маънавии шоирро барои хонандагон муборакбод мегӯем.<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+		<br>
+        <div class="analysis-container">
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    Назри Яздон
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Шоири халқии Тоҷикистон:</h4>
+                    <p>
+						Шоир назме дар сабки саҳли мумтанеъ дорад ва дар ин маврид низ мехоҳад матлабаш барои хонандагонаш равшану сареҳ бошад. Дар ин маврид худаш ҳам ишораҳои зиёде дорад.<br>
+						Чунончи, ин ҷо мегӯяд:<br>
+						<b>Назми манро ту бубин андар ғазал озор нест,<br>
+						Аз барои ранҷиши дил ҳарфи ман такрор нест. <br>
+						Баҳри миллат ҳарчӣ гуфтам муҳтавои ҳар сухан, <br>
+						Дар мазомини луғатҳо маънии душвор нест. <br>
+						Сурати ашъори ман худ чеҳра бошад дар ҳадаф, <br>
+						Васфи ман гар белатофат зеби ҳар рухсор нест.</b><br>
+						Ҳамчуноне ки гуфтам Ҳоҷӣ Ҳусайн Мӯсозода дар маслаки Саъдӣ қалам мефарсояд. Вай бо андешаву афкори ин шоири шаҳир ҳамнавост ва дар баъзе мавридҳои фикри ӯро бо забон ва сабки хосаи нигориши худаш тасдиқ менамояд. Чунончи, дар абёти зерин гуфтаи Саъдӣ «Оқибат гургзода гург шавад, гарчи бо одамӣ бузург шавад» шоирона таъкид мегардад:<br>
+						<b>Асли нопок бенасабро тарбият кардан хато, <br>
+						Бенасаб иффат надорад оқибат орад ҷафо.</b><br>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+		<br>
+        <div class="analysis-container">
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    Аҳмадҷони Раҳматзод
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Шоири халқии Тоҷикистон, раиси бахши суғдии Иттифоқи нависандагони Тоҷикистон:</h4>
+                    <p>
+						Воқеан, истифодаи шеърҳои хуб ва пораҳои манзум, панду андарз дар суҳбатҳо ба ҳисси хештаншиносию ҳувияти миллии насли наврасу ҷавон таъсири бағоят калон ва муҳим дорад. Панду андарзи барҷо бамавқеъ аз бисёр ҷиҳат дар тарбияи ватандӯстӣ ва инсонпарварии ҷомеа таъсири ҳалкунандаро доро мебошанд. Аз ин лиҳоз, истифодаи онҳоро дар мусоҳибаҳо ва суҳбату мавъизаҳо Ҳоҷӣ Ҳусайн устодона анҷом дода, бурди хешро дар мувофиқати амал бо сиёсати замон медонанд.<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+		<br>
+        <div class="analysis-container">
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    Нурмуҳаммад Ниёзӣ
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Шоири халқии Тоҷикистон:</h4>
+                    <p>
+						Шоирон ба арсаи адабиёт ҳар гуна ворид шудаанд. То ба имрӯз як шарти муайян вуҷуд надорад барои шоир шудан. Кай бояд сар кунад? Аввал кадом суханро гӯяд? Дар кадом ҳолат бояд нависад? Яке дар кӯдакӣ оғоз мекунад, дигаре дар пирӣ. Дар ҳама ҳолат барои шоир зарур аст дониши фарох аз ҳама соҳа. Сархатиби масоҷиди вилояти Суғд солиёни дароз аст, ки аз минбар амри маъруф мекунад, панду насиҳат медиҳад авомро. Адои ҳамин вазифа хусусияти аксари шоирон аст. Имрӯз он панду насиҳате, ки дар асоси аҳодиси Паямбари баландмартаба мегуфту бо оятҳои пурғановати Қуръони карим қавӣ мегардонд, дар шакли муъҷази ғазал, ки аз қадимтарин ва зеботарин жанри адабиёти мост, иброз мекунад.<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+		<br>
+        <div class="analysis-container">
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    Фарзона
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Шоири халқии Тоҷикистон:</h4>
+                    <p>
+					Ҳоҷӣ Ҳусайн Мӯсозода як фарди истисноӣ ҳастанд, ки бар тасаввурҳои собиқи мо мувофиқат намекунанд: як инсони бисёр имрӯзину мудерн, як шахсияте бо рӯҳи азими инсонҳои мозиву оянда, як донандаву хонандаву расонандаи қудратманди илми Илоҳӣ ва як нафари пазирандаи футуҳоти илму фарҳанги муосир, ки дар ин айёми барқиву компутериву атомӣ ҳам пеш-пеши ҷомеа бо чароғи нусрат қадам мезананд.<br>
+					Ҳоҷӣ домуллоҳ исломро василаи озодиву пешрафту барозандагии инсонҳову ҷомеаҳову миллатҳову мамлакатҳо медонанд ва бо муҳаббати ростин ба шеъру мусиқӣ, ба синамову театр, ба техникаву технологияи муосир ва ба кулли барномаҳои ҳаёти имрӯз муносибат мекунанд. Руҷӯи муҳаббаташон бо номи ҳазрати ҷон- офарин ба Тоҷикистони азизи мост ба ин ҷойгоҳу пой- гоҳи ҷовидони мо, ба тавҳиду ҳамгароиву ҳамбастагии аҳли меҳан, ба озодиву истиқлоли миллат, ба шаъну шукуҳи инсон, ба бузургии падару модару ҷадду аҷдод, ба адабу ахлоқу ҳамияти ҳамзамонони мо.<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+		<br>
+        <div class="analysis-container">
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    Толиб Карими Озарахш
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>Шоири халқии Тоҷикистон:</h4>
+                    <p>
+						Сайри ашъори устод Ҳоҷӣ Ҳусайн Мӯсозода моро ба олами зебоӣ, маънӣ ва ҷодаи ростиву растагорӣ раҳнамун месозад. Хонанда эҳсос мекунад, ки шоири мо гуфтаниҳои зиёде дорад ва мехоҳад он ба гӯши хонандааш расад. Ва худ ба тақрир мегӯяд:<br>
+						<b>Аз дилам илҳом ҳамчун офтоб омад бурун, <br>
+						Равшанӣ аз зери дарё бениқоб омад бурун.<br>
+						Шуд мунаввар рӯи олам дар назар ҳамчун ғазал,<br> 
+						Назди Шайхи Маслиҳатдин моҳтоб омад бурун.</b><br>
+						Дигар китобро пешорӯи хонандагонаш мегузорам ва бо эҳтирому ихлос аз Домулло Ҳоҷӣ Ҳусайн Мӯсозода барои худ ва ҷамъи хонандагони азиз дуъои хайр талаб мекунам.<br>
+
+                    </p>
+                </div>
+            </div>
+        </div>
+		<br>
+        <div class="analysis-container">
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    Умеда Ғаффорова
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>доктори улуми суханшиносӣ, профессор:</h4>
+                    <p>
+						Дар канори ин ҳама андарзу ҳикматҳои ҷовидона Ҳоҷӣ Ҳусайн Мӯсозода ба муаммоҳои ҷаҳони муосир низ таваҷҷуҳи бевосита зоҳир намуда, сабабҳои аслии сар задани ифротгароиро дар замони имрӯз, фитнаву найрангҳои қудратҳо ва иғвогариҳоро аз номи дини ислом маҳкум мекунад, ки ҳамагӣ боиси сар задани ҷангҳо дар саросари олам шудаанд. Аз ҷумла, ӯ дар як ғазали хеш ба таври муфассал масъалаҳои мазкурро шарҳу тафсир карда, омилҳои иғвогариҳои қудратҳо- ро дар баҳсу баррасии муаммои нафту газ, инчунин аз номи дин сухан кардан, низоъангезӣ миёни мазҳабҳо дониста, аз номи дини ислом таъсис додани ҳизбу ҳаракатҳоро қотеона маҳкум мекунанд, ки ин гуна ҷараёнҳо аслан робитае ба аслу моҳияти ислом надошта, баръакс дар ҷаҳон расвогаранд.<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+		<br>
+        <div class="analysis-container">
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    Гулнози Тоҳириён
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>шоир, узви Иттифоқи нависандагони Тоҷикистон:</h4>
+                    <p>
+					Барои тасаввур ва тасвири мукаммали дунё бо намунаҳое аз чунин осор дар мисоли сурудаҳои устод Ҳоҷӣ Ҳусайн Мӯсозода таънис мебояд кард. Руҷуъ ба намунаҳое аз ашъори ин суханвари ҳаким, шоири амиқназар ва файласуфи ростин ин ҳақиқатро ошкор месозад, ки дар меҳвари сурудаҳояшон фазилати таҳаммулпазирӣ, талқини ғояҳои дурӣ ҷустан ё иҷтиноб аз он чӣ монеаи камоли инсонист, таҳқиқи рисолати инсон дар ҷаҳони омадшуд нақши муҳим дорад.<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+		<br>
+        <div class="analysis-container">
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    Саидумрон Саидов
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>номзади илмҳои суханшиносӣ:</h4>
+                    <p>
+						Низомии Арӯзии Самарқандӣ дар китоби худ «Чаҳор мақола» дар фасли «Дар чигунагии шоир ва шеъри ӯ» овардааст: «Аммо шоир бояд, ки салимул- фитрат азимулфикрат, саҳеҳуттабъ, ҷайиддурривия, дақиқунназар бошад, дар анвои улум муттанавиъ бошад ва дар атрофи русум мустатриф. Ва шоир бояд, ки дар маҷлиси муҳоварат хушгӯй бувад ва дар маҷлиси муошират хушрӯй». Агар аз меъёри баҳодиҳии ин суханшиноси маъруфи асримиёнагӣ назар созем, Ҳоҷӣ Ҳусайн Мӯсозода ба ҳамаи ин сифатҳои муқарраршуда мувофиқ мебошанд ва махсусан сифтаҳои азимулфикрат ва саҳеҳуттабъ, ки устодро хос аст на ба ҳамаи суханварон насиб мегардад. Зеро фикри тозаву бузург ва табъи салиму саҳеҳ доштан сухани адибро мақбули хосу ом(м) мегардонад. Ҳоҷӣ Ҳусайн Мӯсозода ба олами шеър бо сабку услуби ба худ хос ворид гардиданд ва ин аз ҷаҳонбинии васеъ, дониши баланд, мантиқи расо ва ошноии комил бо осори суханварони классикӣ маншаъ мегирад.<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+		<br>
+        <div class="analysis-container">
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    Неъматҷон Файзуллоев
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>доктори илмҳои филологӣ, профессор, узви Иттифоқи нависандагони Тоҷикистон:</h4>
+                    <p>
+						Бояд гуфт, ки Ҳоҷӣ Ҳусайн Мӯсозода инсони табиатан софдилу равшанфикр ва дурандешу мавридшинос буда, фаъолияти касбӣ ва адабиашро аз рӯи ниёзҳои ғоявию эстетикии давру замон ба роҳ мондааст ва дар ин ҷода ба дастовардҳои муҳим ноил гаштааст. Китоби нави ғазалиёт ё ёздаҳумин девони шоир таҳти унвони “Ёздаҳ ситораи дурахшон”, ки ҳоло дар дасти шумост, далели равшани басо фаъолиятмандии муаллиф аст.<br>
+						Гумон мекунам, ки ӯ бо ин қадар маҳсули бобаракати эҷодӣ – ёздаҳ китоби ғазалҳо ва дигар осори пурмояи илмиву публитсистии хеш сазовори таҳсин аст.<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+		<br>
+        <div class="analysis-container">
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    Тоҷибой Султонӣ
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>доктори улуми суханшиносӣ, профессор:</h4>
+                    <p>
+						Ҳоҷӣ Ҳусайн Мӯсозода чун ҳар фарди соҳибватану меҳанпараст, пеш аз ҳама, дар шеърҳои худ васфи табиати нотакрори Ватани маҳбубро сароида, сулҳу субот, оромию осоиштагӣ, дастовардҳо, шукуфоӣ ва сарсабзии онро ситоиш мекунанд.<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+		<br>
+        <div class="analysis-container">
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    Ислом Раҳимов
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>номзади илмҳои суханшиносӣ:</h4>
+                    <p>
+						Ҳам ғазалҳои ишқи заминӣ ва ҳам ғазалҳои ишқи осмонӣ бо ҷаззобияти ба худ хос таълиф гаштаанд, шоир дар ғазалҳои орифона бештар санъати талмеҳро ба кор бурдааст, ки хоси чунин ашъор мебошанд. Дар ҳарду маврид шоир ошиқ аст ва муҳаббаташро ба маъшуқ баён медорад.<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+		<br>
+        <div class="analysis-container">
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    Мирзо Муллоаҳмад
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>узви вобастаи АУ Ҷумҳурии Тоҷикистон:</h4>
+                    <p>
+						Дар ғазалиёти Ҳоҷӣ Ҳусайн Мӯсозода мавзуи ишқ мавқеи худро ба масъалаҳои ахлоқиву иҷтимоӣ ме- диҳад. Дар аксари ғазалҳои шоир масъалаҳои мубрами рӯзгор, рафтору гуфтори неки мардум, пешрафтҳои иқтисодиву фарҳангии мамлакат, сулҳу ваҳдати миллӣ ва ғайра матраҳ шудаанд. Ба ин хусусияти ашъораш худи шоир дар зимни ғазале ишора кардааст:<br>
+						<b>Ман нагуфтам дар ғазал чун дигарон ҳаҷру фироқ, <br>
+						Васфи халқу сарзамин пояндаи ашъори ман.</b><br>
+						Дар аксари ғазалҳои маҷмӯаи охирини ғазалиёти шоир набзи замон эҳсос мешавад.<br> 
+						Аз ҷумла, дар ғазали зер, Истиқлол ҳамчун рамзи саодату хушбахтии мардум, омили пешрафтҳои азими иқтисодиву фарҳангии кишвар самимона ситоиш мешавад:<br>
+						<b>Рӯзи бахту шодмонӣ – рӯзи истиқлоли мо, <br>
+						Баҳри мо бодо муборак тахти мо, иқболи мо. <br>
+						Давлати озодагон шуд Тоҷикистони азиз, <br>
+						Решапайванду ҷавон ин мулки некуфоли мо. <br>
+						Авлавият баҳри миллат пешрафти иқтисод, <br>
+						Суру нусрат мерасад дар қасри истиқболи мо...</b><br>
+						Шоир аз пешрафтҳои иқтисодиву фарҳангии кишвар ба ваҷд омада, онҳоро натиҷаи сулҳу ваҳдати миллӣ медонад. Дар ғазалҳои шоир васфи Тоҷикистони озоду соҳибистиқлол, ситоиши падару модар, устоду муаллим, тараннуми дӯстиву рафоқат, меҳнату садоқати мардум ба назар мерасанд. Ҳоҷӣ Ҳусайн Мӯсозода дар иншои ғазал пеш аз ҳама ба Ҳофиз пайравӣ мекунад ва аз ғазалҳои ӯ илҳом мегирад. Дар ғазале, ки бо матлаи зер шуруъ мешавад, на танҳо матлабу маром, балки вазну қофияву радиф ҳофизона аст:<br>
+						<b>Бар сарат гар мушкил ояд, эй мусулмон ғам махӯр, <br>
+						Гарчи танҳо мондаӣ ту дар биёбон ғам махӯр.</b><br>
+						Панду андарз аз рукнҳои асосии адабиёти тоҷику форс аз ибтидо то имрӯз ба шумор меравад.<br>
+						Андарзҳои гузаштагони мо дар тарбияи ахлоқии мардумони олам, ба роҳи рост ҳидоят намудани онон дар тӯли таърих хидмати шоиста анҷом додааст. Рӯда- киву Фирдавсӣ, Саъдиву Мавлоно ва даҳҳо шоирони мо маҳз бо осору андешаҳои ахлоқии худ шуҳрати ҷаҳонӣ ёфтаанд. Аз ин ҷост, ки Ҳоҷӣ Ҳусайн Мӯсозода ин суннати адибони гузаштаро идома дода, панду на- сиҳатро мавзӯи асосии ғазалҳои худ қарор дод. Некиву накӯкорӣ аз муҳимтарин фазилатҳои инсон аст, ки аз Авесто шурӯъ карда дар ситоиши он сухан рондаанд. Ҳоҷӣ Ҳусайн Мӯсозода низ некиро барои инсон дар ҳар маврид зарур мешуморад :<br>
+						<b>Гар хирадмандӣ бихоҳӣ, дар ҷавонӣ некӣ кун,<br>
+						То шавӣ пири бадавлат, то тавонӣ некӣ кун. <br>
+						Хидмате кардӣ агар, миннат макун аз баҳри кас, <br>
+						Зери борон ё ки шамс чун соябоне некӣ кун.<br>
+						Дар ғазал гуфтӣ, Ҳусайно, ҳикмате аз баҳри халқ, <br>
+						Бо каломи ноби худ ту ҷовидонӣ некӣ кун.</b><br>
+						Шоир барои инсон одобу ахлоқи ҳамидаро муҳим дониста, шахсеро, ки ин сифатҳоро надорад, инсон намешуморад:<br>
+						<b>Ҳар ки бошад беадаб, одам магӯ, <br>
+						Одамӣ бошад касе беғам магӯ. <br>
+						Беадаб дар ин ҷаҳон беобру, <br>
+						Марди носанҷидаро маҳрам магӯ.</b><br>
+                    </p>
+                </div>
+            </div>
+        </div>
+		<br>
+        <div class="analysis-container">
+            <div class="analysis-item">
+                <h3 class="analysis-title">
+                    Саъдуллоҷон Неъматов
+                    <span class="icon"><i class="fas fa-chevron-down"></i></span>
+                </h3>
+                <div class="analysis-content">
+                    <h4>доктори илм, профессор:</h4>
+                    <p>
+						Дар ғазалҳои устод эътиқоду эҳтиром ба маъниҳоибикр ва пандҳои ибратомезу дилнишини бузургону ниё- кони олами маънию ҳикмат барҷаста зуҳур меёбад. Муносибати эҳтиромонаи устод назди арбоби ҳунар мояи пурифтихори саршор аз иродат ва адаб буда, эътиқоди эшонро ба осору мероси ҳадяшуда ба маротиб афзун мегардонад. Устод бо дарки хосу ҳисси муҳаббат мегӯянд:<br>
+						<b>Дарки маънӣ аз сухан бошад каромат, эй Ҳусайн, <br>
+						Аз бузургони ҷаҳон ҳарфи мукаррам мондааст.</b><br>
+						Бешубҳа, доир ба ҳар як авроқи китоби тозаэҷоди устод Ҳоҷӣ Ҳусайн Мӯсозода метавон сӯҳбате беохир дошт. Алъон гуфтан мехоҳам, ки аз Худованди мутаъол шукргузор ҳастам, ки бо чунин инсони поксиришт, забондону суҳбаторо, хирадманду донишманд ва раҳкушову раҳнамо дӯст ҳастаму аз фазилатҳои ҳамидаашон баҳравар гаштаам. Хушбахтона, инсонҳои бедордилу нексиришт мисли устоди муаззам неруи маънавии худро сарфи беҳдошти рӯзгори мардум мекунанд, корафтодаеро даст мегиранд, умедвореро ба умед мерасонанд ва маҳз ба туфайли эшон зиндагӣ баракат ва маънои тоза касб мекунад.<br>
+                    </p>
+                </div>
+            </div>
+        </div>
+		<br>
+	
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <h3 class="footer-title">Дар бораи сайт</h3>
+            <p class="footer-text">
+                Ин сайт ба устод Ҳоҷӣ Ҳусайн Мӯсозода бахшида шудааст. 
+                <br>Мақсади мо таърифи осор ва мероси адабии ин шоири бузург ба насли ҷавон мебошад.
+            </p>
+            <div class="footer-divider"></div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Сайти Ҳоҷӣ Ҳусайн Мӯсозода. Ҳамаи ҳуқуқҳо ҳифз шудаанд.</p>
+                <p>Аз ҷониби тими барномасозон таҳия шудааст.</p>
+                <p>Барои хулоса ва пешниҳод ба суроғаи <b> tajlingvo@gmail.com </b> муроҷиат кунед.</p>
+	
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to top button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Accordion functionality
+        const analysisItems = document.querySelectorAll('.analysis-item');
+
+        analysisItems.forEach(item => {
+            const title = item.querySelector('.analysis-title');
+            const content = item.querySelector('.analysis-content');
+            const icon = item.querySelector('.icon i');
+
+            title.addEventListener('click', () => {
+                const isVisible = content.style.display === 'block';
+                
+                // Close all items
+                analysisItems.forEach(i => {
+                    i.querySelector('.analysis-content').style.display = 'none';
+                    i.querySelector('.icon i').classList.remove('fa-chevron-up');
+                    i.querySelector('.icon i').classList.add('fa-chevron-down');
+                });
+
+                // Open the clicked item if it was closed
+                if (!isVisible) {
+                    content.style.display = 'block';
+                    icon.classList.remove('fa-chevron-down');
+                    icon.classList.add('fa-chevron-up');
+                }
+            });
+        });
+
+        // Back to top functionality
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                if(backToTopButton) backToTopButton.style.display = 'block';
+            } else {
+                if(backToTopButton) backToTopButton.style.display = 'none';
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Mobile menu toggle
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+
+        if(hamburger) {
+            hamburger.addEventListener('click', function() {
+                this.classList.toggle('active');
+                navMenu.classList.toggle('active');
+            });
+        }
+    </script>
+</body>
+</html>
